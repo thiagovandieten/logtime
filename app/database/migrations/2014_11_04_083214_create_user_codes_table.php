@@ -15,9 +15,9 @@ class CreateUserCodesTable extends Migration {
 		Schema::create('user_codes', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('user_type_id')->unsigned();
-			$table->foreign('user_type_id')->references('id')->on('user_types');
 			$table->string('user_code');
+            $table->integer('user_type_id')->unsigned();
+            $table->foreign('user_type_id')->references('id')->on('user_types');
 			$table->timestamps();
 		});
 	}

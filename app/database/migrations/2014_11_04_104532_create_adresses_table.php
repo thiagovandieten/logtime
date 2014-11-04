@@ -16,7 +16,9 @@ class CreateAdressesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('street_id')->unsigned();
+            $table->foreign('street_id')->references('id')->on('streets');
 			$table->integer('city_id')->unsigned();
+            $table->foreign('city_id')->references('id')->on('cities');
 			$table->integer('house_number');
 			$table->timestamps();
 		});

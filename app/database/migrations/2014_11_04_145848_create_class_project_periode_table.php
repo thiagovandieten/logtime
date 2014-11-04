@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateClassProjectPeriodeTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('class_project_periode', function(Blueprint $table)
+		{
+			$table->increments('id');
+            $table->boolean('is_done');
+            $table->integer('class_id')->unsigned();
+            $table->foreign('class_id')->references('id')->on('classes');
+            $table->integer('project_id')->unsigned();
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->integer('periode_id')->unsigned();
+            $table->foreign('periode_id')->references('id')->on('periodes');
+            $table->timestamps();
+		});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('class_project_periode');
+	}
+
+}

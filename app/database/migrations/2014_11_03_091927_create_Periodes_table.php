@@ -29,7 +29,7 @@ class CreatePeriodesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Periodes');
+		Schema::drop('periodes');
 	}
 
 }

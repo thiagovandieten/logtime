@@ -16,6 +16,7 @@ class CreateClassesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('year_id')->unsigned();
+            $table->foreign('year_id')->references('id')->on('years');
 			$table->string('class_name', 255);
 			$table->timestamps();
 		});
