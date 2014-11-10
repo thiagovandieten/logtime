@@ -18,6 +18,8 @@ class CreatePeriodesTable extends Migration {
 			$table->date("start_date");
 			$table->date("stop_date");
 			$table->string("periode_name");
+			$table->integer('location_id')->unsigned();
+            $table->foreign('location_id')->references('id')->on('locations');
 			$table->timestamps();
 		});
 	}

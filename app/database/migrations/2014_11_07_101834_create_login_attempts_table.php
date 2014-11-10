@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectMethodsTable extends Migration {
+class CreateLoginAttemptsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,13 @@ class CreateProjectMethodsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('project_methods', function(Blueprint $table)
+		Schema::create('login_attempts', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('project_method_name',255);
-			$table->integer('location_id')->unsigned();
-            $table->foreign('location_id')->references('id')->on('locations');
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users');
+			$table->string('ip',45);
+			$table->boolean('login_failed');
 			$table->timestamps();
 		});
 	}
@@ -29,7 +30,7 @@ class CreateProjectMethodsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('project_methods');
+		Schema::drop('login_attempts');
 	}
 
 }
