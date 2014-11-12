@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration {
 			$table->integer('phone_number');
 			$table->string('user_image_path',255);
 			$table->boolean('active')->default(true);
+			$table->timestamp('last_time_online');
 			$table->integer('user_type_id')->unsigned();
 			$table->foreign('user_type_id')->references('id')->on('user_types');
             $table->integer('location_id')->unsigned();

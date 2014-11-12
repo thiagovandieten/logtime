@@ -17,8 +17,11 @@ class CreateClassesTable extends Migration {
 			$table->increments('id');
 			$table->integer('year_id')->unsigned();
             $table->foreign('year_id')->references('id')->on('years');
+            $table->integer('adress_id')->unsigned()->nullable();
+            $table->foreign('adress_id')->references('id')->on('adresses');
             $table->boolean('active')->default(true);
 			$table->string('class_name', 255);
+			$table->string('class_image_path', 255)->nullable();
 			$table->timestamps();
 		});
 	}
