@@ -17,6 +17,7 @@ class CreateUserLogsTable extends Migration {
 			$table->increments('id');
             $table->timestamp('start_time');
             $table->timestamp('stop_time');
+            $table->timestamp('total_time_in_hours');
             $table->text('description');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
