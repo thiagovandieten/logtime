@@ -28,8 +28,8 @@ class CreateUsersTable extends Migration {
 			$table->foreign('user_type_id')->references('id')->on('user_types');
             $table->integer('location_id')->unsigned();
             $table->foreign('location_id')->references('id')->on('locations');
-            $table->integer('class_id')->unsigned()->nullable();
-            $table->foreign('class_id')->references('id')->on('classes');
+            $table->integer('project_group_id')->unsigned()->nullable();
+            $table->foreign('project_group_id')->references('id')->on('project_groups');
             $table->integer('adress_id')->unsigned();
             $table->foreign('adress_id')->references('id')->on('adresses');
 			$table->timestamps();

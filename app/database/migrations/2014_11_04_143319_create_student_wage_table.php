@@ -16,8 +16,8 @@ class CreateStudentWageTable extends Migration {
 		{
 			$table->increments('id');
             $table->double('wage', 10 , 2);
-            $table->integer('class_id')->unsigned();
-            $table->foreign('class_id')->references('id')->on('classes');
+            $table->integer('project_group_id')->unsigned();
+            $table->foreign('project_group_id')->references('id')->on('project_groups');
             $table->timestamps();
 		});
 	}

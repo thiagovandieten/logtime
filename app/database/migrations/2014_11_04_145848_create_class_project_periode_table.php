@@ -16,8 +16,8 @@ class CreateClassProjectPeriodeTable extends Migration {
 		{
 			$table->increments('id');
             $table->boolean('is_done');
-            $table->integer('class_id')->unsigned();
-            $table->foreign('class_id')->references('id')->on('classes');
+            $table->integer('project_group_id')->unsigned();
+            $table->foreign('project_group_id')->references('id')->on('project_groups');
             $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects');
             $table->integer('periode_id')->unsigned();

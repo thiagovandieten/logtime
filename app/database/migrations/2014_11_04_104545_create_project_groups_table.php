@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClassesTable extends Migration {
+class CreateProjectGroupsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateClassesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('classes', function(Blueprint $table)
+		Schema::create('project_groups', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('year_id')->unsigned();
@@ -20,8 +20,8 @@ class CreateClassesTable extends Migration {
             $table->integer('adress_id')->unsigned()->nullable();
             $table->foreign('adress_id')->references('id')->on('adresses');
             $table->boolean('active')->default(true);
-			$table->string('class_name', 255);
-			$table->string('class_image_path', 255)->nullable();
+			$table->string('name', 255);
+			$table->string('image_path', 255);
 			$table->timestamps();
 		});
 	}
