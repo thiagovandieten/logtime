@@ -30,7 +30,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function location()
 	{
-		$this-belongsTo('Location');
+		$this->belongsTo('Location');
+	}
+
+	public function userType()
+	{
+		$this->belongsTo('UserType');
+	}
+
+	public function projectGroup()
+	{
+		$this->belongsTo('ProjectGroup');
 	}
 
 }

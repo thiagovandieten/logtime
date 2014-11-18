@@ -33,7 +33,7 @@ class CreateProjectGroupsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('classes');
+		Schema::drop('project_groups');
 	}
 
 }
