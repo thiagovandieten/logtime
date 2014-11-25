@@ -411,7 +411,7 @@ nav select{
 }
 
 .target-mob{
-    height: auto!important;
-    overflow: auto!important;
+    min-height: 300px!important;
+
 
 }
