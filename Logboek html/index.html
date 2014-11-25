@@ -8,8 +8,15 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/default.css" />
     <link rel="stylesheet" type="text/css" href="css/component.css" />
+
+    <link rel="stylesheet" href="css/default-date.css">
+    <link rel="stylesheet" href="css/default.date.css">
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="js/modernizr.custom.js"></script>
+    <script src="js/picker.js"></script>
+    <script src="js/picker.date.js"></script>
+    <script src="js/legacy.js"></script>
+
     <title>Logtime</title>
 
 </head>
@@ -103,6 +110,11 @@
             <option>Onderdeel</option>
             <option>Fase 4</option>
         </select>
+        <select>
+            <option>Taak</option>
+            <option>Fase4A</option>
+        </select>
+        <input type="date" id="input_01" placeholder="Datum" name="date" class="datepicker">
         <input type="text" placeholder="00:00"  class="uren">
         <p class="uren-tot">tot</p>
         <input type="text" placeholder="00:00"  class="uren">
@@ -128,6 +140,11 @@
                     <option>Onderdeel</option>
                     <option>Fase 4</option>
                 </select>
+                <select>
+                    <option>Taak</option>
+                    <option>Fase4A</option>
+                </select>
+                <input type="date" id="input_01" placeholder="Datum" name="date" class="datepicker">
                 <input type="text" placeholder="00:00"  class="uren">
                 <p class="uren-tot">tot</p>
                 <input type="text" placeholder="00:00"  class="uren">
@@ -250,7 +267,20 @@
 
     });
 </script>
+<script type="text/javascript">
 
+    var $input = $( '.datepicker' ).pickadate({
+        firstDay: 1
+    })
+
+    var picker = $input.pickadate('picker')
+    // picker.set('disable', 'flip')
+
+    // $('button').on('click', function() {
+    //     picker.set('disable', true);
+    // });
+
+</script>
 
 <script src="js/classie.js"></script>
 <script type="text/javascript" >
