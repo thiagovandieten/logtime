@@ -13,5 +13,11 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return Redirect::to('login');
 });
+
+Route::get('login', array('as' => 'login.index', 'uses' => 'LoginController@index' ));
+Route::post('login', array('as' => 'login.authentication ', function()
+{
+    return 'Mooi man';
+}));
