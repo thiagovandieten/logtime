@@ -43,8 +43,8 @@
 .ac-container input:checked + label:after{
 	background-image: url(../images/arrow_up.png);
 }
-.ac-container input{
-	display: none;
+.ac-container input[type='checkbox'], .ac-container input[type='radio']{
+    display: none;
 }
 .ac-container article{
 	background: rgba(255, 255, 255, 0.5);
