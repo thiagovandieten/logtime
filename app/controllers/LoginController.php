@@ -6,7 +6,18 @@
  * Time: 09:30
  */
 
+use OrangeSource\Authentication as OsAuth;
+use OrangeSource\Commanding\CommandBus;
+
 class LoginController extends BaseController {
+  
+    protected $commandBus;
+
+    function __construct(CommandBus $commandBus)
+    {
+        $this->commandBus = $commandBus;
+    }
+
 
     public function index()
     {
@@ -20,7 +31,13 @@ class LoginController extends BaseController {
         //Identificeer wat voor gebruiker het is
         //Als het een student is, kijk of dit zijn 1e login
         //Stuur hem naar de dashboard met de juiste informatie
-        return 'aah';
+        $input = Input::all();
+
+        $command = new OsAuth\LoginAuthenticationCommand($input['user_code'], $input['password']);
+
+        $this->commandBus->execute($command);
+
+
     }
 
-} 
+}
