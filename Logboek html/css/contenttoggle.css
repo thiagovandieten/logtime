@@ -10,11 +10,11 @@
 	padding: 5px 20px;
 	position: relative;
 	z-index: 20;
+    overflow: auto;
 	display: block;
-	height: 30px;
 	cursor: pointer;
 	color: #666;
-    height: 40px;
+    min-height: 40px;
 	line-height: 33px;
 	font-size: 21px;
 	background: #eaeaea;
@@ -79,10 +79,10 @@
     width: 98%;
 }
 .ac-container input:checked ~ article.ac-small{
-    min-height: 40px;
+    height: auto;
     margin-bottom: 10px;
-    width: 98%;
-    overflow: auto;
+    width: 100%;
+    overflow: hidden;
 }
 .ac-container input:checked ~ article.ac-medium{
     min-height: 40px;

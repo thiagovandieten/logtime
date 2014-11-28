@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -16,13 +16,14 @@
     <script src="js/picker.js"></script>
     <script src="js/picker.date.js"></script>
     <script src="js/legacy.js"></script>
+    <script src="js/Chart.js"></script>
 
     <title>Logtime</title>
 
 </head>
 <body>
 <div class="top-header">
-<img src="images/menu.png" alt="menu" id="showLeftPush">
+    <img src="images/menu.png" alt="menu" id="showLeftPush">
     <div class="title-place">
         <h1>Logtime</h1>
         <span>Versie: 0.9</span>
@@ -31,12 +32,16 @@
         <input type="text" placeholder="Zoeken">
         <input type="submit" class="search" value="">
     </form>
+    <div id="showRight">
     <div class="mob-noti">
-        <img src="images/noti.png" alt="meldingen" id="showRight">
+        <img src="images/noti.png" alt="meldingen">
         <span class="noti-aantal-mob">12</span>
     </div>
+    </div>
+    <div id="notificationLink">
     <span class="noti-aantal">12</span>
     <a href="#" id="notificationLink"> <img src="images/noti.png" alt="meldingen" class="noti"></a>
+    </div>
     <div id="notificationContainer">
         <div id="notificationTitle">Notificatie</div>
         <div id="notificationsBody" class="notifications">
@@ -83,160 +88,452 @@
             <span>12 feb 2014 12:45</span>
         </div>
     </nav>
-<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left menu-mob-width cbp-spmenu-open" id="cbp-spmenu-s1">
-    <div class="profiel-mob">
-        <img src="images/foto.jpg" class="avatar-mob" alt="avatar">
-        <p>Maria van de visser</p>
-        <img src="images/icons/instellingen-mob.png" class="mob-instellingen" alt="Instellingen" title="Instellingen">
-    </div>
-    <div style="clear:both"></div>
-    <a href="#"><span><img src="images/icons/dashboard.png" alt="Dashboard"></span>Dashboard</a>
-    <a href="#"><span><img src="images/icons/logboek.png" alt="Logboek"></span>Logboek</a>
-    <a href="#"><span><img src="images/icons/map.png" alt="Project aanmaken"></span>Project beheer</a>
-    <a href="#"><span><img src="images/icons/instellingen.png" alt="Instellingen"></span>Groeps instellingen</a>
-    <a href="#"><span><img src="images/icons/handleiding.png" alt="Handleiding"></span>Handleiding</a>
-    <a href="#"><span><img src="images/icons/uitloggen.png" alt="Uitloggen"></span>Uitloggen</a>
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left menu-mob-width cbp-spmenu-open" id="cbp-spmenu-s1">
+        <div class="profiel-mob">
+            <img src="images/foto.jpg" class="avatar-mob" alt="avatar">
+            <p>Maria van de visser</p>
+            <img src="images/icons/instellingen-mob.png" class="mob-instellingen" alt="Instellingen" title="Instellingen">
+        </div>
+        <div style="clear:both"></div>
+        <a href="#"><span><img src="images/icons/dashboard.png" alt="Dashboard"></span>Dashboard</a>
+        <a href="#"><span><img src="images/icons/logboek.png" alt="Logboek"></span>Logboek</a>
+        <a href="#"><span><img src="images/icons/map.png" alt="Project aanmaken"></span>Project beheer</a>
+        <a href="#"><span><img src="images/icons/instellingen.png" alt="Instellingen"></span>Groeps instellingen</a>
+        <a href="#"><span><img src="images/icons/handleiding.png" alt="Handleiding"></span>Handleiding</a>
+        <a href="#"><span><img src="images/icons/uitloggen.png" alt="Uitloggen"></span>Uitloggen</a>
 
-    <h2>Uren bijwerken</h2>
-    <form method="post">
-        <select>
-            <option>Kies een project</option>
-            <option>Logtime</option>
-            <option>Pizza today</option>
-            <option>Malcom</option>
-        </select>
+        <h2>Uren bijwerken</h2>
+        <form method="post">
+            <select>
+                <option>Kies een project</option>
+                <option>Logtime</option>
+                <option>Pizza today</option>
+                <option>Malcom</option>
+            </select>
 
-        <select>
-            <option>Onderdeel</option>
-            <option>Fase 4</option>
-        </select>
-        <select>
-            <option>Taak</option>
-            <option>Fase4A</option>
-        </select>
-        <input type="date" id="input_01" placeholder="Datum" name="date" class="datepicker">
-        <input type="text" placeholder="00:00"  class="uren">
-        <p class="uren-tot">tot</p>
-        <input type="text" placeholder="00:00"  class="uren">
-        <textarea placeholder="Omschrijving"></textarea>
-        <input type="submit" class="bijwerken" value="Bijwerken">
-    </form>
-</nav>
+            <select>
+                <option>Onderdeel</option>
+                <option>Fase 4</option>
+            </select>
+            <select>
+                <option>Taak</option>
+                <option>Fase4A</option>
+            </select>
+            <input type="date" id="input_01" placeholder="Datum" name="date" class="datepicker">
+            <input type="text" placeholder="00:00"  class="uren">
+            <p class="uren-tot">tot</p>
+            <input type="text" placeholder="00:00"  class="uren">
+            <textarea placeholder="Omschrijving"></textarea>
+            <input type="submit" class="bijwerken" value="Bijwerken">
+        </form>
+    </nav>
     <section class="ac-container container-mob">
-    <div>
-        <input id="ac-0" name="accordion-1" type="checkbox" />
-        <label class="uren-mob-invullen" for="ac-0"><img src="images/icons/uren-mob.png">Uren invullen</label>
-        <article class="ac-small-mob">
+        <div>
+            <input id="ac-0" name="accordion-1" type="checkbox" />
+            <label class="uren-mob-invullen" for="ac-0"><img src="images/icons/uren-mob.png">Uren invullen</label>
+            <article class="ac-small-mob">
 
-            <form method="post">
-                <select>
-                    <option>Kies een project</option>
-                    <option>Logtime</option>
-                    <option>Pizza today</option>
-                    <option>Malcom</option>
-                </select>
+                <form method="post">
+                    <select>
+                        <option>Kies een project</option>
+                        <option>Logtime</option>
+                        <option>Pizza today</option>
+                        <option>Malcom</option>
+                    </select>
 
-                <select>
-                    <option>Onderdeel</option>
-                    <option>Fase 4</option>
-                </select>
-                <select>
-                    <option>Taak</option>
-                    <option>Fase4A</option>
-                </select>
-                <input type="date" id="input_01" placeholder="Datum" name="date" class="datepicker">
-                <input type="text" placeholder="00:00"  class="uren">
-                <p class="uren-tot">tot</p>
-                <input type="text" placeholder="00:00"  class="uren">
-                <textarea placeholder="Omschrijving"></textarea>
-                <input type="submit" class="bijwerken" value="Bijwerken">
-            </form>
-        </article>
-    </div>
-        </section>
+                    <select>
+                        <option>Onderdeel</option>
+                        <option>Fase 4</option>
+                    </select>
+                    <select>
+                        <option>Taak</option>
+                        <option>Fase4A</option>
+                    </select>
+                    <input type="date" id="input_01" placeholder="Datum" name="date" class="datepicker">
+                    <input type="text" placeholder="00:00"  class="uren">
+                    <p class="uren-tot">tot</p>
+                    <input type="text" placeholder="00:00"  class="uren">
+                    <textarea placeholder="Omschrijving"></textarea>
+                    <input type="submit" class="bijwerken" value="Bijwerken">
+                </form>
+            </article>
+        </div>
+    </section>
 
-        <section class="ac-container">
-            <div>
-                <input id="ac-1" name="accordion-1" type="radio" checked />
-                <label for="ac-1">Voortgang van het project (Logtime)</label>
-                <article class="ac-small">
-                    dsf
-                </article>
-            </div>
-            <div>
-                <input id="ac-2" name="accordion-1" type="radio" />
-                <label for="ac-2">Voortgang van het project (Pizza today)</label>
-                <article class="ac-small">
-                    sdf
-                </article>
-            </div>
-            <div>
-                <input id="ac-3" name="accordion-1" type="radio" />
-                <label for="ac-3">Voortgang van het project (Malcome)</label>
-                <article class="ac-small">
-                    asd
-                </article>
-            </div>
+    <section class="ac-container">
+        <div>
+            <input id="ac-1" name="accordion-1" type="checkbox" checked />
+            <label for="ac-1">Voortgang van het project (Logtime)
+                <div class="rechts-colum">
+                    <p class="totaal-uren">321 uren</p>
+                    <div class="progress">
+                        <div data-percentage="0%" style="width: 50%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>75%</p>
+                </div>
+            </label>
+            <article class="ac-small">
+              <a href="#"> <div class="leerling-kaart">
+                    <img src="images/avatar1.png" alt="avatar">
+                   <h2>Thiago van dieten</h2>
+                   <div class="stand-leerling">
+                       <div class="progress-leerling">
+                           <div data-percentage="0%" style="width: 74%;" class="progress-bar-leerling progress-bar-success-leerling" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                       </div>
+                   </div>
+                   <p>74%</p>
+                   <div class="leerling-uren">
+                       <h2>324</h2>
+                       <p>uren</p>
+                   </div>
+                   <div class="leerling-datum">
+                       <h2>12 sep 2014</h2>
+                       <p>Laats geupdate</p>
+                   </div>
+               </div></a>
 
-            <div>
-                <input id="ac-4" name="accordion-1" type="radio" />
-                <label for="ac-4">Voortgang van het project (Pizza today)</label>
-                <article class="ac-small">
-                    sdf
-                </article>
-            </div>
-            <div>
-                <input id="ac-5" name="accordion-1" type="radio" />
-                <label for="ac-5">Voortgang van het project (Malcome)</label>
-                <article class="ac-small">
-                    asd
-                </article>
-            </div>
-            <div>
-                <input id="ac-6" name="accordion-1" type="radio" />
-                <label for="ac-6">Voortgang van het project (Pizza today)</label>
-                <article class="ac-small">
-                    sdf
-                </article>
-            </div>
-            <div>
-                <input id="ac-7" name="accordion-1" type="radio" />
-                <label for="ac-7">Voortgang van het project (Malcome)</label>
-                <article class="ac-small">
-                    asd
-                </article>
-            </div>
-            <div>
-                <input id="ac-8" name="accordion-1" type="radio" />
-                <label for="ac-8">Voortgang van het project (Pizza today)</label>
-                <article class="ac-small">
-                    sdf
-                </article>
-            </div>
-            <div>
-                <input id="ac-9" name="accordion-1" type="radio" />
-                <label for="ac-9">Voortgang van het project (Malcome)</label>
-                <article class="ac-small">
-                    asd
-                </article>
-            </div>
-            <div>
-                <input id="ac-10" name="accordion-1" type="radio" />
-                <label for="ac-10">Voortgang van het project (Pizza today)</label>
-                <article class="ac-small">
-                    sdf
-                </article>
-            </div>
-            <div>
-                <input id="ac-11" name="accordion-1" type="radio" />
-                <label for="ac-11">Voortgang van het project (Malcome)</label>
-                <article class="ac-small">
-                    asd
-                </article>
-            </div>
-        </section>
+                <a href="#"><div class="leerling-kaart">
+                    <img src="images/avatar1.png" alt="avatar">
+                    <h2>Thiago van dieten</h2>
+                    <div class="stand-leerling">
+                        <div class="progress-leerling">
+                            <div data-percentage="0%" style="width: 74%;" class="progress-bar-leerling progress-bar-success-leerling" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <p>74%</p>
+                    <div class="leerling-uren">
+                        <h2>324</h2>
+                        <p>uren</p>
+                    </div>
+                    <div class="leerling-datum">
+                        <h2>12 sep 2014</h2>
+                        <p>Laats geupdate</p>
+                    </div>
+                </div></a>
+
+
+                <a href="#"> <div class="leerling-kaart">
+                    <img src="images/avatar1.png" alt="avatar">
+                    <h2>Fatih Celik</h2>
+                    <div class="stand-leerling">
+                        <div class="progress-leerling">
+                            <div data-percentage="0%" style="width: 50%;" class="progress-bar-leerling progress-bar-success-leerling" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <p>50%</p>
+                    <div class="leerling-uren">
+                        <h2>290</h2>
+                        <p>uren</p>
+                    </div>
+                    <div class="leerling-datum">
+                        <h2>11 sep 2014</h2>
+                        <p>Laats geupdate</p>
+                    </div>
+                </div></a>
+
+
+                <a href="#">  <div class="leerling-kaart">
+                    <img src="images/avatar1.png" alt="avatar">
+                    <h2>Dennis Eilander</h2>
+                    <div class="stand-leerling">
+                        <div class="progress-leerling">
+                            <div data-percentage="0%" style="width: 45%;" class="progress-bar-leerling progress-bar-success-leerling" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <p>45%</p>
+                    <div class="leerling-uren">
+                        <h2>300</h2>
+                        <p>uren</p>
+                    </div>
+                    <div class="leerling-datum">
+                        <h2>13 sep 2014</h2>
+                        <p>Laats geupdate</p>
+                    </div>
+                </div></a>
+
+
+                <a href="#"> <div class="leerling-kaart">
+                    <img src="images/avatar1.png" alt="avatar">
+                    <h2>Yannick Berendsen</h2>
+                    <div class="stand-leerling">
+                        <div class="progress-leerling">
+                            <div data-percentage="0%" style="width: 60%;" class="progress-bar-leerling progress-bar-success-leerling" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <p>60%</p>
+                    <div class="leerling-uren">
+                        <h2>314</h2>
+                        <p>uren</p>
+                    </div>
+                    <div class="leerling-datum">
+                        <h2>18 sep 2014</h2>
+                        <p>Laats geupdate</p>
+                    </div>
+                </div></a>
+
+
+                <a href="#"><div class="leerling-kaart">
+                    <img src="images/icons/alert.png" alt="Alert" title="Logboek lang niet bijgewerkt!" class="alert">
+                    <img src="images/avatar1.png" alt="avatar">
+                    <h2>Phillip Heemskerk</h2>
+                    <div class="stand-leerling">
+                        <div class="progress-leerling">
+                            <div data-percentage="0%" style="width: 66%;" class="progress-bar-leerling progress-bar-success-leerling" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <p>66%</p>
+                    <div class="leerling-uren">
+                        <h2>320</h2>
+                        <p>uren</p>
+                    </div>
+                    <div class="leerling-datum">
+                        <h2 style="color: #e84c3d;!important">14 sep 2014</h2>
+                        <p>Laats geupdate</p>
+                    </div>
+                </div></a>
+
+                <div class="klas-stats">
+                    <div class="pie-chart">
+                        <div class="pieID pie">
+
+                        </div>
+                        <ul class="pieID legend">
+                            <li>
+                                <em>Thiago van Dieten</em>
+                                <span>324 </span>
+                            </li>
+                            <li>
+                                <em>Fatih Celik</em>
+                                <span>290 </span>
+                            </li>
+                            <li>
+                                <em>Dennis Eilander</em>
+                                <span>300 </span>
+                            </li>
+                            <li>
+                                <em>Yannick Berendsen</em>
+                                <span>314 </span>
+                            </li>
+                            <li>
+                                <em>Phillip Heemskerk</em>
+                                <span>320 </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="voortgang-leerlingen">
+                        <div id="canvas-holder">
+                            <canvas id="chart-area" width="150" height="150"/></canvas>
+                        </div>
+                        <p><b>75%</b> <br /> voltooid</p>
+                        <div class="progress-project">
+                            <div data-percentage="0%" style="width: 30%;" class="progress-bar-project progress-bar-success-project" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="start-datum">
+                            <b>Start</b><br />
+                            19 sep 2016
+                        </div>
+                        <div class="eind-datum">
+                            <b>Eind</b><br />
+                            24 sep 2017
+                        </div>
+                    </div>
+                </div>
+
+
+            </article>
+        </div>
+        <div>
+            <input id="ac-2" name="accordion-1" type="checkbox" />
+            <label for="ac-2">Voortgang van het project (Pizza today)<div class="rechts-colum">
+                <p class="totaal-uren">44 uren</p>
+                <div class="progress">
+                    <div data-percentage="0%" style="width: 45%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p>45%</p>
+            </div></label>
+            <article class="ac-small">
+                sdf
+            </article>
+        </div>
+        <div>
+            <input id="ac-3" name="accordion-1" type="checkbox" />
+            <label for="ac-3">Voortgang van het project (Malcome)<div class="rechts-colum">
+                <p class="totaal-uren">453 uren</p>
+                <div class="progress">
+                    <div data-percentage="0%" style="width: 90%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p>90%</p>
+            </div></label>
+            <article class="ac-small">
+                asd
+            </article>
+        </div>
+
+        <div>
+            <input id="ac-4" name="accordion-1" type="checkbox" />
+            <label for="ac-4">Voortgang van het project (Pizza today)<div class="rechts-colum">
+                <p class="totaal-uren">454 uren</p>
+                <div class="progress">
+                    <div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p>80%</p>
+            </div></label>
+            <article class="ac-small">
+                sdf
+            </article>
+        </div>
+        <div>
+            <input id="ac-5" name="accordion-1" type="checkbox" />
+            <label for="ac-5">Voortgang van het project (Malcome)<div class="rechts-colum">
+                <p class="totaal-uren">88 uren</p>
+                <div class="progress">
+                    <div data-percentage="0%" style="width: 40%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p>40%</p>
+            </div></label>
+            <article class="ac-small">
+                asd
+            </article>
+        </div>
+        <div>
+            <input id="ac-6" name="accordion-1" type="checkbox" />
+            <label for="ac-6">Voortgang van het project (Pizza today)<div class="rechts-colum">
+                <p class="totaal-uren">22 uren</p>
+                <div class="progress">
+                    <div data-percentage="0%" style="width: 50%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p>50%</p>
+            </div></label>
+            <article class="ac-small">
+                sdf
+            </article>
+        </div>
+        <div>
+            <input id="ac-7" name="accordion-1" type="checkbox" />
+            <label for="ac-7">Voortgang van het project (Malcome)<div class="rechts-colum">
+                <p class="totaal-uren">67 uren</p>
+                <div class="progress">
+                    <div data-percentage="0%" style="width: 48%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p>48%</p>
+            </div></label>
+            <article class="ac-small">
+                asd
+            </article>
+        </div>
+        <div>
+            <input id="ac-8" name="accordion-1" type="checkbox" />
+            <label for="ac-8">Voortgang van het project (Pizza today)<div class="rechts-colum">
+                <p class="totaal-uren">84 uren</p>
+                <div class="progress">
+                    <div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p>20%</p>
+            </div></label>
+            <article class="ac-small">
+                sdf
+            </article>
+        </div>
+        <div>
+            <input id="ac-9" name="accordion-1" type="checkbox" />
+            <label for="ac-9">Voortgang van het project (Malcome)<div class="rechts-colum">
+                <p class="totaal-uren">78 uren</p>
+                <div class="progress">
+                    <div data-percentage="0%" style="width: 58%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p>58%</p>
+            </div></label>
+            <article class="ac-small">
+                asd
+            </article>
+        </div>
+    </section>
 
 </div>
+<script>
+
+    var doughnutData = [
+        {
+            value: 75,
+            color:"#2fcc71",
+            highlight: "#80d5a4",
+            label: "Voortgang"
+        },
+        {
+            value: 25,
+            color: "#d1d1d1",
+            highlight: "#d1d1d1"
+        }
+
+    ];
+
+    window.onload = function(){
+        var ctx = document.getElementById("chart-area").getContext("2d");
+        window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
+    };
+
+
+
+</script>
+<script>
+    function sliceSize(dataNum, dataTotal) {
+        return (dataNum / dataTotal) * 360;
+    }
+    function addSlice(sliceSize, pieElement, offset, sliceID, color) {
+        $(pieElement).append("<div class='slice "+sliceID+"'><span></span></div>");
+        var offset = offset - 1;
+        var sizeRotation = -179 + sliceSize;
+        $("."+sliceID).css({
+            "transform": "rotate("+offset+"deg) translate3d(0,0,0)"
+        });
+        $("."+sliceID+" span").css({
+            "transform"       : "rotate("+sizeRotation+"deg) translate3d(0,0,0)",
+            "background-color": color
+        });
+    }
+    function iterateSlices(sliceSize, pieElement, offset, dataCount, sliceCount, color) {
+        var sliceID = "s"+dataCount+"-"+sliceCount;
+        var maxSize = 179;
+        if(sliceSize<=maxSize) {
+            addSlice(sliceSize, pieElement, offset, sliceID, color);
+        } else {
+            addSlice(maxSize, pieElement, offset, sliceID, color);
+            iterateSlices(sliceSize-maxSize, pieElement, offset+maxSize, dataCount, sliceCount+1, color);
+        }
+    }
+    function createPie(dataElement, pieElement) {
+        var listData = [];
+        $(dataElement+" span").each(function() {
+            listData.push(Number($(this).html()));
+        });
+        var listTotal = 0;
+        for(var i=0; i<listData.length; i++) {
+            listTotal += listData[i];
+        }
+        var offset = 0;
+        var color = [
+            "cornflowerblue",
+            "olivedrab",
+            "orange",
+            "tomato",
+            "crimson",
+            "purple",
+            "turquoise",
+            "forestgreen",
+            "navy",
+            "gray"
+        ];
+        for(var i=0; i<listData.length; i++) {
+            var size = sliceSize(listData[i], listTotal);
+            iterateSlices(size, pieElement, offset, i, 0, color[i]);
+            $(dataElement+" li:nth-child("+(i+1)+")").css("border-color", color[i]);
+            offset += size;
+        }
+    }
+    createPie(".pieID.legend", ".pieID.pie");
+
+</script>
+
 
 <script>
     $('.uren-mob-invullen').click(function(){
