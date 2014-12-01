@@ -13,13 +13,17 @@
 
 Route::get('/', function()
 {
-	return Redirect::to('login');
+	return Redirect::to('dashboard');
 });
 
 Route::get('login', array('as' => 'login.index', 'uses' => 'LoginController@index' ));
 Route::post('login', array('as' => 'login.authentication', 'uses' => 'LoginController@authentication'));
+Route::post('logout', function(){
+    Auth::logout();
+    return Redirect::to('login');
+});
 
 Route::get('dashboard', array('before' => 'auth', function()
 {
-   return 'Hier is dan de dashboard, ga een controller maken';
+   return View::make('dashboard.logout');
 }));
