@@ -18,3 +18,8 @@ Route::get('/', function()
 
 Route::get('login', array('as' => 'login.index', 'uses' => 'LoginController@index' ));
 Route::post('login', array('as' => 'login.authentication', 'uses' => 'LoginController@authentication'));
+
+Route::get('dashboard', array('before' => 'auth', function()
+{
+   return 'Hier is dan de dashboard, ga een controller maken';
+}));
