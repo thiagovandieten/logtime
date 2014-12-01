@@ -1,14 +1,19 @@
 @media screen and (max-width: 1500px){
     #wrapper{
-        width: 80%!important;
+
     }
 }
 
 @media screen and (max-width: 1200px){
+
+
+}
+
+
+@media screen and (max-width: 850px){
+
     #wrapper{
-        max-width:100%;
         left: 0px!important;
-        width: 100%!important;
     }
     .menu-mob-width{
         left: -290px!important;
@@ -20,10 +25,8 @@
         display: none;
     }
 
-}
 
 
-@media screen and (max-width: 850px){
     .top-header input{
         display: none;
     }
@@ -72,6 +75,13 @@
 }
 
 @media screen and (max-width: 450px){
+    #wrapper{
+        max-width:100%;
+        left: 0px!important;
+        width: 100%!important;
+    }
+
+
     .ac-container label{
         font-size: 14px!important;
     }

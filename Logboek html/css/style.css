@@ -194,7 +194,6 @@ nav select, #input_01{
 }
 
 #wrapper{
-    width: 83%;
     margin: 49px 0px 0px 0px;
 }
 
@@ -1019,4 +1018,20 @@ nav select, #input_01{
     color: #666;
     font-size: 14px;
     text-align: right;
+}
+
+.ac-small-mob h3{
+    font-weight: normal;
+    font-size: 21px;
+    color: #666;
+}
+
+.ac-small-mob input{
+    width: 80%!important;
+}
+
+.ac-small-mob{
+    background: #eaeaea!important;
+    margin-top: -10px!important;
+    width: 100%!important;
 }
