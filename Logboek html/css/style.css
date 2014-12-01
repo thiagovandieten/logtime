@@ -2,6 +2,7 @@ body{
     margin: 0px;
     padding: 0px;
     font-family: 'clear_sans_lightregular';
+    -webkit-appearance: none;
 }
 
 h1, h2, h3, p{
@@ -411,7 +412,7 @@ nav select, #input_01{
 }
 
 .target-mob{
-    min-height: 300px!important;
+    min-height: 315px!important;
 }
 
 .rechts-colum{
@@ -1024,14 +1025,39 @@ nav select, #input_01{
     font-weight: normal;
     font-size: 21px;
     color: #666;
+    padding: 10px;
 }
 
-.ac-small-mob input{
+.ac-small-mob input, .ac-small-mob select, .ac-small-mob textarea{
     width: 80%!important;
+    margin: 1px 10px 5px 16px;
+    padding: 8px;
+    width: 184px;
+    border: 0px;
+    color: #666;
+    outline: none;
+}
+
+#uren-klein{
+    width: 15%!important;
+    margin: 1px 5px 5px 16px!important;
+    padding: 8px!important;
+    border: 0px!important;
+    color: #666!important;
 }
 
 .ac-small-mob{
     background: #eaeaea!important;
     margin-top: -10px!important;
     width: 100%!important;
+}
+
+.ac-small-mob input[type='submit']{
+    width: 100%!important;
+    margin: 10px 0px 0px 0px!important;
+    padding: 15px;
+    border: 0px;
+    color: #fff;
+    border-radius: 0px!important;
+    background: #66bb6a url('../images/icons/opslaan.png') no-repeat center;
 }
