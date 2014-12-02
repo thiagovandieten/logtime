@@ -4,22 +4,22 @@ class Adress extends Eloquent {
 
 	public function city()
 	{
-		$this->belongsTo('City');
+		return $this->belongsTo('City');
 	}
 
 	public function street()
 	{
-		$this->belongsTo('Street');
+		return $this->belongsTo('Street');
 	}
 
 	public function users()
 	{
-		$this->hasMany('User');
+		return $this->hasMany('User');
 	}
 
 	public function projectGroups()
 	{
-		$this->hasMany('ProjectGroup');
+		return $this->hasMany('ProjectGroup');
 	}
 
 }

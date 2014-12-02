@@ -4,17 +4,17 @@ class ProjectGroup extends Eloquent {
 
 	public function users()
 	{
-		$this->hasMany('User');
+        return $this->hasMany('User');
 	}
 
 	public function adress()
 	{
-		$this->belongsTo('Adress');
+        return $this->belongsTo('Adress');
 	}
 
 	public function year()
 	{
-		$this->belongsTo('Year');
+        return $this->belongsTo('Year');
 	}
 
 }
