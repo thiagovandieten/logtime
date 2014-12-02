@@ -21,11 +21,6 @@ Route::get('dashboard', function()
 	return View::make('dashboard');
 });
 
-Route::get('dashboard', function()
-{
-	return View::make('dashboard');
-});
-
 Route::get('login', array('as' => 'login.index', 'uses' => 'LoginController@index' ));
 Route::post('login', array('as' => 'login.authentication', 'uses' => 'LoginController@authentication'));
 Route::post('logout', function(){
@@ -37,3 +32,7 @@ Route::get('dashboard', array('before' => 'auth', function()
 {
    return View::make('dashboard.logout');
 }));
+
+Event::listen('illuminate.query', function($query){
+    var_dump($query);
+});
