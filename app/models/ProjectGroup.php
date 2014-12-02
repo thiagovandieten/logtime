@@ -16,5 +16,10 @@ class ProjectGroup extends Eloquent {
 	{
         return $this->belongsTo('Year');
 	}
+	
+	public function project()
+	{
+		return $this->belongsToMany('Project', 'group_project_periode');	
+	}
 
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClassProjectPeriodeTable extends Migration {
+class CreateGroupProjectPeriodeTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateClassProjectPeriodeTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('class_project_periode', function(Blueprint $table)
+		Schema::create('group_project_periode', function(Blueprint $table)
 		{
 			$table->increments('id');
             $table->boolean('is_done');
@@ -20,7 +20,7 @@ class CreateClassProjectPeriodeTable extends Migration {
             $table->foreign('project_group_id')->references('id')->on('project_groups');
             $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects');
-            $table->integer('periode_id')->unsigned();
+            $table->integer('periode_id')->unsigned()->nullable(); //Todo: niet nullable maken!
             $table->foreign('periode_id')->references('id')->on('periodes');
             $table->timestamps();
 		});
@@ -33,7 +33,7 @@ class CreateClassProjectPeriodeTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('class_project_periode');
+		Schema::drop('group_project_periode');
 	}
 
 }
