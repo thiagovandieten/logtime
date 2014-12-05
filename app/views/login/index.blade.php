@@ -3,12 +3,21 @@
 <head lang="en">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/mediaquery.css" />
-    <link rel="stylesheet" type="text/css" href="css/contenttoggle.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/default.css" />
-    <link rel="stylesheet" type="text/css" href="css/component.css" />
+	 {{HTML::style(asset('css/mediaquery.css')) }}
+    {{HTML::style(asset('css/contenttoggle.css')) }}
+    {{HTML::style(asset('css/style.css')) }}
+    {{HTML::style(asset('css/default.css')) }}
+    {{HTML::style(asset('css/component.css')) }}
+	
+    {{{$errors->first()}}}
+<br>
 
+{{Form::model(array('route' => 'login.authentication'))}}
+    {{Form::label('login', 'Login code:')}}
+    {{Form::text('login') }}
+    <!-- 
+     Note: Fatih: Fix dit naar blade syntax (Zie regel 6 t/m 10)
+    -->
     <link rel="stylesheet" href="css/default-date.css">
     <link rel="stylesheet" href="css/default.date.css">
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
