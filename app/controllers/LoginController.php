@@ -1,4 +1,6 @@
 <?php
+use OrangeSource\Authentication\ValidateUser;
+
 /**
  * Created by PhpStorm.
  * User: nktakumi
@@ -6,18 +8,14 @@
  * Time: 09:30
  */
 
-use OrangeSource\Authentication as OsAuth;
-use OrangeSource\Commanding\CommandBus;
-
 class LoginController extends BaseController {
-  
-    protected $commandBus;
 
-    function __construct(CommandBus $commandBus)
+    protected $validateUser;
+
+    function __construct(ValidateUser $validateUser)
     {
-        $this->commandBus = $commandBus;
+        $this->validateUser = $validateUser;
     }
-
 
     public function index()
     {
@@ -31,12 +29,15 @@ class LoginController extends BaseController {
         //Identificeer wat voor gebruiker het is
         //Als het een student is, kijk of dit zijn 1e login
         //Stuur hem naar de dashboard met de juiste informatie
-        $input = Input::all();
 
-        $command = new OsAuth\LoginAuthenticationCommand($input['user_code'], $input['password']);
+        $checkResult = $this->validateUser->checkMailOrUserCode(Input::get('login'));
+        //TODO: Implementeer een Commandbus pattern hier
+        if(Auth::attempt(array($checkResult => Input::get('login'), 'password' => Input::get('password')))) //gadverdamme
+        {
+            return Redirect::intended('dashboard');
+        }
 
-        $this->commandBus->execute($command);
-
+        return Redirect::to('login')->withErrors(['Login gefaald!'])->withInput(Input::all());
 
     }
 

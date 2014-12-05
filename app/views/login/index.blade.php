@@ -1,6 +1,9 @@
-{{Form::open(array('route' => 'login.authentication'))}}
-    {{Form::label('user_code', 'Login code:')}}
-    {{Form::text('user_code') }}
+{{{$errors->first()}}}
+<br>
+
+{{Form::model(array('route' => 'login.authentication'))}}
+    {{Form::label('login', 'Login code:')}}
+    {{Form::text('login') }}
 
     {{Form::label('password', 'Wachtwoord')}}
     {{Form::password('password')}}
