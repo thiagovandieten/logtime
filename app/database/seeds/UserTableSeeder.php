@@ -21,7 +21,7 @@ class UserTableSeeder extends Seeder {
 		$user->first_name = "Thiago";
 		$user->last_name = "van Dieten";
 		$user->email = "nktakumi@gmail.com";
-		$user->phone_number = 0651281477;
+		$user->phone_number = '0651281477';
 		$user->active = 1;
 		$user->user_type_id = 1;
 		$user->location_id = 1;

@@ -43,4 +43,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$this->belongsTo('ProjectGroup');
 	}
 
+    public function saveUser($userCode, $password)
+    {
+        $this->user_code = $userCode;
+        $this->password = $password;
+
+        $this->save();
+    }
+
 }

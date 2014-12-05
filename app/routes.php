@@ -13,5 +13,17 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return Redirect::to('dashboard');
 });
+
+Route::get('login', array('as' => 'login.index', 'uses' => 'LoginController@index' ));
+Route::post('login', array('as' => 'login.authentication', 'uses' => 'LoginController@authentication'));
+Route::post('logout', function(){
+    Auth::logout();
+    return Redirect::to('login');
+});
+
+Route::get('dashboard', array('before' => 'auth', function()
+{
+   return View::make('dashboard.logout');
+}));
