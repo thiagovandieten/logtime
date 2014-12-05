@@ -26,5 +26,5 @@ Route::post('logout', function(){
 
 Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
 Event::listen('illuminate.query', function($query){
-	var_dump($query);
+	//var_dump($query);
 });
