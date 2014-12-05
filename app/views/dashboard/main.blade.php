@@ -1,6 +1,7 @@
 <section class="ac-container">
   @yield('return_projects');
  </section>
+
 {{HTML::script(asset('js/notificatie.js')) }}
 {{HTML::script(asset('js/menuleft.js')) }}
 </body></html><!---------------------Credits---------------------
