@@ -1115,6 +1115,7 @@ nav select, #input_01{
     border-radius: 3px;
     margin: 10px 0px 10px 0px;
     cursor: pointer;
+    -webkit-appearance: none;
 }
 .login-wrap input[type='submit']:hover{
     opacity: 0.8;
