@@ -28,11 +28,7 @@ class dashboardController extends BaseController {
 			$this->group_id = $this->user->project_group_id;
 			
 			$this->projects = ProjectGroup::find($this->group_id)->project;
-			//dd($this->project);
-			foreach($this->projects as $project)
-			{
-				var_dump($project->project_name);	
-			}
+			
 		}
 	
 		return View::make('dashboard')->with('projects', $this->projects);
