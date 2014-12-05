@@ -26,6 +26,7 @@ class UserTableSeeder extends Seeder {
 		$user->user_type_id = 1;
 		$user->location_id = 1;
 		$user->adress_id = 1;
+		$user->project_group_id = 1;
 		$user->save();
 		// $this->call('UserTableSeeder');
 	}

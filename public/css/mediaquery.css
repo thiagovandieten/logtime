@@ -1,0 +1,69 @@
+@media screen and (max-width: 1500px){
+    #wrapper{
+        max-width:100%;
+        left: 0px!important;
+        width: 100%!important;
+    }
+    .menu-mob-width{
+        left: -290px!important;
+    }
+    .menu-witdh-close{
+        left:0px!important;
+    }
+    #cbp-spmenu-s2{
+        display: none;
+    }
+
+}
+
+
+@media screen and (max-width: 850px){
+    .top-header input{
+        display: none;
+    }
+    .cbp-spmenu-vertical {
+        overflow-y: auto;
+
+    }
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    .ac-container{
+        margin:20px 0px 6px 5px!important;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .top-header p, .noti-aantal, .avatar, .noti{
+        display: none;
+    }
+    .profiel-mob{
+        display: block!important;
+    }
+    .cbp-spmenu-vertical{
+        width: 290px!important;
+    }
+    .mob-noti{
+        display: block!important;
+        margin: 8px;
+    }
+    nav form, nav h2, .uren-tot{
+        display: none;
+    }
+    #cbp-spmenu-s2{
+        display: block!important;
+    }
+    .container-mob{
+        display: block!important;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .ac-container label{
+        font-size: 14px!important;
+    }
+    nav span img{
+        margin-left: 15px;
+    }
+
+}
