@@ -1,4 +1,5 @@
 <?php
+namespace Controllers\Login;
 use OrangeSource\Authentication\ValidateUser;
 
 /**
@@ -8,7 +9,7 @@ use OrangeSource\Authentication\ValidateUser;
  * Time: 09:30
  */
 
-class LoginController extends BaseController {
+class LoginController extends \BaseController {
 
     protected $validateUser;
 
@@ -19,7 +20,7 @@ class LoginController extends BaseController {
 
     public function index()
     {
-        return View::make('login.index');
+        return \View::make('login.index');
     }
 
     public function authentication()
@@ -34,10 +35,10 @@ class LoginController extends BaseController {
         //TODO: Implementeer een Commandbus pattern hier
         if(Auth::attempt(array($checkResult => Input::get('login'), 'password' => Input::get('password')))) //gadverdamme
         {
-            return Redirect::intended('dashboard');
+            return \Redirect::intended('dashboard');
         }
 
-        return Redirect::to('login')->withErrors(['Login gefaald!'])->withInput(Input::all());
+        return \Redirect::to('login')->withErrors(['Login gefaald!'])->withInput(Input::all());
 
     }
 

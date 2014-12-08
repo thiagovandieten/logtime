@@ -46,7 +46,7 @@
 </div>
 
 <script>
-  $.backstretch("images/bg.png");
+  $.backstretch( "{{asset("images/bg.png")}}" );
 </script>
 
 

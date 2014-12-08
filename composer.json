@@ -22,7 +22,8 @@
             "app/tests/TestCase.php"
         ],
         "psr-4": {
-            "OrangeSource\\" : "app/orangesource"
+            "OrangeSource\\" : "app/OrangeSource",
+            "Controllers\\Login\\" : "app/controllers/Login"
         }
     },
     "scripts": {

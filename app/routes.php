@@ -16,9 +16,21 @@ Route::get('/', function()
 	return Redirect::to('dashboard');
 });
 	
+Route::group(array('prefix' => 'login'), function(){
 
-Route::get('login', array('as' => 'login.index', 'uses' => 'LoginController@index' ));
-Route::post('login', array('as' => 'login.authentication', 'uses' => 'LoginController@authentication'));
+    Route::get('/', array('as' => 'login.index', 'uses' => 'Controllers\Login\LoginController@index' ));
+    Route::post('/', array('as' => 'login.authentication', 'uses' => 'Controllers\Login\LoginController@authentication'));
+    Route::get('forgotpassword', array(
+        'as' => 'forgotpassword.index',
+        'uses' => 'Controllers\Login\ForgotPasswordController@index'
+    ));
+    Route::post('forgotpassword', array(
+        'as' => 'forgotpassword.execute',
+        'uses' => 'Controllers\Login\ForgotPasswordController@execute'
+    ));
+
+});
+
 Route::post('logout', function(){
     Auth::logout();
     return Redirect::to('login');
