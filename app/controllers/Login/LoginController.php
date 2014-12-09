@@ -31,14 +31,14 @@ class LoginController extends \BaseController {
         //Als het een student is, kijk of dit zijn 1e login
         //Stuur hem naar de dashboard met de juiste informatie
 
-        $checkResult = $this->validateUser->checkMailOrUserCode(Input::get('login'));
+        $checkResult = $this->validateUser->checkMailOrUserCode(\Input::get('login'));
         //TODO: Implementeer een Commandbus pattern hier
-        if(Auth::attempt(array($checkResult => Input::get('login'), 'password' => Input::get('password')))) //gadverdamme
+        if(\Auth::attempt(array($checkResult => \Input::get('login'), 'password' => \Input::get('password')))) //gadverdamme
         {
             return \Redirect::intended('dashboard');
         }
 
-        return \Redirect::to('login')->withErrors(['Login gefaald!'])->withInput(Input::all());
+        return \Redirect::to('login')->withErrors(['Login gefaald!'])->withInput(\Input::all());
 
     }
 
