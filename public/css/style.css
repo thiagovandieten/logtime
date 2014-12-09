@@ -1159,3 +1159,7 @@ nav select, #input_01{
 p:-ms-input-placeholder { /* Internet Explorer 10+ */
     color:    #333;
 }
+
+.email{
+    background: rgba(255,255,255,0.5) url('../images/e-mail-icon.png') no-repeat 16px 22px!important;
+}

@@ -8,13 +8,9 @@
     {{HTML::style(asset('css/style.css')) }}
     {{HTML::style(asset('css/default.css')) }}
     {{HTML::style(asset('css/component.css')) }}
-
-    <!-- 
-     Note: Fatih: Fix dit naar blade syntax (Zie regel 6 t/m 10)
-    -->
-    <link rel="stylesheet" href="css/default-date.css">
-    <link rel="stylesheet" href="css/default.date.css">
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    {{HTML::style(asset('css/default-date.css')) }}
+    {{HTML::style(asset('css/default.date.css')) }}
+    {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js'))}}
     {{HTML::script(asset('js/jquery.backstretch.min.js'))}}
 
     <title>Logtime</title>
