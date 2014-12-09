@@ -44,31 +44,15 @@
     <a href="#"><span><img src="images/icons/uitloggen.png" alt="Uitloggen"></span>Uitloggen</a>
 
     <h2>Uren bijwerken</h2>
-    <form method="post">
-        <select>
-            <option>Kies een project</option>
-            <option>Logtime</option>
-            <option>Pizza today</option>
-            <option>Malcom</option>
-        </select>
-
-        <select>
-            <option>Onderdeel</option>
-            <option>Fase 4</option>
-        </select>
-        <input type="text" placeholder="00:00"  class="uren">
-        <p class="uren-tot">tot</p>
-        <input type="text" placeholder="00:00"  class="uren">
-        <textarea placeholder="Omschrijving"></textarea>
-        <input type="submit" class="bijwerken" value="Bijwerken">
-    </form>
+    @yield('fast_fill')
+    
 </nav>
     <section class="ac-container container-mob">
     <div>
         <input id="ac-0" name="accordion-1" type="checkbox" />
         <label class="uren-mob-invullen" for="ac-0"><img src="images/icons/uren-mob.png">Uren invullen</label>
         <article class="ac-small-mob">
-
+		
             <form method="post">
                 <select>
                     <option>Kies een project</option>

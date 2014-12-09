@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'logtime',
 			'username'  => 'root',
-			'password'  => 'orangesource',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
