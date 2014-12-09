@@ -22,7 +22,7 @@
 
 <!-- Get the user name -->
 @section('username')
-	Maaria van de Visser
+	{{$user}}
 @stop
 
 <!-- Extend: main content -->
@@ -39,4 +39,27 @@
             <article class="ac-small"> Content</article>
         </div>
     @endforeach
+@stop
+<!-- Fast Fill new project -->
+@section('fast_fill')
+<form method="post">
+    <select>
+         @foreach($projects as $project)
+        	<option>{{$project->project_name}}</option>
+   		 @endforeach
+    </select>
+
+    <select>
+        <option>Onderdeel</option>
+        <option>Fase 4</option>
+    </select>
+    <input type="text" placeholder="00:00"  class="uren">
+    <p class="uren-tot">tot</p>
+    <input type="text" placeholder="00:00"  class="uren">
+    <textarea placeholder="Omschrijving"></textarea>
+    <input type="submit" class="bijwerken" value="Bijwerken">
+</form>
+
+
+   
 @stop
