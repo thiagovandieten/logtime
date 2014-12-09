@@ -28,13 +28,17 @@ Route::group(array('prefix' => 'login'), function(){
         'as' => 'forgotpassword.execute',
         'uses' => 'Controllers\Login\ForgotPasswordController@execute'
     ));
-
+    Route::get('newpassword', array('as' => 'newpassword', function()
+    {
+        return View::make('login.newpassword');
+    }));
 });
 
 Route::post('logout', function(){
     Auth::logout();
     return Redirect::to('login');
 });
+
 
 Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
 
