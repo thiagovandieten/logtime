@@ -21,7 +21,7 @@ class CreateProjectsTable extends Migration {
 			$table->foreign('parent_id')->references('id')->on('projects');
 			$table->integer('location_id')->unsigned();
             $table->foreign('location_id')->references('id')->on('locations');
-            $table->integer('level_type_id')->unsigned();
+            $table->integer('level_type_id')->unsigned()->nullable();
             $table->foreign('level_type_id')->references('id')->on('level_types');
 			$table->timestamps();
 		});

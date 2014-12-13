@@ -26,6 +26,11 @@
 </div>
 @endif
 
+@if(Session::has('message'))
+    <div class="error">
+        {{{ Session::get('message') }}}
+    </div>
+@endif
 
 
 {{Form::model(array('route' => 'login.authentication'))}}

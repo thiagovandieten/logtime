@@ -34,7 +34,7 @@ Route::group(array('prefix' => 'login'), function(){
     }));
 });
 
-Route::post('logout', function(){
+Route::get('logout', function(){
     Auth::logout();
     return Redirect::to('login');
 });
