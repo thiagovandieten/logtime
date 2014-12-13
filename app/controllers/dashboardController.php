@@ -1,6 +1,6 @@
 <?php
 
-class dashboardController extends BaseController {
+class dashboardController extends BaseLoggedInController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -31,6 +31,8 @@ class dashboardController extends BaseController {
 			
 		}
 	
-		return View::make('dashboard')->with('projects', $this->projects);
+		return View::make('dashboard')->with(array(
+			'projects' => $this->projects,
+			'userFullName' => $this->userFullName));
 	}
 }
