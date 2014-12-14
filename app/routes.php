@@ -16,7 +16,7 @@ Route::get('/', function()
 	return Redirect::to('dashboard');
 });
 	
-Route::group(array('prefix' => 'login'), function(){
+Route::group(array('prefix' => 'login', 'before' => 'guest'), function(){
 
     Route::get('/', array('as' => 'login.index', 'uses' => 'Controllers\Login\LoginController@index' ));
     Route::post('/', array('as' => 'login.authentication', 'uses' => 'Controllers\Login\LoginController@authentication'));
@@ -25,13 +25,18 @@ Route::group(array('prefix' => 'login'), function(){
         'uses' => 'Controllers\Login\ForgotPasswordController@index'
     ));
     Route::post('forgotpassword', array(
-        'as' => 'forgotpassword.execute',
-        'uses' => 'Controllers\Login\ForgotPasswordController@execute'
+        'as' => 'forgotpassword.request',
+        'uses' => 'Controllers\Login\ForgotPasswordController@request'
     ));
-    Route::get('newpassword', array('as' => 'newpassword', function()
-    {
-        return View::make('login.newpassword');
-    }));
+    Route::get('forgotpassword/{token}', array(
+        'as' => 'forgotpassword.create',
+        'uses' => 'Controllers\Login\ForgotPasswordController@newPassword'
+    ));
+
+    Route::post('forgotpassword/{token}', array(
+        'as' => 'forgotpassword.store',
+        'uses' => 'Controllers\Login\ForgotPasswordController@newPassword'
+    ));
 });
 
 Route::get('logout', function(){
