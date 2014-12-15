@@ -30,12 +30,12 @@ Route::group(array('prefix' => 'login', 'before' => 'guest'), function(){
     ));
     Route::get('forgotpassword/{token}', array(
         'as' => 'forgotpassword.create',
-        'uses' => 'Controllers\Login\ForgotPasswordController@newPassword'
+        'uses' => 'Controllers\Login\ForgotPasswordController@create'
     ));
 
     Route::post('forgotpassword/{token}', array(
         'as' => 'forgotpassword.store',
-        'uses' => 'Controllers\Login\ForgotPasswordController@newPassword'
+        'uses' => 'Controllers\Login\ForgotPasswordController@store'
     ));
 });
 
