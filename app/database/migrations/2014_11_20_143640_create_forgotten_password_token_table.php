@@ -12,12 +12,12 @@ class CreateForgottenPasswordTokenTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('forgotten_password_token', function(Blueprint $table)
+		Schema::create('forgotten_password_tokens', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users');
-			$table->string('forgoten_password_token', 255);
+			$table->string('forgotten_password_token', 255);
 			$table->boolean('active')->default(true);
 			$table->timestamps();
 		});
@@ -30,7 +30,7 @@ class CreateForgottenPasswordTokenTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('forgotten_password_token');
+		Schema::drop('forgotten_password_tokens');
 	}
 
 }

@@ -17,10 +17,12 @@ class CreateProjectsTable extends Migration {
 			$table->increments('id');
 			$table->string('project_name',255);
 			$table->boolean('active')->default(true);
-			$table->integer('project_method_id')->unsigned()->nullable();
-			$table->foreign('project_method_id')->references('id')->on('project_methods');
+			$table->integer('parent_id')->unsigned()->nullable();
+			$table->foreign('parent_id')->references('id')->on('projects');
 			$table->integer('location_id')->unsigned();
             $table->foreign('location_id')->references('id')->on('locations');
+            $table->integer('level_type_id')->unsigned()->nullable();
+            $table->foreign('level_type_id')->references('id')->on('level_types');
 			$table->timestamps();
 		});
 	}

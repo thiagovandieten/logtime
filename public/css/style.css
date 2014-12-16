@@ -1115,6 +1115,7 @@ nav select, #input_01{
     border-radius: 3px;
     margin: 10px 0px 10px 0px;
     cursor: pointer;
+    -webkit-appearance: none;
 }
 .login-wrap input[type='submit']:hover{
     opacity: 0.8;
@@ -1157,4 +1158,78 @@ nav select, #input_01{
 }
 p:-ms-input-placeholder { /* Internet Explorer 10+ */
     color:    #333;
+}
+
+.email{
+    background: rgba(255,255,255,0.5) url('../images/e-mail-icon.png') no-repeat 16px 22px!important;
+}
+
+.ww-vergeten-wrap{
+    position: absolute;
+    width: 355px;
+    min-height: 20px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    top: 20%;
+    background: #fff;
+    padding: 30px;
+    border-radius: 3px;
+}
+
+.ww-vergeten-wrap h1{
+    font-size: 31px;
+    padding: 0px;
+    font-weight: normal;
+    color: #6588ae;
+    text-align: center;
+    margin: 0px 0px 15px 0px;
+
+}
+
+.ww-vergeten-wrap input[type='submit']{
+    width: 100%;
+    padding: 20px;
+    background: #eb9001;
+    color: #fff;
+    border: 0px;
+    font-size: 18px;
+    border-radius: 3px;
+    margin: 10px 0px 10px 0px;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+
+.ww-vergeten-wrap input[type='password']{
+    width: 100%;
+    padding: 20px;
+    color: #666;
+    border: 0px;
+    font-size: 18px;
+    border-radius: 3px;
+    margin: 10px 0px 10px 0px;
+    background: #ededed;
+}
+
+.ww-vergeten-wrap input[type='submit']:hover{
+    opacity: 0.8;
+}
+.ww-vergeten-wrap input[type='submit']:active{
+    opacity: 1;
+}
+
+.ww-vergeten-wrap ::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #666;
+}
+.ww-vergeten-wrap :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #666;
+    opacity:  1;
+}
+.ww-vergeten-wrap ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #666;
+    opacity:  1;
+}
+.ww-vergeten-wrap :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #666;
 }

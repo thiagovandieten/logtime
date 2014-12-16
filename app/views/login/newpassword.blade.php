@@ -18,21 +18,11 @@
 </head>
 <body>
 
-
-<div class="login-wrap">
-<h1>Wachtwoord vergeten</h1>
-@if(strlen($errors->first()) >=1)
-<div class="error">
-{{{ $errors->first()}}}
-</div>
-@endif
-
-{{Form::open(array('route' => 'forgotpassword.execute'))}}
-    {{Form::label('', '')}}
-    {{Form::text('email','',['placeholder'=> 'Uw E-mail','class'=>'email']) }}
-
-    {{Form::submit('Verzoek nieuwe wachtwoord')}}
-{{Form::close()}}
+<div class="ww-vergeten-wrap">
+<h1>Uw wachtwoord wijzigen</h1>
+<input type="password" placeholder="Uw wachtwoord">
+<input type="password" placeholder="Wachtwoord herhalen">
+<input type="submit" value="Opslaan">
 </div>
 
 <script>

@@ -16,8 +16,7 @@
  <div class="top-header">
 <img src="images/menu.png" alt="menu" id="showLeftPush">
     <div class="title-place">
-        <h1>@yield("application_name")</h1>
-        <span>@yield("application_version")</span>
+        <h1>Logtime</h1>
     </div>
     <div class="mob-noti">
         <img src="images/noti.png" alt="meldingen" id="showRight">
@@ -38,5 +37,3 @@
     <img src="images/foto.jpg" class="avatar" alt="avatar">
 
 </div>
-@include('dashboard.sidebar')
-@include('dashboard.main')

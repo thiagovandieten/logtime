@@ -1,5 +1,4 @@
-<!-- Extend: header -->
-@extends('dashboard.header')
+@extends('template.main')
 
 <!-- Application name -->
 @section('application_name')

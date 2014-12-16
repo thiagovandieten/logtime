@@ -1,6 +1,6 @@
 <?php
 
-class dashboardController extends BaseController {
+class dashboardController extends BaseLoggedInController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -15,7 +15,7 @@ class dashboardController extends BaseController {
 	|
 	*/
 
-	protected $sqldata, $user, $group_id, $projects, $full_name;
+	protected $sqldata, $user, $group_id, $projects;
 	
 	public function showWelcome()
 	{
@@ -23,17 +23,16 @@ class dashboardController extends BaseController {
 		{
 			//Ingelogte USER
 			$this->user = User::find(Auth::id());
-		
 			
 			//Project Group ID ophalen
 			$this->group_id = $this->user->project_group_id;
 			
 			$this->projects = ProjectGroup::find($this->group_id)->project;
-			$this->full_name = $this->user->first_name ." ".$this->user->last_name; 
-
 			
 		}
 	
-		return View::make('dashboard')->with(array('projects'=>$this->projects, 'user' => $this->full_name));
+		return View::make('dashboard')->with(array(
+			'projects' => $this->projects,
+			'userFullName' => $this->userFullName));
 	}
 }

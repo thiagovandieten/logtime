@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'smtp',
+	'driver' => 'log', //TODO: Een heuze SMTP implementatie bouwen
 
 	/*
 	|--------------------------------------------------------------------------
