@@ -204,7 +204,7 @@ nav select, #input_01{
 }
 
 .title-place h1{
-    padding: 3px 0px 0px 4px;
+    padding: 9px 0px 0px 4px;
     margin: 0px;
     color: #fff;
     font-weight: normal;
@@ -871,7 +871,6 @@ nav select, #input_01{
 }
 
 .leerling-uren h2{
-
     font-size: 21px;
     color: #808b8d;
     margin: 0px;
@@ -1063,183 +1062,7 @@ nav select, #input_01{
     background: #66bb6a url('../images/icons/opslaan.png') no-repeat center;
 }
 
-.login-wrap{
-    position: absolute;
-    width: 275px;
-    min-height: 20px;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-    top: 20%;
-}
-
-.login-wrap input[type='text']{
-    width: 100%;
-    padding: 20px 20px 20px 46px;
-    color: #333;
-    border: 0px;
-    font-size: 18px;
-    border-radius: 3px;
-    margin: 10px 0px 10px 0px;
-    background: rgba(255,255,255,0.5) url('../images/username-icon.png') no-repeat 16px 22px;
-}
-
-.login-wrap input[type='password']{
-    width: 100%;
-    padding: 20px 20px 20px 46px;
-    color: #333;
-    border: 0px;
-    font-size: 18px;
-    border-radius: 3px;
-    margin: 10px 0px 10px 0px;
-    background: rgba(255,255,255,0.5) url('../images/wachtwoord-icon.png') no-repeat 16px 22px;
-}
-
-.error{
-    background: #e74c3c;
-    color: #fff;
-    width: 100%;
-    padding: 10px;
-    word-wrap: break-word;
-}
-
-
-
-.login-wrap input[type='submit']{
-    width: 100%;
-    padding: 20px;
-    background: #eb9001;
-    color: #fff;
-    border: 0px;
-    font-size: 18px;
-    border-radius: 3px;
-    margin: 10px 0px 10px 0px;
-    cursor: pointer;
-    -webkit-appearance: none;
-}
-.login-wrap input[type='submit']:hover{
-    opacity: 0.8;
-}
-.login-wrap input[type='submit']:active{
-    opacity: 1;
-}
-.login-wrap p{
-    color: #fff;
-    font-size: 14px;
-    text-align: center;
-}
-.login-wrap p a{
-    text-decoration: none;
-    color: #fff;
-}
-.login-wrap p a:hover{
-    text-decoration: underline;
-    color: #fff;
-}
-
-.login-wrap h1{
-    font-size: 50px;
-    font-weight: normal;
-    color: #fff;
-    text-align: center;
-    margin: 0px 0px 29px 0px;
-}
-
-::-webkit-input-placeholder { /* WebKit browsers */
-    color:    #333;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color:    #333;
-    opacity:  1;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color:    #333;
-    opacity:  1;
-}
-p:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color:    #333;
-}
-
-.email{
-    background: rgba(255,255,255,0.5) url('../images/e-mail-icon.png') no-repeat 16px 22px!important;
-}
-
-.ww-vergeten-wrap{
-    position: absolute;
-    width: 355px;
-    min-height: 20px;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-    top: 20%;
-    background: #fff;
-    padding: 30px;
-    border-radius: 3px;
-}
-
-.ww-vergeten-wrap h1{
-    font-size: 31px;
-    padding: 0px;
-    font-weight: normal;
-    color: #6588ae;
-    text-align: center;
-    margin: 0px 0px 15px 0px;
-
-}
-
-.ww-vergeten-wrap input[type='submit']{
-    width: 100%;
-    padding: 20px;
-    background: #eb9001;
-    color: #fff;
-    border: 0px;
-    font-size: 18px;
-    border-radius: 3px;
-    margin: 10px 0px 10px 0px;
-    cursor: pointer;
-    -webkit-appearance: none;
-    display: none;
-}
-
-
-.ww-vergeten-wrap input[type='password']{
-    width: 89%;
-    padding: 20px;
-    color: #666;
-    border: 0px;
-    font-size: 18px;
-    border-radius: 3px;
-    margin: 10px 0px 10px 0px;
-    background: #ededed;
-}
-
-.ww-vergeten-wrap input[type='submit']:hover{
-    opacity: 0.8;
-}
-.ww-vergeten-wrap input[type='submit']:active{
-    opacity: 1;
-}
-
-.ww-vergeten-wrap ::-webkit-input-placeholder { /* WebKit browsers */
-    color:    #666;
-}
-.ww-vergeten-wrap :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color:    #666;
-    opacity:  1;
-}
-.ww-vergeten-wrap ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color:    #666;
-    opacity:  1;
-}
-.ww-vergeten-wrap :-ms-input-placeholder { /* Internet Explorer 10+ */
-    color:    #666;
-}
-
-#divCheckPasswordMatch{
-    color: #fff;
-    width: 94.5%;
-    word-wrap: break-word;
-    padding: 10px;
-    background: #e74c3c!important;
-    display: none;
+.destop-instellingen{
+    float: right!important;
+    margin: 17px 0px 0px 0px!important;
 }

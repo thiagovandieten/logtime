@@ -9,8 +9,12 @@
     {{HTML::style(asset('css/style.css')) }}
     {{HTML::style(asset('css/default.css')) }}
     {{HTML::style(asset('css/component.css')) }}
-    {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
-    {{HTML::script(asset('js/modernizr.custom.js')) }}
+    {{HTML::style(asset('css/default-date.css')) }}
+    {{HTML::style(asset('css/default.date.css')) }}
+    
+
+
+
   </head>
   <body>
  <div class="top-header">
@@ -33,6 +37,8 @@
         </div>
         <div id="notificationFooter"><a href="#">Bekijk alles</a></div>
     </div>
+    {{--TODO:hier de link naar instellingen van leerling--}}
+    <a href="#"><img src="images/icons/instellingen-mob.png" class="destop-instellingen" alt="Instellingen" title="Instellingen"></a>
     <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
     <img src="images/foto.jpg" class="avatar" alt="avatar">
 
@@ -83,24 +89,29 @@
     <a href="#"><span><img src="images/icons/uitloggen.png" alt="Uitloggen"></span>Uitloggen</a>
 
     <h2>Uren bijwerken</h2>
-    <form method="post">
-        <select>
-            <option>Kies een project</option>
-            <option>Logtime</option>
-            <option>Pizza today</option>
-            <option>Malcom</option>
-        </select>
+           <form method="post">
+               <select>
+                   <option>Kies een project</option>
+                   <option>Logtime</option>
+                   <option>Pizza today</option>
+                   <option>Malcom</option>
+               </select>
 
-        <select>
-            <option>Onderdeel</option>
-            <option>Fase 4</option>
-        </select>
-        <input type="text" placeholder="00:00"  class="uren">
-        <p class="uren-tot">tot</p>
-        <input type="text" placeholder="00:00"  class="uren">
-        <textarea placeholder="Omschrijving"></textarea>
-        <input type="submit" class="bijwerken" value="Bijwerken">
-    </form>
+               <select>
+                   <option>Onderdeel</option>
+                   <option>Fase 4</option>
+               </select>
+               <select>
+                   <option>Taak</option>
+                   <option>Fase4A</option>
+               </select>
+               <input type="date" id="input_01" placeholder="Datum" name="date" class="datepicker">
+               <input type="text" placeholder="00:00"  class="uren">
+               <p class="uren-tot">tot</p>
+               <input type="text" placeholder="00:00"  class="uren">
+               <textarea placeholder="Omschrijving"></textarea>
+               <input type="submit" class="bijwerken" value="Bijwerken">
+           </form>
 </nav>
     <section class="ac-container container-mob">
     <div>
@@ -108,24 +119,30 @@
         <label class="uren-mob-invullen" for="ac-0"><img src="images/icons/uren-mob.png">Uren invullen</label>
         <article class="ac-small-mob">
 
-            <form method="post">
-                <select>
-                    <option>Kies een project</option>
-                    <option>Logtime</option>
-                    <option>Pizza today</option>
-                    <option>Malcom</option>
-                </select>
+           <h3>Uren bijwerken</h3>
+                           <form method="post">
+                               <select>
+                                   <option>Kies een project</option>
+                                   <option>Logtime</option>
+                                   <option>Pizza today</option>
+                                   <option>Malcom</option>
+                               </select>
 
-                <select>
-                    <option>Onderdeel</option>
-                    <option>Fase 4</option>
-                </select>
-                <input type="text" placeholder="00:00"  class="uren">
-                <p class="uren-tot">tot</p>
-                <input type="text" placeholder="00:00"  class="uren">
-                <textarea placeholder="Omschrijving"></textarea>
-                <input type="submit" class="bijwerken" value="Bijwerken">
-            </form>
+                               <select>
+                                   <option>Onderdeel</option>
+                                   <option>Fase 4</option>
+                               </select>
+                               <select>
+                                   <option>Taak</option>
+                                   <option>Fase4A</option>
+                               </select>
+                               <input type="date" id="input_01" placeholder="Datum" name="date" class="datepicker">
+                               <input type="text" placeholder="00:00"  id="uren-klein">
+                               <p class="uren-tot">tot</p>
+                               <input type="text" placeholder="00:00"  id="uren-klein">
+                               <textarea placeholder="Omschrijving"></textarea>
+                               <input type="submit" class="bijwerken" value=" ">
+                           </form>
         </article>
     </div>
         </section>
@@ -133,9 +150,13 @@
         <section class="ac-container">
           @yield('return_projects')
          </section>
-
+     {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
         {{HTML::script(asset('js/notificatie.js')) }}
         {{HTML::script(asset('js/menuleft.js')) }}
+             {{HTML::script(asset('js/picker.js')) }}
+             {{HTML::script(asset('js/picker.date.js')) }}
+             {{HTML::script(asset('js/legacy.js')) }}
+             {{HTML::script(asset('js/Chart.js')) }}
         </body>
         </html><!---------------------Credits---------------------
 
