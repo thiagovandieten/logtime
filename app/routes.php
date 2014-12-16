@@ -50,3 +50,5 @@ Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController
 Event::listen('illuminate.query', function($query){
 	//var_dump($query);
 });
+
+Route::get('persoonlijke-instellingen', array('before' => 'auth', 'uses' => 'personalSettingsController@index'));

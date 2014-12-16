@@ -38,8 +38,9 @@
         <div id="notificationFooter"><a href="#">Bekijk alles</a></div>
     </div>
     {{--TODO:hier de link naar instellingen van leerling--}}
-    <a href="#"><img src="images/icons/instellingen-mob.png" class="destop-instellingen" alt="Instellingen" title="Instellingen"></a>
-    <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
+    <a href="persoonlijke-instellingen"><img src="images/icons/instellingen-mob.png" class="destop-instellingen" alt="Instellingen" title="Instellingen">
+        <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
+    </a>
     <img src="images/foto.jpg" class="avatar" alt="avatar">
 
 </div>
@@ -81,7 +82,7 @@
         <img src="images/icons/instellingen-mob.png" class="mob-instellingen" alt="Instellingen" title="Instellingen">
     </div>
     <div style="clear:both"></div>
-    <a href="#"><span><img src="images/icons/dashboard.png" alt="Dashboard"></span>Dashboard</a>
+    <a href="dashboard"><span><img src="images/icons/dashboard.png" alt="Dashboard"></span>Dashboard</a>
     <a href="#"><span><img src="images/icons/logboek.png" alt="Logboek"></span>Logboek</a>
     <a href="#"><span><img src="images/icons/map.png" alt="Project aanmaken"></span>Project beheer</a>
     <a href="#"><span><img src="images/icons/instellingen.png" alt="Instellingen"></span>Groeps instellingen</a>
@@ -149,6 +150,7 @@
 
         <section class="ac-container">
           @yield('return_projects')
+          @yield('content')
          </section>
      {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
         {{HTML::script(asset('js/notificatie.js')) }}
