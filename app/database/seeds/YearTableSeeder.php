@@ -14,7 +14,6 @@ class YearTableSeeder extends Seeder {
 		$year->year = "2011-08-01";
 		$year->nickname = "Lions";
 		$year->save();
-		// $this->call('UserTableSeeder');
 	}
 
 }

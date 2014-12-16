@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectMethodProcesCategoriesTable extends Migration {
+class CreateSubGroupsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class CreateProjectMethodProcesCategoriesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('project_method_proces_categories', function(Blueprint $table)
+		Schema::create('sub_groups', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('project_method_proces_categorie');
+			$table->string('sub_group_name', 255);
 			$table->timestamps();
 		});
 	}
@@ -27,7 +27,7 @@ class CreateProjectMethodProcesCategoriesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('project_method_proces_categories');
+		Schema::drop('sub_groups');
 	}
 
 }

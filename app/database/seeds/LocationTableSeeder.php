@@ -14,7 +14,7 @@ class LocationTableSeeder extends Seeder {
 		$location = new Location();
 		$location->location = "Harderwijk";
 		$location->save();
-		// $this->call('UserTableSeeder');
+
 	}
 
 }

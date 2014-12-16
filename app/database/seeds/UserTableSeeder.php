@@ -28,7 +28,6 @@ class UserTableSeeder extends Seeder {
 		$user->adress_id = 1;
 		$user->project_group_id = 1;
 		$user->save();
-		// $this->call('UserTableSeeder');
 	}
 
 }

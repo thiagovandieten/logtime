@@ -18,10 +18,8 @@ class CreateEstimatedTimeTable extends Migration {
             $table->time('time_needed');
             $table->integer('project_group_id')->unsigned();
             $table->foreign('project_group_id')->references('id')->on('project_groups');
-            $table->integer('project_task_id')->unsigned()->nullable();
-            $table->foreign('project_task_id')->references('id')->on('project_tasks');
-            $table->integer('user_project_task_id')->unsigned()->nullable();
-            $table->foreign('user_project_task_id')->references('id')->on('user_project_tasks');
+            $table->integer('task_id')->unsigned()->nullable();
+            $table->foreign('task_id')->references('id')->on('tasks');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 

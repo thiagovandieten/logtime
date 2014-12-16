@@ -10,6 +10,8 @@ class ProjectTableSeeder extends Seeder {
 
     public function run()
     {
+        $this->call('LevelTypeTableSeeder');
+
         $project = new Project();
         $project->project_name = "Logtime";
         $project->active = 1;
