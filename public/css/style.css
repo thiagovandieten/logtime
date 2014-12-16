@@ -926,7 +926,6 @@ nav select, #input_01{
     z-index: 1;
     width: 100px;
     height: 100px;
-    background: #EEE;
     border-radius: 50%;
     top: 50px;
     left: 50px;
@@ -937,7 +936,6 @@ nav select, #input_01{
     width: 120px;
     background: rgba(0,0,0,0.1);
     border-radius: 50%;
-    box-shadow: 0 0 3px 4px rgba(0,0,0,0.1);
     margin: 220px auto;
 
 }
