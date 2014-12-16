@@ -13,16 +13,15 @@
 </head>
 <body>
 
-
-
-
 <div class="ww-vergeten-wrap">
 <h1>Uw wachtwoord wijzigen</h1>
-<div class="registrationFormAlert" id="divCheckPasswordMatch">
-</div>
-
-
-
+  <div class="registrationFormAlert" id="divCheckPasswordMatch">
+  </div>
+@if(Session::has('message'))
+    <div class="error">
+        {{{ Session::get('message') }}}
+    </div>
+@endif
 
 {{ Form::open(array('route' => array('forgotpassword.store', $token))) }}
     {{Form::label('', '')}}
@@ -30,7 +29,7 @@
 
     {{Form::label('', '')}}
     {{Form::password('password1', ['placeholder'=>'Uw wachtwoord herhalen', 'id'=>'txtConfirmPassword', 'onChange'=>'checkPasswordMatch();'])}}
-
+{{ Form::hidden('token', $token) }}
     {{Form::submit('Opslaan')}}
 {{Form::close()}}
 </div>
