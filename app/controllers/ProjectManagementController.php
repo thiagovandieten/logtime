@@ -1,11 +1,7 @@
 <?php
 
-class ProjectManagementController extends \BaseLoggedInController {
+class ProjectManagementController extends BaseLoggedInController {
 
-	public function __construct()
-	{
-		$this->beforeFilter('auth');
-	}
 	/**
 	 * Display a listing of the resource.
 	 *

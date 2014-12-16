@@ -4,12 +4,19 @@ class BaseLoggedInController extends BaseController {
 
     protected $userFullName;
 
-    function __construct()
+    public function __construct()
     {
+
         if(Auth::check())
         {
             $this->userFullName = Auth::user()->first_name . ' ' . Auth::user()->last_name;
         }
+
+
+        View::composer(array('dashboard', 'projectmanagement.index' ), function($view)
+        {
+            $view->with('userFullName', $this->userFullName);
+        });
 
     }
 }
