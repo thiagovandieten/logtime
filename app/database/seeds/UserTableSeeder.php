@@ -14,6 +14,21 @@ class UserTableSeeder extends Seeder {
 		$this->call('LocationTableSeeder');
 		$this->call('UserTypeTableSeeder');
 		$this->call('ProjectGroupTableSeeder');
+		//versneld2014@gmail.com
+
+		$user = new User();
+		$user->user_code = "1337";
+		$user->password = Hash::make("wachtwoord");
+		$user->first_name = "Rutger";
+		$user->last_name = "Koerselman";
+		$user->email = "versneld2014@gmail.com";
+		$user->phone_number = '0651281477';
+		$user->active = 1;
+		$user->user_type_id = 1;
+		$user->location_id = 1;
+		$user->adress_id = 1;
+		$user->project_group_id = 1;
+		$user->save();
 
 		$user = new User();
 		$user->user_code = "256116";
