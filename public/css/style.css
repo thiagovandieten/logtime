@@ -204,7 +204,7 @@ nav select, #input_01{
 }
 
 .title-place h1{
-    padding: 3px 0px 0px 4px;
+    padding: 9px 0px 0px 4px;
     margin: 0px;
     color: #fff;
     font-weight: normal;
@@ -1198,11 +1198,12 @@ p:-ms-input-placeholder { /* Internet Explorer 10+ */
     margin: 10px 0px 10px 0px;
     cursor: pointer;
     -webkit-appearance: none;
+    display: none;
 }
 
 
 .ww-vergeten-wrap input[type='password']{
-    width: 100%;
+    width: 89%;
     padding: 20px;
     color: #666;
     border: 0px;
@@ -1232,4 +1233,17 @@ p:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 .ww-vergeten-wrap :-ms-input-placeholder { /* Internet Explorer 10+ */
     color:    #666;
+}
+
+#divCheckPasswordMatch{
+    color: #fff;
+    width: 94.5%;
+    word-wrap: break-word;
+    padding: 10px;
+    background: #e74c3c!important;
+    display: none;
+}
+.destop-instellingen{
+    float: right!important;
+    margin: 17px 0px 0px 0px!important;
 }
