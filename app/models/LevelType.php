@@ -3,9 +3,7 @@
 class LevelType extends Eloquent{
 
 	protected $table = "level_types";
-	/*
-	LevelType heeft een relatie met projects,
-	tasks, categories en level_types_project_groups.
+
 	public function projects()
 	{
 		return $this->hasMany('Project');
@@ -21,9 +19,9 @@ class LevelType extends Eloquent{
 		return $this->hasMany('Categorie');
 	}
 
-	public function projectGroup()
-	{
-		return $this->belongsToMany('ProjectGroup', 'group_project_periode');
-	}
-	*/
+	// public function projectGroup()
+	// {
+	// 	return $this->belongsToMany('ProjectGroup', 'level_types_project_groups');
+	// }
+
 }
