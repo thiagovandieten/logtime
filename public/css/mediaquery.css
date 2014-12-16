@@ -43,7 +43,7 @@
 }
 
 @media screen and (max-width: 600px){
-    .top-header p, .noti-aantal, .avatar, .noti{
+    .top-header p, .noti-aantal, .avatar, .noti, .destop-instellingen{
         display: none;
     }
     .profiel-mob{
