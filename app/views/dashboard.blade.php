@@ -24,11 +24,6 @@
 	{{$user}}
 @stop
 
-<!-- Extend: main content -->
-@include('dashboard.main')
-
-@stop
-
 <!-- Return the group projects -->
 @section('return_projects')
     @foreach($projects as $project)

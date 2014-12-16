@@ -27,7 +27,7 @@
 </div>
 @endif
 
-{{Form::open(array('route' => 'forgotpassword.execute'))}}
+{{Form::open(array('route' => 'forgotpassword.request'))}}
     {{Form::label('', '')}}
     {{Form::text('email','',['placeholder'=> 'Uw E-mail','class'=>'email']) }}
 

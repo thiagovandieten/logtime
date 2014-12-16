@@ -17,12 +17,20 @@
 
 </head>
 <body>
+@if(Session::has('message'))
+    <div class="error">
+        {{{ Session::get('message') }}}
+    </div>
+@endif
 
 <div class="ww-vergeten-wrap">
 <h1>Uw wachtwoord wijzigen</h1>
-<input type="password" placeholder="Uw wachtwoord">
-<input type="password" placeholder="Wachtwoord herhalen">
+    {{ Form::open(array('route' => array('forgotpassword.store', $token))) }}
+<input name="password" type="password" placeholder="Uw wachtwoord">
+<input name="passwordagain" type="password" placeholder="Wachtwoord herhalen">
+    {{ Form::hidden('token', $token) }}
 <input type="submit" value="Opslaan">
+    {{ Form::close() }}
 </div>
 
 <script>
