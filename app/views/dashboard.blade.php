@@ -19,10 +19,7 @@
 	Hier komen de notificaties
 @stop
 
-<!-- Get the user name -->
-@section('username')
-	{{$user}}
-@stop
+
 
 <!-- Return the group projects -->
 @section('return_projects')

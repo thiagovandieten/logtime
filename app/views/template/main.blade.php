@@ -86,7 +86,7 @@
     <a href="#"><span><img src="images/icons/map.png" alt="Project aanmaken"></span>Project beheer</a>
     <a href="#"><span><img src="images/icons/instellingen.png" alt="Instellingen"></span>Groeps instellingen</a>
     <a href="#"><span><img src="images/icons/handleiding.png" alt="Handleiding"></span>Handleiding</a>
-    <a href="#"><span><img src="images/icons/uitloggen.png" alt="Uitloggen"></span>Uitloggen</a>
+    <a href="logout"><span><img src="images/icons/uitloggen.png" alt="Uitloggen"></span>Uitloggen</a>
 
     <h2>Uren bijwerken</h2>
            <form method="post">
