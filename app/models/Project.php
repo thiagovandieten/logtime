@@ -9,15 +9,20 @@
 class Project extends Eloquent {
 
     protected $fillable = [];
-	
+
 	public function location()
 	{
         return $this->hasOne('Location');
 	}
-	
+
 	public function projectGroup()
 	{
-		return $this->belongsToMany('ProjectGroup', 'group_project_periode');	
+		return $this->belongsToMany('ProjectGroup', 'group_project_periode');
 	}
-	
+
+	public function LevelType()
+	{
+		return $this->hasOne('LevelType');
+	}
+
 }

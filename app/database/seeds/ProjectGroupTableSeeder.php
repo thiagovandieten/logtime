@@ -17,7 +17,6 @@ class ProjectGroupTableSeeder extends Seeder {
 		$projectGroup->adress_id = 1;
 		$projectGroup->year_id = 1;
 		$projectGroup->save();
-		// $this->call('UserTableSeeder');
 	}
 
 }

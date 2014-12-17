@@ -22,8 +22,6 @@ class AdressTableSeeder extends Seeder {
 
 		$adress->save();
 
-
-		// $this->call('UserTableSeeder');
 	}
 
 }
