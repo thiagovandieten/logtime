@@ -45,65 +45,18 @@ Route::get('logout', function(){
 });
 
 Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
+Route::group(array('before' => 'auth'), function()
+{
+    Route::get('dashboard', array('uses' => 'dashboardController@showWelcome'));
+    Route::resource('projects', 'ProjectManagementController');
+    Route::get('persoonlijke-instellingen', 'personalSettingsController@index');
+    Route::post('persoonlijke-instellingen/opslaan', 'personalSettingsController@store');
+});
 
-Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
 
-Route::resource('projects', 'ProjectManagementController', array('before' => 'auth'));
 Event::listen('illuminate.query', function($query){
 	//var_dump($query);
 });
 
-Route::get('persoonlijke-instellingen', array('before' => 'auth', 'uses' => 'personalSettingsController@index'));
-//Route::post('persoonlijke-instellingen/opslaan', array('before' => 'auth', 'uses' => 'personalSettingsController@store'), function(){
-//    Auth::post('opslaan');
-//    return Redirect::to('persoonlijke-instellingen');
-//});
 
-Route::post('persoonlijke-instellingen/opslaan', function(){
-        
-        // create the validation rules ------------------------
-        $rules = array(
-            'first_name'       => 'required', 						// just a normal required validation
-            'last_name'        => 'required', 	                    // just a normal required validation
-            'phone_number'     => 'required'                        // just a normal required validation
-            //'password'         => 'required',
-            //'password_confirm' => 'required|same:password' 		// required and has to match the password field
-        );
 
-        // do the validation ----------------------------------
-        // validate against the inputs from our form
-        $validator = Validator::make(Input::all(), $rules);
-
-        // check if the validator failed -----------------------
-        if ($validator->fails()) {
-
-            // get the error messages from the validator
-            $messages = $validator->messages('Er is iets fout gegaan');
-
-            // redirect our user back to the form with the errors from the validator
-            return Redirect::to('persoonlijke-instellingen')
-                ->withErrors($validator);
-
-        } else {
-                        
-            // validation successful ---------------------------
-
-            // our duck has passed all tests!
-            // let him enter the database
-
-            // create the data
-            $user_data = User::find(Auth::id());
-            $user_data->first_name       = Input::get('first_name');
-            $user_data->last_name        = Input::get('last_name');
-            $user_data->phone_number     = Input::get('phone_number');
-            //$duck->password = Hash::make(Input::get('password'));
-
-            // save our data
-            $user_data->save();
-
-            // redirect ----------------------------------------
-            // redirect our user back to the form so they can do it all over again
-            return Redirect::to('persoonlijke-instellingen');
-
-        }
-    });

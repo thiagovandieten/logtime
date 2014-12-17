@@ -15,10 +15,7 @@ class StreetTableSeeder extends Seeder {
 
 		$street->street = "Hertog Willemweg 23";
 		$street->save();
-	
 
-
-		// $this->call('UserTableSeeder');
 	}
 
 }
