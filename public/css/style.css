@@ -277,7 +277,7 @@ nav select, #input_01{
 }
 
 .profiel-mob{
-    border-bottom: 1px solid #34759f;
+    border-bottom: 1px solid #6588ae;
     min-height: 95px;
     padding: 25px 0px 0px 8px;
     font-size: 18px;
@@ -332,7 +332,7 @@ nav select, #input_01{
 
 .mob-notification{
     padding: 10px;
-    border-bottom: 1px solid #34759f;
+    border-bottom: 1px solid #6588ae;
     min-height: 90px;
     font-size: 14px;
 }
@@ -362,7 +362,7 @@ nav select, #input_01{
 
 .noti-mob-instellingen{
     overflow: auto;
-    border-bottom: 1px solid #34759f;
+    border-bottom: 1px solid #6588ae;
     padding: 5px;
 }
 
@@ -396,7 +396,7 @@ nav select, #input_01{
 .uren-mob-invullen{
     height: 41px!important;
     font-size: 14px!important;
-    background: #2a80b9!important;
+    background: #6588ae!important;
     color: #fff!important;
     text-align: center!important;
     border-left: 0px!important;
