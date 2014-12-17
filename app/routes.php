@@ -44,6 +44,7 @@ Route::get('logout', function(){
     return Redirect::to('login');
 });
 
+Route::get('eenmalig-gegevens','enteronetimedataController@showWelcome');
 
 Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
 
