@@ -12,6 +12,9 @@ class GroupSettingsController extends BaseLoggedInController {
     public function group_settings()
     {
         
+          //$project_group  = showWelcome->project_group_id; 
+          //dd($user->project_group_id);
+        
         $user = User::find(Auth::id());    
         $group_data = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'phone_number' => $user->phone_number);
 
@@ -27,11 +30,7 @@ class GroupSettingsController extends BaseLoggedInController {
         
          // create the validation rules ------------------------
         $rules = array(
-            'first_name'       => 'required', 						// just a normal required validation
-            'last_name'        => 'required', 	                    // just a normal required validation
-            'phone_number'     => 'required'                        // just a normal required validation
-            //'password'         => 'required',
-            //'password_confirm' => 'required|same:password' 		// required and has to match the password field
+            'wage'       => 'required', 						// just a normal required validation
         );
 
         // do the validation ----------------------------------

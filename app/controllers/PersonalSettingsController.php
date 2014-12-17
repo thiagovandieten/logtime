@@ -10,14 +10,12 @@ class PersonalSettingsController extends BaseLoggedInController {
 
         
     public function index()
-    {
-        
+    {        
         $user = User::find(Auth::id());    
-        $personal_data = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'phone_number' => $user->phone_number);
+        $personal_data = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'phone_number' => $user->phone_number, 'avatar' => $user->user_image_path);
 
-        return View::make('personal_settings')->with(array(
-            'personal_data' => $personal_data
-             ));
+        return View::make('personal_settings')->with(array
+            ('personal_data' => $personal_data));
     }
     
     public function store()
@@ -28,9 +26,9 @@ class PersonalSettingsController extends BaseLoggedInController {
         $destinatonPath = '';
         $filename = '';
         $file = Input::file('avatar');
-        //$destinationPath = public_path().'/_img/';
+        $destinationPath = public_path().'/images/';
         $filename = str_random(6).'_'.$file->getClientOriginalName();
-        //$uploadSuccess = $file->move($destinationPath, $filename);
+        $uploadSuccess = $file->move($destinationPath, $filename);
         
         // create the validation rules ------------------------
         $rules = array(
