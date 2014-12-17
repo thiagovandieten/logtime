@@ -44,10 +44,13 @@ Route::get('logout', function(){
     return Redirect::to('login');
 });
 
+Route::group(array('before' => 'auth'), function()
+{
+    Route::get('dashboard', array('uses' => 'dashboardController@showWelcome'));
+    Route::resource('projects', 'ProjectManagementController');
+});
 
-Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
 
-Route::resource('projects', 'ProjectManagementController', array('before' => 'auth'));
 Event::listen('illuminate.query', function($query){
 	//var_dump($query);
 });
