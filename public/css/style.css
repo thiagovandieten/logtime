@@ -1429,5 +1429,40 @@ button:active{
     color: #999;
     font-size: 16px;
     cursor: pointer;
-    
+}
+
+.projecten-overzicht{
+    overflow: auto;
+}
+
+.projecten-overzicht td{
+    padding: 10px;
+}
+
+.projecten-overzicht table{
+    width: 100%;
+    margin-top:20px;
+    font-size: 16px;
+    color: #999;
+}
+
+.projecten-overzicht table p{
+    padding: 4px;
+}
+
+tr.border_bottom td{
+    border-bottom: 1px solid #d0d0d0;
+    background: #fff!important;
+    cursor: auto!important;
+}
+
+.projecten-overzicht tr:hover{
+     background: #cfdbe3!important;
+     cursor: pointer;
+     transition: 0.3s;
+ }
+
+.projecten-overzicht a{
+    text-decoration: none;
+    color: #999;
 }
