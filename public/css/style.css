@@ -252,7 +252,7 @@ nav select, #input_01{
     z-index: 1000;
     padding: 8px;
     font-size: 16px;
-    background-color: #2a80b9;
+    background-color: #6588ae;
     width: 300px;
     color: #fff;
 }
@@ -261,7 +261,7 @@ nav select, #input_01{
     padding: 10px;
 }
 #notificationFooter {
-    background-color: #2a80b9;
+    background-color: #6588ae;
     text-align: center;
     padding: 8px;
     font-size: 12px;
