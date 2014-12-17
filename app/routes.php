@@ -48,6 +48,7 @@ Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
 
 Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
 
+Route::resource('projects', 'ProjectManagementController', array('before' => 'auth'));
 Event::listen('illuminate.query', function($query){
 	//var_dump($query);
 });

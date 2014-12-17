@@ -32,7 +32,6 @@ class dashboardController extends BaseLoggedInController {
 		}
 	
 		return View::make('dashboard')->with(array(
-			'projects' => $this->projects,
-			'userFullName' => $this->userFullName));
+			'projects' => $this->projects));
 	}
 }

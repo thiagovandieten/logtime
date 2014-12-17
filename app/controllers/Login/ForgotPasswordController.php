@@ -73,7 +73,7 @@ class ForgotPasswordController extends \BaseController {
         {
             return Redirect::route('forgotpassword.create', $token)->withMessage('De twee ingevoerde wachtworden komen niet met elkaar overheen.');
         }
-        $user = User::findorFail($tokenObject->user_id)->first();
+        $user = User::findorFail($tokenObject->user_id);
         $user->password = \Hash::make(\Input::get('password'));
         $user->save();
         return Redirect::to('login')->withMessage('Wachtwoord is gewijzigd!');
