@@ -15,9 +15,9 @@ class PersonalSettingsController extends BaseLoggedInController {
         $user = User::find(Auth::id());    
         $personal_data = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'phone_number' => $user->phone_number);
 
-        return View::make('personal_settings')->with(array(
-            'personal_data' => $personal_data,
-            'userFullName' => $this->userFullName, ));
+        return View::make('personal_settings.index')->with(array(
+            'personal_data' => $personal_data
+             ));
     }
     
     public function store()

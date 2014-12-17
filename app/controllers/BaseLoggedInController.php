@@ -13,7 +13,7 @@ class BaseLoggedInController extends BaseController {
         }
 
 
-        View::composer(array('dashboard', 'projectmanagement.index' ), function($view)
+        View::composer(array('dashboard', 'projectmanagement.index', 'personal_settings.index' ), function($view)
         {
             $view->with('userFullName', $this->userFullName);
         });
