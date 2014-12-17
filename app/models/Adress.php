@@ -12,6 +12,11 @@ class Adress extends Eloquent {
 		return $this->belongsTo('Street');
 	}
 
+	public function zipcode()
+	{
+		return $this->belongsTo('Zipcode');
+	}
+
 	public function users()
 	{
 		return $this->hasMany('User');
