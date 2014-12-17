@@ -6,7 +6,7 @@ class CategorieTableSeeder extends Seeder {
 	{
 		$categorie = new Categorie();
 		$categorie->categorie_name = "fase 0";
-		$categorie->level_type_id = 0;
+		$categorie->level_type_id = 1;
 		$categorie->save();
 
 
