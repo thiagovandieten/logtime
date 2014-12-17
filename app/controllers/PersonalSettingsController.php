@@ -1,24 +1,29 @@
 <?php
 
 class PersonalSettingsController extends BaseLoggedInController {
-   
-    //public function PersonalSettingsController()
-	//{
-		//$personal_data = DB::table('users')->select('first_name', 'last_name', 'phone_number', 'password')->where('id', $this->user = User::find(Auth::id()))->get();
+   	
+        // ophalen van de volgende gegevens:
+        // voornaam, achternaam, straatnaam, huisnummer, postcode, woonplaats, telefoonnummer, wachtwoord 
+        // voornaam, achternaam, telefoonnummer, van tabel users
+        // straat, woonplaats, huisnummer van tabel adresses
+        // wachtwoord van tabel users
+
         
-        //$personal_data = DB::table('adresses')->select('street_id', 'city_id', 'house_number')->get();
-        
-        //$user = User::find(1);
-        //var_dump($user->name);
-        
-		//return var_dump($personal_data);
-		//return View::make('layouts.todo.index', array('tasks' => $taken));
-	//}
-    
-    protected $userFullName;
-    
     public function index()
     {
-        return View::make('personal_settings')->with(array('userFullName' => $this->userFullName));
+        
+        $user = User::find(Auth::id());    
+        $personal_data = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'phone_number' => $user->phone_number);
+
+        return View::make('personal_settings')->with(array(
+            'personal_data' => $personal_data,
+            'userFullName' => $this->userFullName, ));
     }
+    
+    public function store()
+    {
+        $user = User::find(Auth::id());
+        var_dump(Input::all());
+    }
+        
 }

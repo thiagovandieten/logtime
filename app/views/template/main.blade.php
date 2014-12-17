@@ -77,9 +77,11 @@
     </nav>
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left menu-mob-width cbp-spmenu-open" id="cbp-spmenu-s1">
     <div class="profiel-mob">
-        <img src="images/foto.jpg" class="avatar-mob" alt="avatar">
-        <p>Maria van de visser</p>
-        <img src="images/icons/instellingen-mob.png" class="mob-instellingen" alt="Instellingen" title="Instellingen">
+            <img src="images/foto.jpg" class="avatar-mob" alt="avatar">
+        <a href="persoonlijke-instellingen">
+            <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
+        </a>
+            <img src="images/icons/instellingen-mob.png" class="mob-instellingen" alt="Instellingen" title="Instellingen">
     </div>
     <div style="clear:both"></div>
     <a href="dashboard"><span><img src="images/icons/dashboard.png" alt="Dashboard"></span>Dashboard</a>
