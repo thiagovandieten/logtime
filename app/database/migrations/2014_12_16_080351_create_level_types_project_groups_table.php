@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration {
+class CreateLevelTypesProjectGroupsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,13 @@ class CreateCategoriesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('categories', function(Blueprint $table)
+		Schema::create('level_types_project_groups', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('level_type_id')->unsigned();
             $table->foreign('level_type_id')->references('id')->on('level_types');
-			$table->string('categorie_name',255);
+            $table->integer('project_group_id')->unsigned();
+            $table->foreign('project_group_id')->references('id')->on('project_groups');
 			$table->timestamps();
 		});
 	}
@@ -29,7 +30,7 @@ class CreateCategoriesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('categories');
+		Schema::drop('level_types_project_groups');
 	}
 
 }

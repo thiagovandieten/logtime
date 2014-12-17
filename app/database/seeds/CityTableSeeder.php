@@ -16,8 +16,6 @@ class CityTableSeeder extends Seeder {
 		$city->city = "Epe";
 		$city->save();
 
-
-		// $this->call('UserTableSeeder');
 	}
 
 }
