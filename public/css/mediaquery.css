@@ -11,9 +11,12 @@
 
 
 @media screen and (max-width: 850px){
-
+    .filter-wrap{
+       margin: -20px 0px 0px -6px!important;
+    }
     #wrapper{
         left: 0px!important;
+        width:100%!important;
     }
     .menu-mob-width{
         left: -290px!important;
@@ -43,6 +46,20 @@
 }
 
 @media screen and (max-width: 600px){
+    .filter-omgeving{
+        width: 100%!important;
+        margin-top: 20px;
+    }
+    .filter-wrap{
+        width: 100%!important;
+        margin: -20px 0px 0px 0px!important;
+    }
+    .filter-omgeving{
+        margin-left: 0px!important;
+    }
+    .filter-omgeving p{
+        padding: 14px 14px 14px 0px!important;
+    }
     .top-header p, .noti-aantal, .avatar, .noti, .destop-instellingen{
         display: none;
     }
@@ -73,6 +90,7 @@
     }
 
 }
+
 
 @media screen and (max-width: 450px){
     #wrapper{
