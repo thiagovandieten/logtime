@@ -101,6 +101,7 @@
         <textarea placeholder="Omschrijving"></textarea>
         <input type="submit" class="bijwerken" value="Bijwerken">
     </form>
+    
 </nav>
     <section class="ac-container container-mob">
     <div>
@@ -131,6 +132,8 @@
         </section>
 
         <section class="ac-container">
+          @yield('content')
+    
           @yield('return_projects')
          </section>
 

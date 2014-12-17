@@ -46,6 +46,7 @@ Route::get('logout', function(){
 
 
 Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
+Route::resource('logbook',  'logbookController');
 
 Event::listen('illuminate.query', function($query){
 	//var_dump($query);
