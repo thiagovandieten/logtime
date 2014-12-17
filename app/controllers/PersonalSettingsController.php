@@ -15,7 +15,7 @@ class PersonalSettingsController extends BaseLoggedInController {
         $user = User::find(Auth::id());    
         $personal_data = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'phone_number' => $user->phone_number);
 
-        return View::make('personal_settings.index')->with(array(
+        return View::make('personal_settings')->with(array(
             'personal_data' => $personal_data
              ));
     }
@@ -23,9 +23,16 @@ class PersonalSettingsController extends BaseLoggedInController {
     public function store()
     {
         $user = User::find(Auth::id());
-        var_dump(Input::all());
         
-         // create the validation rules ------------------------
+        //Data for image upload -------------------------------
+        $destinatonPath = '';
+        $filename = '';
+        $file = Input::file('avatar');
+        //$destinationPath = public_path().'/_img/';
+        $filename = str_random(6).'_'.$file->getClientOriginalName();
+        //$uploadSuccess = $file->move($destinationPath, $filename);
+        
+        // create the validation rules ------------------------
         $rules = array(
             'first_name'       => 'required', 						// just a normal required validation
             'last_name'        => 'required', 	                    // just a normal required validation
@@ -56,11 +63,17 @@ class PersonalSettingsController extends BaseLoggedInController {
             // let him enter the database
 
             // create the data
+            if(Input::hasFile('image')){
+                $images = User::find(Auth::id());
+                Session::flash('success_insert','<strong>Upload success</strong>');
+            }
+
             $user_data = User::find(Auth::id());
             $user_data->first_name       = Input::get('first_name');
             $user_data->last_name        = Input::get('last_name');
             $user_data->phone_number     = Input::get('phone_number');
-            //$duck->password = Hash::make(Input::get('password'));
+            //$user_data->password = Hash::make(Input::get('password'));
+            $user_data->user_image_path     = $filename;
 
             // save our data
             $user_data->save();
@@ -71,5 +84,5 @@ class PersonalSettingsController extends BaseLoggedInController {
 
         }
     }
-        
+    
 }

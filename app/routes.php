@@ -44,13 +44,15 @@ Route::get('logout', function(){
     return Redirect::to('login');
 });
 
-Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
+
 Route::group(array('before' => 'auth'), function()
 {
+    Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
     Route::get('dashboard', array('uses' => 'dashboardController@showWelcome'));
     Route::resource('projects', 'ProjectManagementController');
     Route::get('persoonlijke-instellingen', 'personalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'personalSettingsController@store');
+    Route::get('groepsinstellingen', 'groupSettingsController@group_settings');
 });
 
 
