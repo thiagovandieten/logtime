@@ -41,7 +41,7 @@
     <a href="persoonlijke-instellingen"><img src="images/icons/instellingen-mob.png" class="destop-instellingen" alt="Instellingen" title="Instellingen">
         <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
     </a>
-    <img src="images/foto.jpg" class="avatar" alt="avatar">
+    <img src="images/{{$user_avatar}}" class="avatar" alt="avatar">
 
 </div>
 <div class="cbp-spmenu-push cbp-spmenu-push-toright" id="wrapper">
@@ -86,8 +86,8 @@
     <div style="clear:both"></div>
     <a href="dashboard"><span><img src="images/icons/dashboard.png" alt="Dashboard"></span>Dashboard</a>
     <a href="#"><span><img src="images/icons/logboek.png" alt="Logboek"></span>Logboek</a>
-    <a href="#"><span><img src="images/icons/map.png" alt="Project aanmaken"></span>Project beheer</a>
-    <a href="#"><span><img src="images/icons/instellingen.png" alt="Instellingen"></span>Groeps instellingen</a>
+    <a href="projects"><span><img src="images/icons/map.png" alt="Project aanmaken"></span>Project beheer</a>
+    <a href="groepsinstellingen"><span><img src="images/icons/instellingen.png" alt="Instellingen"></span>Groeps instellingen</a>
     <a href="#"><span><img src="images/icons/handleiding.png" alt="Handleiding"></span>Handleiding</a>
     <a href="logout"><span><img src="images/icons/uitloggen.png" alt="Uitloggen"></span>Uitloggen</a>
 

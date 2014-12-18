@@ -13,12 +13,10 @@ class StreetTableSeeder extends Seeder {
 
 		$street = new Street();
 
-		$street->street = "Hertog Willemweg 23";
+		$street->street = "Hertog Willemweg";
+		$street->house_number = "23";
 		$street->save();
-	
 
-
-		// $this->call('UserTableSeeder');
 	}
 
 }

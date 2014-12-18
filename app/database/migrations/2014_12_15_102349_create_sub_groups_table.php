@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectMethodsTable extends Migration {
+class CreateSubGroupsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,10 @@ class CreateProjectMethodsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('project_methods', function(Blueprint $table)
+		Schema::create('sub_groups', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('project_method_name',255);
-			$table->integer('location_id')->unsigned();
-            $table->foreign('location_id')->references('id')->on('locations');
+			$table->string('sub_group_name', 255);
 			$table->timestamps();
 		});
 	}
@@ -29,7 +27,7 @@ class CreateProjectMethodsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('project_methods');
+		Schema::drop('sub_groups');
 	}
 
 }

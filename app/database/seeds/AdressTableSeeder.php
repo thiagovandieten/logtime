@@ -13,17 +13,16 @@ class AdressTableSeeder extends Seeder {
 
 		$this->call('StreetTableSeeder');
 		$this->call('CityTableSeeder');
+		$this->call('ZipcodeTableseeder');
 
 		$adress = new Adress();
 
-		$adress->house_number = 1;
 		$adress->street_id = 1;
 		$adress->city_id = 1;
+		$adress->zipcode_id = 1;
 
 		$adress->save();
 
-
-		// $this->call('UserTableSeeder');
 	}
 
 }

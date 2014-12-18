@@ -14,7 +14,7 @@ class UserTypeTableSeeder extends Seeder {
 		$userType = new UserType();
 		$userType->user_type = "Docent";
 		$userType->save();
-		// $this->call('UserTableSeeder');
+
 	}
 
 }
