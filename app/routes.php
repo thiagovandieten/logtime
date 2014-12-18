@@ -63,7 +63,7 @@ Route::group(array('before' => 'auth'), function()
 
 
 Event::listen('illuminate.query', function($query){
-	var_dump($query);
+	//var_dump($query);
 });
 
 
