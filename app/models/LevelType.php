@@ -19,9 +19,9 @@ class LevelType extends Eloquent{
 		return $this->hasMany('Categorie');
 	}
 
-	// public function projectGroup()
-	// {
-	// 	return $this->belongsToMany('ProjectGroup', 'level_types_project_groups');
-	// }
+	public function projectGroup()
+	{
+		return $this->belongsToMany('ProjectGroup', 'level_types_project_groups');
+	}
 
 }

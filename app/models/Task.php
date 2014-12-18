@@ -19,13 +19,13 @@ class Task extends Eloquent {
 		return $this->hasOne('Categorie');
 	}
 
-	// public function estimatedTimes()
-	// {
-	// 	return $this->hasMany('EstimatedTime');
-	// }
+	public function estimatedTimes()
+	{
+		return $this->hasMany('EstimatedTime');
+	}
 
-	// public function userLogs()
-	// {
-	// 	return $this->hasMany('UserLog');
-	// }
+	public function userLogs()
+	{
+		return $this->hasMany('UserLog');
+	}
 }
