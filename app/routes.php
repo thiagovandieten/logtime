@@ -53,6 +53,7 @@ Route::group(array('before' => 'auth'), function()
     Route::get('persoonlijke-instellingen', 'personalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'personalSettingsController@store');
     Route::get('groepsinstellingen', 'groupSettingsController@group_settings');
+    Route::post('groepsinstellingen/opslaan', 'groupSettingsController@store');
 });
 
 

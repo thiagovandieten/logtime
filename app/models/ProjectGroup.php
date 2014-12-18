@@ -4,7 +4,7 @@ class ProjectGroup extends Eloquent {
 
 	public function users()
 	{
-        return $this->belongToMany('User','project_groups_users')->withTimestamps();
+        return $this->hasMany('User');
 	}
 
 	public function adress()

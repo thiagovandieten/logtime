@@ -12,7 +12,8 @@ class PersonalSettingsController extends BaseLoggedInController {
     public function index()
     {        
         $user = User::find(Auth::id());    
-        $personal_data = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'phone_number' => $user->phone_number, 'avatar' => $user->user_image_path);
+        $personal_data = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 
+                               'phone_number' => $user->phone_number, 'avatar' => $user->user_image_path);
 
         return View::make('personal_settings')->with(array
             ('personal_data' => $personal_data));
@@ -23,12 +24,16 @@ class PersonalSettingsController extends BaseLoggedInController {
         $user = User::find(Auth::id());
         
         //Data for image upload -------------------------------
-        $destinatonPath = '';
-        $filename = '';
-        $file = Input::file('avatar');
-        $destinationPath = public_path().'/images/';
-        $filename = str_random(6).'_'.$file->getClientOriginalName();
-        $uploadSuccess = $file->move($destinationPath, $filename);
+        if(Input::hasFile('avatar')){
+            $destinatonPath = '';
+            $filename = '';
+            $file = Input::file('avatar');
+            $destinationPath = public_path().'/images/';
+            $filename = str_random(6).'_'.$file->getClientOriginalName();
+            $uploadSuccess = $file->move($destinationPath, $filename);
+        }else{
+            $filename = $user->user_image_path;    
+        }
         
         // create the validation rules ------------------------
         $rules = array(
@@ -61,11 +66,6 @@ class PersonalSettingsController extends BaseLoggedInController {
             // let him enter the database
 
             // create the data
-            if(Input::hasFile('image')){
-                $images = User::find(Auth::id());
-                Session::flash('success_insert','<strong>Upload success</strong>');
-            }
-
             $user_data = User::find(Auth::id());
             $user_data->first_name       = Input::get('first_name');
             $user_data->last_name        = Input::get('last_name');

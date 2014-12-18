@@ -12,7 +12,7 @@
 
 <h1>Persoonlijke gegevens</h1>
 {{Form::open(array('url' => 'persoonlijke-instellingen/opslaan', 'files' => true, 'method' => 'post')) }}
-<img scr="C:/xampp/htdocs/logtime/public/images/{{$personal_data['avatar']}}" /> 
+<img src="/images/{{$personal_data['avatar']}}" width="150" /> <br />
 {{Form::file('avatar')}}<br />
 {{Form::text('first_name', $personal_data['first_name'], ['placeholder' => 'voornaam']) }}<br />
 {{Form::text('last_name', $personal_data['last_name'], ['placeholder' => 'achternaam']) }}<br />

@@ -75,7 +75,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function projectGroup()
 	{
-		return $table->belongsToMany('ProjectGroup', 'project_groups_users')->withTimestamps();
+		return $table->belongsTo('ProjectGroup');
 	}
 
     public function saveUser($userCode, $password)

@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration {
 			$table->string('last_name',255);
 			$table->string('email',255);
 			$table->integer('phone_number');
-			$table->string('user_image_path',255);
+			$table->string('user_image_path',255)->default('placeholder.png');
 			$table->boolean('active')->default(true);
 			$table->timestamp('last_time_online');
             $table->rememberToken();
