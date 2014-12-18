@@ -37,7 +37,7 @@
         overflow-y: auto;
 
     }
-    .uren-mob-invullen::-webkit-scrollbar {
+    .uren-mob-invullen::-webkit-scrollbar, .cbp-spmenu-vertical::-webkit-scrollbar {
         display: none;
     }
     .ac-container{
