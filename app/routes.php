@@ -10,11 +10,16 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
-Route::get('/', function()
+Route::group(array('before' => 'auth'), function()
 {
-	return Redirect::to('dashboard');
+  Route::get('/', function()
+  {
+    return Redirect::to('eenmalige-gegevens');
+  });  
 });
+
+
+
 	
 Route::group(array('prefix' => 'login', 'before' => 'guest'), function(){
 
@@ -58,7 +63,7 @@ Route::group(array('before' => 'auth'), function()
 
 
 Event::listen('illuminate.query', function($query){
-	//var_dump($query);
+	var_dump($query);
 });
 
 

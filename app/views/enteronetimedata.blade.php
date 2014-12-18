@@ -21,7 +21,7 @@
 [hier komt error berichten]
 </div>
 <div class="upload-foto">
-<img src="images/geenfoto.png" alt="avatar" title="Avatar">
+<img src="images/{{$user_avatar}}" alt="avatar" title="Avatar">
 <input type="submit" value="Wijzigen">
 </div>
 <input type="text" placeholder="Voornaam">
