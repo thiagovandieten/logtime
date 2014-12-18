@@ -41,7 +41,7 @@
     <a href="persoonlijke-instellingen"><img src="images/icons/instellingen-mob.png" class="destop-instellingen" alt="Instellingen" title="Instellingen">
         <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
     </a>
-    <img src="images/foto.jpg" class="avatar" alt="avatar">
+    <img src="images/{{$user_avatar}}" class="avatar" alt="avatar">
 
 </div>
 <div class="cbp-spmenu-push cbp-spmenu-push-toright" id="wrapper">
