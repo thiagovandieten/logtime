@@ -10,7 +10,9 @@ class ProjectManagementController extends BaseLoggedInController {
 	 */
 	public function index()
 	{
-		return View::make('projectmanagement.index');
+		$projectGroup = ProjectGroup::findOrFail(Auth::user()->project_group_id);
+		$projects = $projectGroup->project()->get();
+		return View::make('projectmanagement.index')->withProjects($projects);
 	}
 
 

@@ -25,7 +25,7 @@
 @stop
 
 <!-- Return the group projects -->
-@section('return_projects')
+@section('content')
     @foreach($projects as $project)
         <div>
             <input id="ac-{{$project->id}}" name="accordion" type="checkbox" />
