@@ -12,7 +12,12 @@ class PasswordToken extends Eloquent {
 
     public function user()
     {
-        $this->hasOne('User');
+        return $this->hasOne('User');
+    }
+
+    public static function doesTokenExist($token)
+    {
+        return static::where('forgotten_password_token', '=', $token)->first();
     }
 
 }

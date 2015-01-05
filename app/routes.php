@@ -15,7 +15,11 @@ Route::get('/', function()
 {
 	return Redirect::to('dashboard');
 });
-	
+
+/**
+ * Deze Route group wordt gebruikt voor alle pagina's die een niet ingelogde gebruiker
+ * te zien krijgt.
+ */
 Route::group(array('prefix' => 'login', 'before' => 'guest'), function(){
 
     Route::get('/', array('as' => 'login.index', 'uses' => 'Controllers\Login\LoginController@index' ));
@@ -30,12 +34,12 @@ Route::group(array('prefix' => 'login', 'before' => 'guest'), function(){
     ));
     Route::get('forgotpassword/{token}', array(
         'as' => 'forgotpassword.create',
-        'uses' => 'Controllers\Login\ForgotPasswordController@newPassword'
+        'uses' => 'Controllers\Login\ForgotPasswordController@create'
     ));
 
     Route::post('forgotpassword/{token}', array(
         'as' => 'forgotpassword.store',
-        'uses' => 'Controllers\Login\ForgotPasswordController@newPassword'
+        'uses' => 'Controllers\Login\ForgotPasswordController@store'
     ));
 });
 
@@ -44,8 +48,19 @@ Route::get('logout', function(){
     return Redirect::to('login');
 });
 
-
 Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
+
+Route::group(array('before' => array('auth', 'leerling')), function()
+{
+    Route::resource('projects', 'ProjectManagementController');
+});
+
+Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
+
+    Route::resource('projects', 'Controllers\ProjectManagement\DocentProjectManagement');
+
+});
+
 
 Event::listen('illuminate.query', function($query){
 	//var_dump($query);

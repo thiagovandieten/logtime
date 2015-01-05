@@ -131,7 +131,7 @@
         </section>
 
         <section class="ac-container">
-          @yield('return_projects')
+          @yield('content')
          </section>
 
         {{HTML::script(asset('js/notificatie.js')) }}

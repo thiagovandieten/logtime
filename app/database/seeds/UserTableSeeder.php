@@ -28,6 +28,19 @@ class UserTableSeeder extends Seeder {
 		$user->adress_id = 1;
 		$user->project_group_id = 1;
 		$user->save();
+
+		$user = new User();
+		$user->user_code = "10";
+		$user->password = Hash::make("orangesource");
+		$user->first_name = "Emiel";
+		$user->last_name = "Snel";
+		$user->email = "nktakumi@gmail.com";
+		$user->phone_number = '0651281477';
+		$user->active = 1;
+		$user->user_type_id = 2;
+		$user->location_id = 1;
+		$user->adress_id = 1;
+		$user->save();
 	}
 
 }

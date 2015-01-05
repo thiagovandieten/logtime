@@ -32,7 +32,7 @@ class ForgotPasswordController extends \BaseController {
         //Kijk of e-mail bestaat, zo niet redirect weer naar verloren WW pagina -- gedaan
         //Stuur een mail met token -- gedaan
         //Redirect naar login met de melding dat het goed gekomen is -- gedaan
-        $user = User::getMail(\Input::get('email'));
+        $user = User::getMail(\Input::get('email')); //TODO: Is momenteel static. Misschien later een Facade maken.
         //Check of de gebruiker bestaat
         if ($this->checkClass->notUser($user))
         {
@@ -59,23 +59,36 @@ class ForgotPasswordController extends \BaseController {
 
     }
 
-    public function store()
+    public function store($token)
     {
-        //TODO: Kan Yannick of Philip even deze overnemen?
         //Controleer of de token nogsteeds geldig is
+        $tokenObject = PasswordToken::doesTokenExist($token); //TODO: Is momenteel static. Misschien later een Facade maken.
+        if (! isset($tokenObject))
+        {
+            return Redirect::to('/');
+        }
+
+        //Zie of de ww's kloppen
+        if (\Input::get('password') !== \Input::get('passwordagain'))
+        {
+            return Redirect::route('forgotpassword.create', $token)->withMessage('De twee ingevoerde wachtworden komen niet met elkaar overheen.');
+        }
+        $user = User::findorFail($tokenObject->user_id);
+        $user->password = \Hash::make(\Input::get('password'));
+        $user->save();
+        return Redirect::to('login')->withMessage('Wachtwoord is gewijzigd!');
         //Wijzig de gebruikerswachtwoord
         //Redirect naar de loginscherm dat het goed is gegaan
     }
 
-    public function newPassword($token)
+    public function create($token)
     {
         //Check of token daadwerklijk bestaat
-        $tokenObject = PasswordToken::where('forgotten_password_token', '=', $token)->first();
-        if(! isset($tokenObject))
+        $tokenObject = PasswordToken::doesTokenExist($token); //TODO: Is momenteel static. Misschien later een Facade maken.
+        if (! isset($tokenObject))
         {
-            Redirect::to('/');
+            return Redirect::to('/');
         }
-        //Link er een gebruiker aan vast
         //Stuur de view
         return \View::make('login.newpassword')->withToken($token);
     }
