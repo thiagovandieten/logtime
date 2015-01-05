@@ -16,9 +16,14 @@ class dashboardController extends BaseLoggedInController {
 	*/
 
 	protected $sqldata, $user, $group_id, $projects;
-	
+
+
 	public function showWelcome()
 	{
+		if($this->isDocent())
+		{
+			return View::make('dashboard');
+		}
 		if (Auth::check())
 		{
 			//Ingelogte USER

@@ -15,7 +15,11 @@ Route::get('/', function()
 {
 	return Redirect::to('dashboard');
 });
-	
+
+/**
+ * Deze Route group wordt gebruikt voor alle pagina's die een niet ingelogde gebruiker
+ * te zien krijgt.
+ */
 Route::group(array('prefix' => 'login', 'before' => 'guest'), function(){
 
     Route::get('/', array('as' => 'login.index', 'uses' => 'Controllers\Login\LoginController@index' ));
@@ -44,10 +48,17 @@ Route::get('logout', function(){
     return Redirect::to('login');
 });
 
-Route::group(array('before' => 'auth'), function()
+Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
+
+Route::group(array('before' => array('auth', 'leerling')), function()
 {
-    Route::get('dashboard', array('uses' => 'dashboardController@showWelcome'));
     Route::resource('projects', 'ProjectManagementController');
+});
+
+Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
+
+    Route::resource('projects', 'Controllers\ProjectManagement\DocentProjectManagement');
+
 });
 
 

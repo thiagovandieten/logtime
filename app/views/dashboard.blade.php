@@ -26,21 +26,25 @@
 
 <!-- Return the group projects -->
 @section('content')
-    @foreach($projects as $project)
-        <div>
-            <input id="ac-{{$project->id}}" name="accordion" type="checkbox" />
-            <label for="ac-{{$project->id}}">Voortgang van het project ({{$project->project_name}})</label>
-            <article class="ac-small"> Content</article>
-        </div>
-    @endforeach
+    @if(isset($projects))
+        @foreach($projects as $project)
+            <div>
+                <input id="ac-{{$project->id}}" name="accordion" type="checkbox" />
+                <label for="ac-{{$project->id}}">Voortgang van het project ({{$project->project_name}})</label>
+                <article class="ac-small"> Content</article>
+            </div>
+        @endforeach
+    @endif
 @stop
 <!-- Fast Fill new project -->
 @section('fast_fill')
 <form method="post">
     <select>
+        @if(isset($projects))
          @foreach($projects as $project)
         	<option>{{$project->project_name}}</option>
    		 @endforeach
+        @endif
     </select>
 
     <select>
