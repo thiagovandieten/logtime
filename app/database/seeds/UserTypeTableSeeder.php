@@ -12,6 +12,10 @@ class UserTypeTableSeeder extends Seeder {
 		Eloquent::unguard();
 
 		$userType = new UserType();
+		$userType->user_type = "Leerling";
+		$userType->save();
+
+		$userType = new UserType();
 		$userType->user_type = "Docent";
 		$userType->save();
 

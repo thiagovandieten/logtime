@@ -1,7 +1,15 @@
 <?php
+namespace Controllers\ProjectManagement;
+use Illuminate\View\Factory as View;
 
-class ProjectManagementController extends BaseLoggedInController {
+class DocentProjectManagement extends \BaseLoggedInController {
 
+	protected $view;
+	function __construct(View $view)
+	{
+		parent::__construct();
+		$this->view = $view;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -10,9 +18,7 @@ class ProjectManagementController extends BaseLoggedInController {
 	 */
 	public function index()
 	{
-		$projectGroup = ProjectGroup::findOrFail(Auth::user()->project_group_id);
-		$projects = $projectGroup->project()->get();
-		return View::make('projectmanagement.index')->withProjects($projects);
+		return $this->view->make('projectmanagement.docent.index')->withProjects(\Project::all());
 	}
 
 
