@@ -50,6 +50,12 @@ Route::get('logout', function(){
 
 Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
 
+Route::get('handleiding', 'GuideController@index');
+
+Route::resource('logbook',  'logbookController');
+
+Route::post('logbook/opslaan', 'logbookController@store');
+
 Route::group(array('before' => array('auth', 'leerling')), function()
 {
     Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
