@@ -35,6 +35,11 @@ class CreateUsersTable extends Migration {
             $table->foreign('adress_id')->references('id')->on('adresses');
 			$table->timestamps();
 		});
+
+		Schema::table('project_groups', function(Blueprint $table)
+		{
+            $table->foreign('user_id')->references('id')->on('users');
+        });
 	}
 
 	/**
@@ -44,6 +49,10 @@ class CreateUsersTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('project_groups', function(Blueprint $table)
+		{
+            $table->dropForeign('project_groups_user_id_foreign');
+        });
 		Schema::drop('users');
 	}
 
