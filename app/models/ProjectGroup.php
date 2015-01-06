@@ -36,10 +36,10 @@ class ProjectGroup extends Eloquent {
 	{
 		return $this->hasMany('LogCategorie');
 	}
-	
+
 	public function project()
 	{
-		return $this->belongsToMany('Project', 'group_project_periode')->withPivot('is_done')->withTimestamps();	
+		return $this->belongsToMany('Project', 'group_project_periode')->withPivot('is_done')->withTimestamps();
 	}
 
 	public function levelType()
