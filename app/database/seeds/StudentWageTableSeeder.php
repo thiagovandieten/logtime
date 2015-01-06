@@ -11,7 +11,7 @@ class StudentWageTableSeeder extends Seeder {
 		Eloquent::unguard();
 
 		$studentwage = new StudentWage();
-		$studentwage->wage = 12,42;
+		$studentwage->wage = 12.42;
 		$studentwage->project_group_id = 1;
 		$studentwage->save();
 
