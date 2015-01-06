@@ -11,6 +11,7 @@ class ProjectGroupTableSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 		$this->call('YearTableSeeder');
+
 		$projectGroup = new ProjectGroup();
 		$projectGroup->name = "Orange Source";
 		$projectGroup->active = 1;
