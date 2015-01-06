@@ -16,9 +16,14 @@ class dashboardController extends BaseLoggedInController {
 	*/
 
 	protected $sqldata, $user, $group_id, $projects;
-	
+
+
 	public function showWelcome()
 	{
+		if($this->isDocent())
+		{
+			return View::make('dashboard');
+		}
 		if (Auth::check())
 		{
 			//Ingelogte USER
@@ -32,7 +37,6 @@ class dashboardController extends BaseLoggedInController {
 		}
 	
 		return View::make('dashboard')->with(array(
-			'projects' => $this->projects,
-			'userFullName' => $this->userFullName));
+			'projects' => $this->projects));
 	}
 }

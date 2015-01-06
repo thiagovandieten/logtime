@@ -88,3 +88,24 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/*
+ * Docent filter
+ *
+ * Deze filter controllert of de gebruiker een docent is. Zo ja, stuur hem naar de links met prefix
+ * docent
+ */
+
+Route::filter('docent', function(){
+	if(Auth::user()->user_type['user_type'] != 'Docent')
+	{
+		return Redirect::to('/');
+	}
+});
+
+Route::filter('leerling', function(){
+	if(Auth::user()->user_type['user_type'] != 'Leerling')
+	{
+		return Redirect::to('/');
+	}
+});

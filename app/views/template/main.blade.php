@@ -83,6 +83,8 @@
     <a href="#"><span><img src="images/icons/uitloggen.png" alt="Uitloggen"></span>Uitloggen</a>
 
     <h2>Uren bijwerken</h2>
+    
+    
     <form method="post">
         <select>
             <option>Kies een project</option>
@@ -101,7 +103,6 @@
         <textarea placeholder="Omschrijving"></textarea>
         <input type="submit" class="bijwerken" value="Bijwerken">
     </form>
-    
 </nav>
     <section class="ac-container container-mob">
     <div>
@@ -133,8 +134,6 @@
 
         <section class="ac-container">
           @yield('content')
-    
-          @yield('return_projects')
          </section>
 
         {{HTML::script(asset('js/notificatie.js')) }}
