@@ -10,22 +10,28 @@ class GroupSettingsController extends BaseLoggedInController {
 
         
     public function group_settings()
-    {        
-        $group_id = $this->user->project_group_id;
-        $group = ProjectGroup::find($group_id);
+    {                
+        $group_id       = $this->user->project_group_id;
+        $group          = ProjectGroup::find($group_id);
         
-        $wages = StudentWage::find($group_id);
-        $group_wage = $group->wage;
+        $wages          = StudentWage::find($group_id); 
+        $group_wage     = str_replace('.', ',', $wages->wage);
                 
         //dd($group_wage);
                        
-        return View::make('group_settings')->with(array('group_name' => $group->name, 'group_image' => $group->image_path, 'group_wage' => $group->wage));
+        return View::make('group_settings')->with(array('group_name' => $group->name, 'group_image' => $group->image_path, 'group_wage' => $group_wage));
         
         
     }
     
     public function store()
     {
+        $group_id       = $this->user->project_group_id;
+        $group          = ProjectGroup::find($group_id);
+        
+        $wages          = StudentWage::find($group_id); 
+        $group_wage     = str_replace('.', ',', $wages->wage);
+        //dd($group->image_path);
         
         //Data for image upload -------------------------------
         if(Input::hasFile('group_image')){
@@ -36,12 +42,13 @@ class GroupSettingsController extends BaseLoggedInController {
         $filename = str_random(3).'_'.$file->getClientOriginalName();
         $uploadSuccess = $file->move($destinationPath, $filename);
         }else{
-            $filename = $user->user_image_path;    
+            $filename = $group->image_path;    
         }
-        
+                
         // create the validation rules ------------------------
         $rules = array(
             'group_name'       => 'required', 						// just a normal required validation
+            'group_wage'       => 'required' 						// just a normal required validation
         );
         
         // do the validation ----------------------------------
@@ -69,9 +76,11 @@ class GroupSettingsController extends BaseLoggedInController {
             $group_data              = ProjectGroup::find($this->user->project_group_id);
             $group_data->name        = Input::get('group_name');
             $group_data->image_path  = $filename;
+            $wages->wage             = str_replace(',', '.', Input::get('group_wage'));
             
             // save our data
             $group_data->save();
+            $wages->save();
 
             // redirect ----------------------------------------
             // redirect our user back to the form so they can do it all over again

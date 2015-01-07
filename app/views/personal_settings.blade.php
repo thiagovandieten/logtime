@@ -10,6 +10,7 @@
 
 @endif
 
+
 <h1>Persoonlijke gegevens</h1>
 {{Form::open(array('url' => 'persoonlijke-instellingen/opslaan', 'files' => true, 'method' => 'post')) }}
 <img src="/images/{{$personal_data['avatar']}}" width="150" /> <br />
@@ -23,16 +24,17 @@
 {{Form::text('city', $personal_data['city'] ,['placeholder' => 'Woonplaats']) }}<br />
 {{Form::text('phone_number', $personal_data['phone_number'], ['placeholder' => 'telefoonnummer']) }}<br />
 
-{{Form::submit('Opslaan')}}
+<input type="submit" name="save" value="Opslaan">
 {{ Form::close() }}
 
 <br />
 <h1>Wachtwoord aanpassen</h1>
-{{ Form::open() }}
-{{Form::text('first-password','',['placeholder' => 'Wachtwoord']) }} <br />
-{{Form::text('second_password','',['placeholder' => 'Wachtwoord herhalen']) }}
+{{Form::open(array('url' => 'persoonlijke-instellingen/wachtwoord-wijzigen', 'files' => true, 'method' => 'post')) }}
+{{Form::password('old_password','',['placeholder' => 'Huidig wachtwoord']) }} <br />
+{{Form::password('new_password','',['placeholder' => 'Nieuw wachtwoord']) }} <br />
+{{Form::password('confirm_password','',['placeholder' => 'Wachtwoord herhalen']) }}
 <br />
-{{Form::submit('Wijzigen')}}
+<input type="submit" name="change" value="Wijzigen">
 {{ Form::close() }}
 
 @stop
