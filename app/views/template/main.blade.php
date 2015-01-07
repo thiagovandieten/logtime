@@ -83,6 +83,8 @@
     <a href="#"><span><img src="images/icons/uitloggen.png" alt="Uitloggen"></span>Uitloggen</a>
 
     <h2>Uren bijwerken</h2>
+    
+    
     <form method="post">
         <select>
             <option>Kies een project</option>
@@ -131,7 +133,7 @@
         </section>
 
         <section class="ac-container">
-          @yield('return_projects')
+          @yield('content')
          </section>
 
         {{HTML::script(asset('js/notificatie.js')) }}

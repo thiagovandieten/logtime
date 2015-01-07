@@ -1,0 +1,41 @@
+@extends('template.main')
+@section('content')
+
+@if ($errors->has())
+		
+    @foreach ($errors->all() as $error)
+        {{ $error }}		
+    @endforeach
+
+@endif
+
+
+<h1>Gegevens van {{$personal_data['first_name']}} {{$personal_data['last_name']}} </h1>
+{{Form::open(array('url' => 'studentsettings/save', 'files' => true, 'method' => 'post')) }}
+<img src="/images/{{$personal_data['avatar']}}" width="150" /> <br />
+{{Form::file('avatar')}}<br />
+{{Form::text('first_name', $personal_data['first_name'], ['placeholder' => 'voornaam']) }}<br />
+{{Form::text('last_name', $personal_data['last_name'], ['placeholder' => 'achternaam']) }}<br />
+
+{{Form::text('street', $personal_data['street'], ['placeholder' => 'Straatnaam']) }}<br />
+{{Form::text('house_number', $personal_data['house_number'], ['placeholder' => 'Huisnummer']) }}<br />
+{{Form::text('zipcode', $personal_data['zipcode'], ['placeholder' => 'Postcode']) }}<br />
+{{Form::text('city', $personal_data['city'] ,['placeholder' => 'Woonplaats']) }}<br />
+{{Form::text('phone_number', $personal_data['phone_number'], ['placeholder' => 'telefoonnummer']) }}<br />
+{{Form::hidden('invisible', $personal_data['id'], array('id' => 'invisible_id')) }}
+
+{{Form::submit('Opslaan')}}
+{{ Form::close() }}
+
+<br />
+<h1>Wachtwoord aanpassen</h1>
+{{ Form::open() }}
+{{Form::text('first-password','',['placeholder' => 'Wachtwoord']) }} <br />
+{{Form::text('second_password','',['placeholder' => 'Wachtwoord herhalen']) }}
+<br />
+{{Form::submit('Wijzigen')}}
+{{ Form::close() }}
+
+
+
+@stop
