@@ -27,12 +27,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->belongsTo('Adress');
 	}
-	public function cities()
-	{
-    	return $this->belongsToManyThrough('City', 'Adress');
-	}
 
-	public function location()
+    public function location()
 	{
         return $this->belongsTo('Location');
 	}
