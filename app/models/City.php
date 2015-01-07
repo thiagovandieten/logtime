@@ -14,4 +14,9 @@ class City extends Eloquent {
 		return $this->hasMany('Adress');
 	}
 
+	public function user()
+	{
+		return $this->hasManyThrough('City', 'Adress');
+	}
+
 }
