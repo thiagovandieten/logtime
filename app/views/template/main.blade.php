@@ -85,7 +85,7 @@
     </div>
     <div style="clear:both"></div>
     <a href="dashboard"><span><img src="images/icons/dashboard.png" alt="Dashboard"></span>Dashboard</a>
-    <a href="#"><span><img src="images/icons/logboek.png" alt="Logboek"></span>Logboek</a>
+    <a href="logboek"><span><img src="images/icons/logboek.png" alt="Logboek"></span>Logboek</a>
     <a href="projects"><span><img src="images/icons/map.png" alt="Project aanmaken"></span>Project beheer</a>
     <a href="groepsinstellingen"><span><img src="images/icons/instellingen.png" alt="Instellingen"></span>Groeps instellingen</a>
     <a href="#"><span><img src="images/icons/handleiding.png" alt="Handleiding"></span>Handleiding</a>

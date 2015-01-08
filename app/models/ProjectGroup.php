@@ -47,6 +47,11 @@ class ProjectGroup extends Eloquent {
 		return $this->belongsToMany('LevelType', 'level_types_project_groups')->withTimestamps();
 	}
 
+	public function customer()
+	{
+		return $this->hasOne('Customer');
+	}
+
 
 
 }
