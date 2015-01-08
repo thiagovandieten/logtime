@@ -49,9 +49,12 @@ class PersonalSettingsController extends BaseLoggedInController {
                 $destinatonPath     = '';
                 $filename           = '';
                 $file               = Input::file('avatar');
+                $filesize           = Input::file('avatar')->getSize();
                 $destinationPath    = public_path().'/images/';
                 $filename           = str_random(6).'_'.$file->getClientOriginalName();
                 $uploadSuccess      = $file->move($destinationPath, $filename);
+                
+                //dd($filesize);
             }else{
                 $filename = $user->user_image_path;    
             }
@@ -64,9 +67,10 @@ class PersonalSettingsController extends BaseLoggedInController {
                 'house_number'     => 'required', 						// just a normal required validation
                 'zipcode'          => 'required', 	                    // just a normal required validation
                 'city'             => 'required', 	                    // just a normal required validation
-                'phone_number'     => 'required',                        // just a normal required validation
+                'phone_number'     => 'required',                       // just a normal required validation
                 'password'         => 'min:6',
-                'password_confirm' => 'same:password' 		            // required and has to match the password field
+                'password_confirm' => 'same:password', 		            // required and has to match the password field
+                'image'            => 'max:5000000'            // limited file size of 1000kb
             );
 
             // do the validation ----------------------------------

@@ -77,7 +77,7 @@
     </nav>
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left menu-mob-width cbp-spmenu-open" id="cbp-spmenu-s1">
     <div class="profiel-mob">
-            <img src="images/foto.jpg" class="avatar-mob" alt="avatar">
+            <img src="images/{{$user_avatar}}" class="avatar" alt="avatar">
         <a href="persoonlijke-instellingen">
             <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
         </a>

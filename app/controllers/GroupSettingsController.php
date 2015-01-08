@@ -14,12 +14,26 @@ class GroupSettingsController extends BaseLoggedInController {
         $group_id       = $this->user->project_group_id;
         $group          = ProjectGroup::find($group_id);
         
+        $adress_id      = Adress::find($group->adress_id);
+
+        $street_id      = $adress_id->street_id;
+        $street         = Street::find($street_id);
+
+        $city_id        = $adress_id->city_id;
+        $city           = City::find($city_id);
+
+        $zipcode_id     = $adress_id->zipcode_id;
+        $zipcode        = Zipcode::find($zipcode_id);
+        
         $wages          = StudentWage::find($group_id); 
         $group_wage     = str_replace('.', ',', $wages->wage);
                 
         //dd($group_wage);
                        
-        return View::make('group_settings')->with(array('group_name' => $group->name, 'group_image' => $group->image_path, 'group_wage' => $group_wage));
+        return View::make('group_settings')->with(array('group_name' => $group->name, 'street' => $street->street, 
+                                                        'house_number' => $street->house_number, 'city' => $city->city, 
+                                                        'zipcode' => $zipcode->zipcode, 'group_image' => $group->image_path, 
+                                                        'group_wage' => $group_wage));
         
         
     }
@@ -28,6 +42,17 @@ class GroupSettingsController extends BaseLoggedInController {
     {
         $group_id       = $this->user->project_group_id;
         $group          = ProjectGroup::find($group_id);
+        
+        $adress_id      = Adress::find($group->adress_id);
+
+        $street_id      = $adress_id->street_id;
+        $street         = Street::find($street_id);
+
+        $city_id        = $adress_id->city_id;
+        $city           = City::find($city_id);
+
+        $zipcode_id     = $adress_id->zipcode_id;
+        $zipcode        = Zipcode::find($zipcode_id);
         
         $wages          = StudentWage::find($group_id); 
         $group_wage     = str_replace('.', ',', $wages->wage);
@@ -48,6 +73,10 @@ class GroupSettingsController extends BaseLoggedInController {
         // create the validation rules ------------------------
         $rules = array(
             'group_name'       => 'required', 						// just a normal required validation
+            'street'           => 'required',                       // just a normal required validation
+            'house_number'     => 'required', 						// just a normal required validation
+            'zipcode'          => 'required', 	                    // just a normal required validation
+            'city'             => 'required', 	                    // just a normal required validation
             'group_wage'       => 'required' 						// just a normal required validation
         );
         
@@ -75,11 +104,19 @@ class GroupSettingsController extends BaseLoggedInController {
             // create the data
             $group_data              = ProjectGroup::find($this->user->project_group_id);
             $group_data->name        = Input::get('group_name');
+            $street->house_number        = Input::get('house_number');
+            $street->street              = Input::get('street');
+            $zipcode->zipcode            = Input::get('zipcode');
+            $city->city                  = Input::get('city');
+            
             $group_data->image_path  = $filename;
             $wages->wage             = str_replace(',', '.', Input::get('group_wage'));
             
             // save our data
             $group_data->save();
+            $street->save();
+            $zipcode->save();
+            $city->save();
             $wages->save();
 
             // redirect ----------------------------------------
