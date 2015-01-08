@@ -11,8 +11,7 @@
 @endif
 
 <h1>Groepsinstellingen</h1>
-
-<img src="/images/{{$group_image}}" width="150"/> <br />
+<img src="/images/{{$group_image}}"  width="150"/> <br />
 {{Form::open(array('url' => 'groepsinstellingen/opslaan', 'files' => true, 'method' => 'post')) }}
 {{Form::file('group_image')}}<br /><br />
 {{Form::text('group_name', $group_name, ['placeholder' => 'groepsnaam']) }}<br />

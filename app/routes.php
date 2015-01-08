@@ -62,9 +62,11 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     Route::resource('projects', 'ProjectManagementController');
     Route::get('persoonlijke-instellingen', 'personalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'personalSettingsController@store');
+    Route::post('persoonlijke-instellingen/wachtwoord-wijzigen', 'personalSettingsController@store');
     Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
     Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
-    Route::post('persoonlijke-instellingen/wachtwoord-wijzigen', 'personalSettingsController@store');
+    Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
+    Route::post('klantinstellingen/opslaan', 'CustomerSettingsController@store');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){

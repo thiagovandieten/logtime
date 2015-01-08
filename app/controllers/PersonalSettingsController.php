@@ -52,10 +52,32 @@ class PersonalSettingsController extends BaseLoggedInController {
                 $filesize           = Input::file('avatar')->getSize();
                 $destinationPath    = public_path().'/images/';
                 $filename           = str_random(6).'_'.$file->getClientOriginalName();
-                $uploadSuccess      = $file->move($destinationPath, $filename);
-                
-                //dd($filesize);
-            }else{
+
+                // Validation check for extension
+                $extension = Input::file('avatar')->getClientOriginalExtension();
+                $allowed =  array('png','jpg');
+
+                if(!in_array($extension,$allowed) ) {
+                    dd('Dit bestand is niet geldig');
+                }
+                else {
+                    $rules = array('avatar' => 'max:5000000');              // limited file size of 500kb
+                    $validator = Validator::make(Input::all(), $rules);
+                    
+                    if ($validator->fails()){
+                        // get the error messages from the validator
+                        $messages = $validator->messages('Er is iets fout gegaan');
+
+                        // redirect our user back to the form with the errors from the validator
+                        return Redirect::to('personal_settings')
+                            ->withErrors($validator);
+                    }
+
+                    $uploadSuccess = $file->move($destinationPath, $filename);
+                    File::delete(public_path().'/images/'.$user->user_image_path);
+                }
+            }
+            else{
                 $filename = $user->user_image_path;    
             }
 
@@ -70,7 +92,6 @@ class PersonalSettingsController extends BaseLoggedInController {
                 'phone_number'     => 'required',                       // just a normal required validation
                 'password'         => 'min:6',
                 'password_confirm' => 'same:password', 		            // required and has to match the password field
-                'image'            => 'max:5000000'            // limited file size of 1000kb
             );
 
             // do the validation ----------------------------------
