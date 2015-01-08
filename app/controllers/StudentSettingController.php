@@ -189,15 +189,175 @@ class StudentSettingController extends BaseLoggedInController {
 	
 	function create()
 	{
-		/**
-		*	Tabels die we nodig hebben voor een user aan te maken: 
-		*	`adresses`, `street`, `cities`, `zipcodes`, `user_types`, `project_group_id`, `locations`
-		*
-		*
-		*/
+		$locations = DB::table('locations')->get();
+		$user_types = DB::table('user_types')->get();
 		
-		return View::make('studentsettings.create');
+		return View::make('studentsettings.create')->with(array('locations' => $locations, 'user_types' => $user_types ));
 
+	}
+	
+	function save_new_user()
+	{
+		/**
+		*
+		*	Tabels die we nodig hebben om een user aan te maken: 
+		*	=  `adresses`, `streets`, `cities`, `zipcodes`, `user_types`, `project_group_id`, `locations`
+		*
+		**/
+		
+		// Validatie regels voor het valideren
+        $rules = array(
+            'first_name'       	=> 'required|alpha',
+			'last_name'       	=> 'required|alpha',
+			'user_type'			=> 'required|numeric',
+			'street_name'       => 'required',
+			'house_number'      => 'required',
+			'zipcode'       	=> 'required',
+			'city'      	 	=> 'required',
+			'phone_number'      => 'required',
+			'location'		    => 'required|numeric',
+			'user_code'			=> 'required|numeric'			
+		);
+		
+		// valideer de input fields
+        $validator = Validator::make(Input::all(), $rules);
+		
+		//Data for image upload -------------------------------
+        if(Input::hasFile('avatar')){
+            $destinatonPath     = '';
+            $filename           = '';
+            $file               = Input::file('avatar');
+            $destinationPath    = public_path().'/images/';
+            $filename           = str_random(6).'_'.$file->getClientOriginalName();
+            $uploadSuccess      = $file->move($destinationPath, $filename);
+        }else{
+			$destinationPath = "";	
+		}
+		
+        // check if the validator failed -----------------------
+        if ($validator->fails()) {
+            // redirect our user back to the form with the errors from the validator
+            return Redirect::to('studentsettings/create')
+                ->withErrors($validator);
+            
+            //dd($validator);
+
+        } else {
+                        
+            // validation successful ---------------------------
+            // create the data and save it to db
+			
+			// User_types tabel
+			// Check of de user_type bestaat
+			$user_type = DB::table('user_types')->where('id', Input::get('user_type'))->first();
+			
+			// Als de opgegeven stad niet bestaat voer hem in
+			if(!isset($user_type->id)){
+				$getUserTypeid = $user_type->id;
+			}else{
+				$getUserTypeid = 1;
+			}
+			
+			// location tabel
+			// Check of de location bestaat
+			$locations = DB::table('locations')->where('id', Input::get('location'))->first();
+			
+			// Als de opgegeven stad niet bestaat voer hem in
+			if(!isset($locations->id)){
+				$getLocationsid = $locations->id;
+			}else{
+				$getLocationsid = 1;
+			}
+			
+			// User Table
+			DB::table('users')->insert(
+				array('user_code' 		=> Input::get('user_code'),
+					  'first_name' 		=> Input::get('first_name'),
+					  'last_name' 		=> Input::get('last_name'),
+					  'phone_number' 	=> Input::get('phone_number'),
+					  'user_type_id'	=> $getUserTypeid,
+					  'location_id'		=> $getLocationsid,
+					  'adress_id'		=> 1,
+					  'user_image_path' => $destinationPath  	
+					  )
+			);
+			
+			// Cities Table
+			// Check of de stad al bestaat
+			$city = DB::table('cities')->where('city', Input::get('city'))->first();
+			
+			// Als de opgegeven stad niet bestaat voer hem in
+			if(!isset($city)){
+				$getCityid = DB::table('cities')->insertGetId(
+					array('city' => Input::get('city'))
+				);
+			}else{
+			// Anders wijs hem toe
+				$getCityid = $city->id;	
+			}
+			
+			// Streets Table
+			// Check of de stad al bestaat
+			$streets = DB::table('streets')->where('street', Input::get('street_name'))->first();
+			
+			// Als de opgegeven straat niet bestaat voer hem in
+			if(!isset($streets->street)){
+				$getStreetsid = DB::table('streets')->insertGetId(
+					array('street' => Input::get('street_name'),
+						  'house_number' => Input::get('house_number'))
+				);
+			}else{
+			// Anders wijs hem toe
+				$getStreetsid = $streets->id;	
+			}
+	
+			// Zipcodes Table
+			// Check of de zipcode al bestaat
+			$zipcodes = DB::table('zipcodes')->where('zipcode', Input::get('zipcde'))->first();
+			
+			// Als de opgegeven zipcode niet bestaat voer hem in
+			if(!isset($zipcodes->zipcode)){
+				$getZipcodesid = DB::table('zipcodes')->insertGetId(
+					array('zipcode' => Input::get('zipcode'))
+				);
+			}else{
+			// Anders wijs hem toe
+				$getZipcodesid = $zipcodes->id;	
+			}
+			
+			// Adresses Table
+			// Check of de stad al bestaat
+			$adresses = DB::table('adresses')
+					->where(array('zipcode_id' => $getZipcodesid,
+								  'street_id' => $getStreetsid,
+								  'city_id' => $getCityid
+					))->first();
+			
+			// Als de opgegeven straat niet bestaat voer hem in
+			if(!isset($adresses->id)){
+				$getAdressesid = DB::table('adresses')->insertGetId(
+					array('zipcode_id' => $getZipcodesid,
+						  'street_id' => $getStreetsid,
+						  'city_id' => $getCityid)
+				);
+			}else{
+			// Anders wijs hem toe
+				$getAdressesid = $adresses->id;	
+			}
+			
+			// User ID
+			$id = DB::getPdo()->lastInsertId();
+			
+			//Update de Adresses ID van de user
+			DB::table('users')
+				->where('id', $id)
+				->update(array('adress_id' => $getAdressesid));
+			
+			
+            // redirect our user back to the form so they can do it all over again
+		    return Redirect::to('studentsettings/create')->with(array("message" => "Nieuwe gebruiker is succesvol aangemaakt in het systeem!"));
+
+        }
 	}
 
 	/**

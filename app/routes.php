@@ -61,6 +61,7 @@ Route::get('studentsettings',  'StudentSettingController@index');
 Route::post('studentsettings/edit',  'StudentSettingController@edit');
 Route::post('studentsettings/save',  'StudentSettingController@save');
 Route::get('studentsettings/create',  'StudentSettingController@create');
+Route::post('studentsettings/create',  'StudentSettingController@save_new_user');
 
 
 Route::group(array('before' => array('auth', 'leerling')), function()
