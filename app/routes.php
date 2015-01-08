@@ -52,7 +52,7 @@ Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController
 
 Route::get('handleiding', 'GuideController@index');
 
-Route::resource('logbook',  'logbookController');
+Route::resource('logboek',  'LogbookController');
 
 Route::post('logbook/opslaan', 'logbookController@store');
 
