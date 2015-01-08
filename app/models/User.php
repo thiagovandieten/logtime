@@ -27,6 +27,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->belongsTo('Adress');
 	}
+	public function cities()
+	{
+    	return $this->belongsToManyThrough('City', 'Adress');
+	}
 
 	public function location()
 	{
@@ -38,9 +42,44 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->belongsTo('UserType');
 	}
 
+	public function userSubGroups()
+	{
+		return $table->hasMany('UserSubGroups');
+	}
+
+	public function userLogs()
+	{
+		return $this->hasMany('UserLog');
+	}
+
+	public function estimatedTimes()
+	{
+		return $this->hasMany('EstimatedTime');
+	}
+
+	public function loginAttempt()
+	{
+		return $this->hasMany('LoginAttempt');
+	}
+
+	public function notifications()
+	{
+		return $table->belongsToMany('Notification', 'user_notifications')->withTimestamps();
+	}
+
+	public function UserSubGroup()
+	{
+		return $table->hasMany('UserSubGroup');
+	}
+
+	public function passwordTokens()
+	{
+		return $table->hasMany('PasswordToken');
+	}
+
 	public function projectGroup()
 	{
-        return $this->belongsTo('ProjectGroup');
+		return $table->belongsToMany('ProjectGroup', 'project_groups_users')->withTimestamps();
 	}
 
     public function saveUser($userCode, $password)
@@ -50,6 +89,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
         $this->save();
     }
+
 
 	public static function getMail($email)
 	{

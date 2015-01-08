@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration {
 			$table->string('first_name',255);
 			$table->string('last_name',255);
 			$table->string('email',255);
-			$table->integer('phone_number');
+			$table->string('phone_number',16);
 			$table->string('user_image_path',255);
 			$table->boolean('active')->default(true);
 			$table->timestamp('last_time_online');
@@ -35,6 +35,11 @@ class CreateUsersTable extends Migration {
             $table->foreign('adress_id')->references('id')->on('adresses');
 			$table->timestamps();
 		});
+
+		Schema::table('project_groups', function(Blueprint $table)
+		{
+            $table->foreign('user_id')->references('id')->on('users');
+        });
 	}
 
 	/**
@@ -44,6 +49,10 @@ class CreateUsersTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('project_groups', function(Blueprint $table)
+		{
+            $table->dropForeign('project_groups_user_id_foreign');
+        });
 		Schema::drop('users');
 	}
 

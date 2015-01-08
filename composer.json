@@ -24,7 +24,8 @@
         ],
         "psr-4": {
             "OrangeSource\\" : "app/OrangeSource",
-            "Controllers\\Login\\" : "app/controllers/Login"
+            "Controllers\\Login\\" : "app/controllers/Login",
+            "Controllers\\ProjectManagement\\" : "app/controllers/ProjectManagement"
         }
     },
     "scripts": {

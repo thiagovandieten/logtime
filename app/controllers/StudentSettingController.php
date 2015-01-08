@@ -20,7 +20,6 @@ class StudentSettingController extends BaseLoggedInController {
 		return View::make('studentsettings')->with(array(
 														'userFullName' => $this->userFullName,
 														'all_students' => $this->all_students));
-		
 	}
 
 
@@ -190,6 +189,13 @@ class StudentSettingController extends BaseLoggedInController {
 	
 	function create()
 	{
+		/**
+		*	Tabels die we nodig hebben voor een user aan te maken: 
+		*	`adresses`, `street`, `cities`, `zipcodes`, `user_types`, `project_group_id`, `locations`
+		*
+		*
+		*/
+		
 		return View::make('studentsettings.create');
 
 	}

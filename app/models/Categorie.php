@@ -6,7 +6,7 @@ class Categorie extends Eloquent {
 
 	public function projects()
 	{
-		return $table->belongsToMany('Project', 'categories_projects');
+		return $table->belongsToMany('Project', 'categories_projects')->withTimestamps();
 	}
 
 	public function leveltype()
@@ -19,9 +19,9 @@ class Categorie extends Eloquent {
 		return $this->hasMany('task');
 	}
 
-	// public function groupProjectPeriode()
-	// {
-	// 	return $this->belongsToMany('groepProjectPeriode', 'groep_project_categorie');
-	// }
+	public function groupProjectPeriode()
+	{
+	 	return $this->belongsToMany('GroepProjectPeriode', 'groep_project_categorie');
+	}
 
 }
