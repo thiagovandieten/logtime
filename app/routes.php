@@ -15,7 +15,11 @@ Route::get('/', function()
 {
 	return Redirect::to('dashboard');
 });
-	
+
+/**
+ * Deze Route group wordt gebruikt voor alle pagina's die een niet ingelogde gebruiker
+ * te zien krijgt.
+ */
 Route::group(array('prefix' => 'login', 'before' => 'guest'), function(){
 
     Route::get('/', array('as' => 'login.index', 'uses' => 'Controllers\Login\LoginController@index' ));
@@ -44,21 +48,34 @@ Route::get('logout', function(){
     return Redirect::to('login');
 });
 
+Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
 
-Route::group(array('before' => 'auth'), function()
+Route::get('handleiding', 'GuideController@index');
+
+Route::resource('logboek',  'LogbookController');
+
+Route::post('logbook/opslaan', 'logbookController@store');
+
+Route::group(array('before' => array('auth', 'leerling')), function()
 {
     Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
-    Route::get('dashboard', array('uses' => 'dashboardController@showWelcome'));
     Route::resource('projects', 'ProjectManagementController');
     Route::get('persoonlijke-instellingen', 'personalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'personalSettingsController@store');
-    Route::get('groepsinstellingen', 'groupSettingsController@group_settings');
+    Route::post('persoonlijke-instellingen/wachtwoord-wijzigen', 'personalSettingsController@store');
+    Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
+    Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
+    Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
+    Route::post('klantinstellingen/opslaan', 'CustomerSettingsController@store');
+});
+
+Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
+
+    Route::resource('projects', 'Controllers\ProjectManagement\DocentProjectManagement');
+
 });
 
 
 Event::listen('illuminate.query', function($query){
 	//var_dump($query);
 });
-
-
-

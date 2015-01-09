@@ -77,7 +77,7 @@
     </nav>
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left menu-mob-width cbp-spmenu-open" id="cbp-spmenu-s1">
     <div class="profiel-mob">
-            <img src="images/foto.jpg" class="avatar-mob" alt="avatar">
+            <img src="images/{{$user_avatar}}" class="avatar" alt="avatar">
         <a href="persoonlijke-instellingen">
             <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
         </a>
@@ -85,7 +85,7 @@
     </div>
     <div style="clear:both"></div>
     <a href="dashboard"><span><img src="images/icons/dashboard.png" alt="Dashboard"></span>Dashboard</a>
-    <a href="#"><span><img src="images/icons/logboek.png" alt="Logboek"></span>Logboek</a>
+    <a href="logboek"><span><img src="images/icons/logboek.png" alt="Logboek"></span>Logboek</a>
     <a href="projects"><span><img src="images/icons/map.png" alt="Project aanmaken"></span>Project beheer</a>
     <a href="groepsinstellingen"><span><img src="images/icons/instellingen.png" alt="Instellingen"></span>Groeps instellingen</a>
     <a href="#"><span><img src="images/icons/handleiding.png" alt="Handleiding"></span>Handleiding</a>
@@ -151,11 +151,12 @@
         </section>
 
         <section class="ac-container">
-          @yield('return_projects')
           @yield('content')
          </section>
-     {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
+     {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}     {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
         {{HTML::script(asset('js/notificatie.js')) }}
+                     {{HTML::script(asset('js/picker.js')) }}
+                     {{HTML::script(asset('js/picker.date.js')) }}
                      {{HTML::script(asset('js/picker.js')) }}
                      {{HTML::script(asset('js/picker.date.js')) }}
         {{HTML::script(asset('js/menuleft.js')) }}

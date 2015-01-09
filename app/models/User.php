@@ -28,7 +28,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->belongsTo('Adress');
 	}
 
-	public function location()
+    public function location()
 	{
         return $this->belongsTo('Location');
 	}
@@ -75,7 +75,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function projectGroup()
 	{
-		return $table->belongsToMany('ProjectGroup', 'project_groups_users')->withTimestamps();
+		return $table->belongsTo('ProjectGroup');
 	}
 
     public function saveUser($userCode, $password)

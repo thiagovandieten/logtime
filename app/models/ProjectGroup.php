@@ -4,7 +4,7 @@ class ProjectGroup extends Eloquent {
 
 	public function users()
 	{
-        return $this->belongToMany('User','project_groups_users')->withTimestamps();
+        return $this->hasMany('User');
 	}
 
 	public function adress()
@@ -36,15 +36,20 @@ class ProjectGroup extends Eloquent {
 	{
 		return $this->hasMany('LogCategorie');
 	}
-	
+
 	public function project()
 	{
-		return $this->belongsToMany('Project', 'group_project_periode')->withPivot('is_done')->withTimestamps();	
+		return $this->belongsToMany('Project', 'group_project_periode')->withPivot('is_done')->withTimestamps();
 	}
 
 	public function levelType()
 	{
 		return $this->belongsToMany('LevelType', 'level_types_project_groups')->withTimestamps();
+	}
+
+	public function customer()
+	{
+		return $this->hasOne('Customer');
 	}
 
 
