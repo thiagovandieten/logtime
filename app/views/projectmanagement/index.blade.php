@@ -1,26 +1,17 @@
 @extends('template.main')
 
-@section('content')
-<table>
-	<tr>
-		<td>Projectnaam</td>
-		<td>Laatst geupdate</td>
-	</tr>
-	@foreach ($projects as $project) 
-		<tr>
-			<td>{{$project->project_name}}</td>
-			<td>{{$project->updated_at}}</td>
-		</tr>
-	@endforeach
-	<tr>
-		<td>Kasboekje</td>
-		<td>1-1-2001</td>
-	</tr>
-</table>
 
-@stop
 
 @section('content')
+
+
+
+
+
+
+
+
+
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <div class="filter-wrap">
         <div class="buttons-wrap">
@@ -65,50 +56,19 @@
                 <td style="color: #666">Voortgang</td>
             </tr>
             </thead>
+            @foreach ($projects as $project)
             <tr>
                 <td><input type="checkbox"  style="display: block"></td>
                 <td><span>Leerjaar 2</span></td>
                 <td>Periode 1</td>
                 <td>Klas 1D0W</td>
-                <td>Pizza today</td>
-                <td>12 November 2014</td>
+                <td>{{$project->project_name}}</td>
+                <td>{{$project->updated_at}}</td>
                 <td><div class="progress">
                         <div data-percentage="0%" style="width: 75%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div> <p>75%</p></td>
             </tr>
-            <tr>
-                <td><input type="checkbox" style="display: block"></td>
-                <td>Leerjaar 2</td>
-                <td>Periode 3</td>
-                <td>Klas 1D0W</td>
-                <td>Malcome</td>
-                <td>12 December 2014</td>
-                <td><div class="progress">
-                        <div data-percentage="0%" style="width: 68%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div> <p>68%</p></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" style="display: block"></td>
-                <td>Leerjaar 1</td>
-                <td>Periode 2</td>
-                <td>Klas 3H3W</td>
-                <td>Platform techniek</td>
-                <td>1 Januari 2015</td>
-                <td><div class="progress">
-                        <div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div> <p>20%</p></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" style="display: block"></td>
-                <td>Leerjaar 3</td>
-                <td>Periode 2</td>
-                <td>Klas 3H0W</td>
-                <td>Pizza today</td>
-                <td>12 November 2014</td>
-                <td><div class="progress">
-                        <div data-percentage="0%" style="width: 54%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div> <p>54%</p></td>
-            </tr>
+            @endforeach
 
         </table>
 

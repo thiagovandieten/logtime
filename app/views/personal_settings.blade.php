@@ -21,7 +21,7 @@
 {{Form::text('first_name', $personal_data['first_name'], ['placeholder' => 'voornaam']) }}
 {{Form::text('last_name', $personal_data['last_name'], ['placeholder' => 'achternaam']) }}
 
-{{Form::text('street', $personal_data['street'], ['placeholder' => 'Straatnaam']) }}<br />
+{{Form::text('street', $personal_data['street'], ['placeholder' => 'Straatnaam']) }}
 {{Form::text('house_number', $personal_data['house_number'], ['placeholder' => 'Huisnummer']) }}
 {{Form::text('zipcode', $personal_data['zipcode'], ['placeholder' => 'Postcode']) }}
 {{Form::text('city', $personal_data['city'] ,['placeholder' => 'Woonplaats']) }}
@@ -33,8 +33,8 @@
 
 <h1 class="ww-aanpassen">Wachtwoord aanpassen</h1>
 {{Form::open(array('url' => 'persoonlijke-instellingen/wachtwoord-wijzigen', 'files' => true, 'method' => 'post')) }}
-{{Form::password('old_password',['placeholder' => 'Huidig wachtwoord']) }} <br />
-{{Form::password('new_password',['placeholder' => 'Nieuw wachtwoord']) }} <br />
+{{Form::password('old_password',['placeholder' => 'Huidig wachtwoord']) }}
+{{Form::password('new_password',['placeholder' => 'Nieuw wachtwoord']) }}
 {{Form::password('confirm_password',['placeholder' => 'Wachtwoord herhalen']) }}
 <br />
 <input type="submit" name="change" value="Wijzigen">
