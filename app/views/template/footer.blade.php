@@ -1,9 +1,13 @@
 <section class="ac-container">
   @yield('return_projects');
  </section>
-
-{{HTML::script(asset('js/notificatie.js')) }}
-{{HTML::script(asset('js/menuleft.js')) }}
+     {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
+    {{HTML::script(asset('js/notificatie.js')) }}
+    {{HTML::script(asset('js/menuleft.js')) }}
+     {{HTML::script(asset('js/picker.js')) }}
+     {{HTML::script(asset('js/picker.date.js')) }}
+     {{HTML::script(asset('js/legacy.js')) }}
+     {{HTML::script(asset('js/Chart.js')) }}
 </body></html><!---------------------Credits---------------------
 
 Class:          4D0W

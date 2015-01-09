@@ -7,4 +7,13 @@ class Location extends Eloquent {
 		return $this->hasMany('User');
 	}
 
+	public function projects()
+	{
+		return $this->hasMany('Project');
+	}
+
+	public function periodes()
+	{
+		return $this->hasMany('periode');
+	}
 }

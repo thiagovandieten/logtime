@@ -15,7 +15,7 @@ Route::get('/', function()
 {
 	return Redirect::to('dashboard');
 });
-
+	
 /**
  * Deze Route group wordt gebruikt voor alle pagina's die een niet ingelogde gebruiker
  * te zien krijgt.
@@ -52,7 +52,12 @@ Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController
 
 Route::group(array('before' => array('auth', 'leerling')), function()
 {
+    Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
+    Route::get('dashboard', array('uses' => 'dashboardController@showWelcome'));
     Route::resource('projects', 'ProjectManagementController');
+    Route::get('persoonlijke-instellingen', 'personalSettingsController@index');
+    Route::post('persoonlijke-instellingen/opslaan', 'personalSettingsController@store');
+    Route::get('groepsinstellingen', 'groupSettingsController@group_settings');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
