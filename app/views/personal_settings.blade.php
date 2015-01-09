@@ -33,10 +33,10 @@
 
 <h1 class="ww-aanpassen">Wachtwoord aanpassen</h1>
 {{Form::open(array('url' => 'persoonlijke-instellingen/wachtwoord-wijzigen', 'files' => true, 'method' => 'post')) }}
-{{Form::password('old_password',['placeholder' => 'Huidig wachtwoord']) }}
-{{Form::password('new_password',['placeholder' => 'Nieuw wachtwoord']) }}
+{{Form::password('old_password',['placeholder' => 'Huidig wachtwoord']) }} <br />
+{{Form::password('new_password',['placeholder' => 'Nieuw wachtwoord']) }} <br />
 {{Form::password('confirm_password',['placeholder' => 'Wachtwoord herhalen']) }}
-
+<br />
 <input type="submit" name="change" value="Wijzigen">
 {{ Form::close() }}
 </div>
