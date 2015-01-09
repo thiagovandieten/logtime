@@ -57,12 +57,17 @@ Route::resource('logbook',  'logbookController');
 Route::post('logbook/opslaan', 'logbookController@store');
 
 //Student settings
-Route::get('studentsettings',  'StudentSettingController@index');
-Route::post('studentsettings/edit',  'StudentSettingController@edit');
-Route::post('studentsettings/save',  'StudentSettingController@save');
-Route::get('studentsettings/create',  'StudentSettingController@create');
-Route::post('studentsettings/create',  'StudentSettingController@save_new_user');
-
+Route::group(array('before' => array('auth', 'leerling')), function()
+{
+	Route::get('studentsettings',  'StudentSettingController@index');
+	Route::post('studentsettings/edit',  'StudentSettingController@edit');
+	Route::post('studentsettings/save',  'StudentSettingController@save');
+	Route::get('studentsettings/create',  'StudentSettingController@create');
+	Route::post('studentsettings/create',  'StudentSettingController@save_new_user');
+	Route::get('studentsettings/delete',  'StudentSettingController@delete');
+	Route::post('studentsettings/delete',  'StudentSettingController@hard_delete');
+	Route::post('studentsettings/delete',  'StudentSettingController@soft_delete');
+});
 
 Route::group(array('before' => array('auth', 'leerling')), function()
 {

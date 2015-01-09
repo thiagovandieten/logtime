@@ -12,7 +12,7 @@ class StudentSettingController extends BaseLoggedInController {
 	
 	public function index()
 	{
-		$this->all_students = DB::select('SELECT `first_name`, `last_name`, `id` FROM `users` ');
+		$this->all_students = DB::select('SELECT `first_name`, `last_name`, `id`, `active` FROM `users` ');
 		
 		$user = User::find(Auth::id());
 		//print_r($user);
@@ -358,6 +358,57 @@ class StudentSettingController extends BaseLoggedInController {
 		    return Redirect::to('studentsettings/create')->with(array("message" => "Nieuwe gebruiker is succesvol aangemaakt in het systeem!"));
 
         }
+	}
+
+	public function delete()
+	{	
+		
+		// Verkrijg de user data
+		$id = $_GET['user'];
+		$user = User::find($id); 
+		
+		// User bestaat niet link terug naar het overzicht
+		if(empty($user)){
+			return Redirect::to('studentsettings');	
+		}else{
+		// De user bestaat wel
+			return View::make('studentsettings.delete');			
+		}
+		
+	}
+	
+	public function hard_delete()
+	{
+		// Deleet alles van de USER
+	}
+	
+	public function soft_delete()
+	{
+		// Validatie regels voor het valideren
+        $rules = array(
+            'user'       	=> 'required'		
+		);
+		
+		// valideer de input fields
+        $validator = Validator::make(Input::all(), $rules);
+		
+		if ($validator->fails()) {
+            // redirect our user back to the form with the errors from the validator
+            return Redirect::to('studentsettings')
+                ->withErrors($validator);
+        } else {
+			$id = Input::get('user');
+			$user = User::find($id); 
+			
+			DB::table('users')
+				->where('id', $id)
+				->update(array('active' => 0));
+			
+			return Redirect::to('studentsettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol op inactief gezet!');
+		}
+		
+		// Create view
+		//return Redirect::to('studentsettings')->with('error_msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' inactief gezet!');
 	}
 
 	/**
