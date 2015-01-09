@@ -59,37 +59,41 @@ class GroupSettingsController extends BaseLoggedInController {
         //dd($group->image_path);
         
         //Data for image upload -------------------------------
-        if(Input::hasFile('group_image')){
-                $destinatonPath = '';
-                $filename = '';
-                $file = Input::file('group_image');
-                $destinationPath = public_path().'/images/';
-                $filename = str_random(3).'_'.$file->getClientOriginalName();
-                
+            if(Input::hasFile('group_image')){
+                $destinatonPath     = '';
+                $filename           = '';
+                $file               = Input::file('group_image');
+                $filesize           = Input::file('group_image')->getSize();
+                $destinationPath    = public_path().'/images/';
+                $filename           = str_random(6).'_'.$file->getClientOriginalName();
+
                 // Validation check for extension
                 $extension = Input::file('group_image')->getClientOriginalExtension();
                 $allowed =  array('png','jpg');
-    
+
                 if(!in_array($extension,$allowed) ) {
                     dd('Dit bestand is niet geldig');
-                }else {
+                }
+                else {
                     $rules = array('group_image' => 'max:5000000');              // limited file size of 500kb
                     $validator = Validator::make(Input::all(), $rules);
-                    if ($validator->fails()) {
-
+                    
+                    if ($validator->fails()){
                         // get the error messages from the validator
                         $messages = $validator->messages('Er is iets fout gegaan');
 
                         // redirect our user back to the form with the errors from the validator
-                        return Redirect::to('groepsinstellingen')
+                        return Redirect::to('group_settings')
                             ->withErrors($validator);
-                    }                          
+                    }
+
                     $uploadSuccess = $file->move($destinationPath, $filename);
                     File::delete(public_path().'/images/'.$group->image_path);
                 }
-        }else{
-            $filename = $group->image_path;    
-        }
+            }
+            else{
+                $filename = $group->image_path;    
+            }
                 
         // create the validation rules ------------------------
         $rules = array(

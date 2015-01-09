@@ -37,7 +37,6 @@ class Project extends Eloquent {
 
 	public function customers()
 	{
-		echo "help";
 		return $this->hasMany('Customer');
 	}
 

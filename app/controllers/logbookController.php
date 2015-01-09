@@ -1,6 +1,15 @@
 <?php
 
-class LogbookController extends BaseLoggedInController {
+class LogbookController extends BaseLoggedInController
+{ 
+
+	private $userLogs;
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->userLogs = new Userlog;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -8,10 +17,9 @@ class LogbookController extends BaseLoggedInController {
 	 * @return Response
 	 */
 
-
 	public function index()
 	{
-		return View::make('logbook')->with(array('userFullName' => $this->userFullName));
+		return View::make('logbook')->with(array('userFullName' => $this->userFullName, 'userLogs' => $this->userLogs));
 	}
 
 
@@ -49,43 +57,20 @@ class LogbookController extends BaseLoggedInController {
         // do the validation ----------------------------------
         // validate against the inputs from our form
         $validator = Validator::make(Input::all(), $rules);
-
-		 // check if the validator failed -----------------------
+        // check if the validator failed -----------------------
         if ($validator->fails()) {
 
             // get the error messages from the validator
             $messages = $validator->messages('Er is iets fout gegaan');
 
             // redirect our user back to the form with the errors from the validator
-
 			var_dump($validator->messages());
-
 			//return Redirect::to('logbook')
              //   ->withErrors($validator);
 
         } else {
-
             // validation successful ---------------------------
 
-            // our duck has passed all tests!
-            // let him enter the database
-
-            // create the data
-            $user_data = User::find(Auth::id());
-
-		    $user_data->description       = Input::get('description');
-            $user_data->task       		  = Input::get('task');
-            $user_data->start_time     	  = Input::get('start_time');
-            $user_data->end_time     	  = Input::get('end_time');
-
-            // save our data
-            //$user_data->save();
-
-			var_dump($user_data);
-
-            // redirect ----------------------------------------
-            // redirect our user back to the form so they can do it all over again
-            //return Redirect::to('logbook');
 		}
 	}
 
