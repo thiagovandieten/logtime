@@ -26,8 +26,8 @@
 {{Form::text('group_wage', $group_wage, ['placeholder' => 'uurloon']) }}
 
 
-
 {{Form::submit('Opslaan')}}
 {{ Form::close() }}
+    <a href="/klantinstellingen"><button class="klant-gegevens-aanpassen">Klantgegevens</button></a>
 </div>
 @stop
