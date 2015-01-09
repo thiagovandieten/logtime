@@ -1,16 +1,25 @@
 <?php
 
-class LogbookController extends BaseLoggedInController 
+class LogbookController extends BaseLoggedInController
+{ 
+
+	private $userLogs;
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->userLogs = new Userlog;
+	}
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-    
+
 	public function index()
 	{
-		return View::make('logbook')->with(array('userFullName' => $this->userFullName));
+		return View::make('logbook')->with(array('userFullName' => $this->userFullName, 'userLogs' => $this->userLogs));
 	}
 
 
@@ -62,23 +71,6 @@ class LogbookController extends BaseLoggedInController
         } else {
             // validation successful ---------------------------
 
-            // our duck has passed all tests!
-            // let him enter the database
-
-            // create the data
-            $user_data = User::find(Auth::id());
-		    $user_data->description       = Input::get('description');
-            $user_data->task       		  = Input::get('task');
-            $user_data->start_time     	  = Input::get('start_time');
-            $user_data->end_time     	  = Input::get('end_time');
-            // save our data
-            //$user_data->save();
-
-			var_dump($user_data);
-
-            // redirect ----------------------------------------
-            // redirect our user back to the form so they can do it all over again
-            //return Redirect::to('logbook');
 		}
 	}
 
