@@ -1474,3 +1474,94 @@ thead{
 input[type='checkbox']:checked + span {
     background: red!important;
 }
+
+.personal-settings img{
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+    position: absolute;
+    margin: auto;
+    left: 0px;
+    right: 0px;
+    top: 60px;
+}
+
+.personal-settings{
+    position: relative;
+    width: 300px;
+}
+
+.img-omvang{
+    height: 165px;
+}
+
+.avatar-veranderen{
+   position: absolute;
+    width: 70px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    margin-bottom: 20px;
+    top: 150px;
+}
+
+
+.personal-settings input[type='text'],  .personal-settings input[type='password']{
+    width: 100%;
+    background: #e2e2e2;
+    border-radius: 3px;
+    color: #666;
+    padding: 15px;
+    border: 0px;
+    margin-bottom: 20px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Wijzigen';
+    display: inline-block;
+    background: #eb9001;
+    border: 0px;
+    border-radius: 3px;
+    padding: 10px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.custom-file-input:hover::before {
+    opacity: 0.8;
+}
+
+.personal-settings input[type='submit']{
+    padding: 12px 20px 12px 20px;
+    color: #fff;
+    background: #eb9001;
+    border-radius: 3px;
+    border: 0px;
+    float: right;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+.personal-settings input[type='submit']:hover{
+    opacity: 0.8;
+}
+
+.personal-settings input[type='submit']:active{
+    opacity: 1;
+}
+
+.personal-settings h1{
+    color: #999;
+    font-weight: normal;
+}
+
+.ww-aanpassen{
+    margin-top: 100px;
+}
