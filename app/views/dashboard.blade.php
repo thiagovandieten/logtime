@@ -22,6 +22,7 @@
 
 <!-- Return the group projects -->
 @section('content')
+    @if(isset($projects))
     @foreach($projects as $project)
         <div>
             <input id="ac-{{$project->id}}" name="accordion-1" type="checkbox" />
@@ -206,15 +207,10 @@
             <!---hier eindigt de inhoud--->
 
 
-
-
-
-
-
-
             </article>
         </div>
     @endforeach
+    @endif
 @stop
 <!-- Fast Fill new project -->
 @section('fast_fill')
@@ -224,7 +220,7 @@
          @foreach($projects as $project)
         	<option>{{$project->project_name}}</option>
    		 @endforeach
-        @endif
+         @endif
     </select>
 
     <select>

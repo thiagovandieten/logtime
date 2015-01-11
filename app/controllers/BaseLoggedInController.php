@@ -12,7 +12,10 @@ class BaseLoggedInController extends BaseController {
             $this->userFullName = \Auth::user()->first_name . ' ' . \Auth::user()->last_name;
         }
 
-        View::share(array('userFullName' => $this->userFullName, 'user_avatar' => \Auth::user()->user_image_path));
+        View::share(array(
+            'userFullName' => $this->userFullName,
+            'user_avatar' => \Auth::user()->user_image_path,
+            'user_role' => \Auth::user()->user_type_id ));
 
 //        View::composer(array('dashboard', 'projectmanagement.index' ), function($view)
 //        {

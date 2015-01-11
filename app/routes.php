@@ -43,17 +43,16 @@ Route::group(array('prefix' => 'login', 'before' => 'guest'), function(){
     ));
 });
 
-Route::get('logout', function(){
+Route::get('logout', array('as' => 'logout', function(){
     Auth::logout();
     return Redirect::to('login');
-});
+}));
 
-Route::get('dashboard', array('before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
+Route::get('dashboard', array('as' => 'dashboard','before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
 
 Route::group(array('before' => array('auth', 'leerling')), function()
 {
     Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
-    Route::get('dashboard', array('uses' => 'dashboardController@showWelcome'));
     Route::resource('projects', 'ProjectManagementController');
     Route::get('persoonlijke-instellingen', 'personalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'personalSettingsController@store');

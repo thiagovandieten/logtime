@@ -29,7 +29,7 @@ class DocentProjectManagement extends \BaseLoggedInController {
 	 */
 	public function create()
 	{
-		//
+		return $this->view->make('projectmanagement.docent.create');
 	}
 
 
