@@ -1466,3 +1466,11 @@ tr.border_bottom td{
     text-decoration: none;
     color: #999;
 }
+
+thead{
+    background: #fff!important;
+}
+
+input[type='checkbox']:checked + span {
+    background: red!important;
+}

@@ -8,6 +8,7 @@ class LogbookController extends BaseLoggedInController {
 	{
 		parent::__construct();
 		$this->userLogs = new Userlog;
+
 	}
 
 	/**
@@ -17,6 +18,7 @@ class LogbookController extends BaseLoggedInController {
 	 */
 	public function index()
 	{
+
 		return View::make('logbook')->with(array('userFullName' => $this->userFullName, 'userLogs' => $this->userLogs));
 	}
 
