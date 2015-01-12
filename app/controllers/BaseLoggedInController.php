@@ -3,12 +3,15 @@
 class BaseLoggedInController extends BaseController {
 
     protected $userFullName;
+    protected $user;
+    protected $user_avatar;
 
     public function __construct()
     {
 
         if(\Auth::check())
         {
+            $this->user = Auth::user();
             $this->userFullName = \Auth::user()->first_name . ' ' . \Auth::user()->last_name;
         }
 
@@ -22,6 +25,7 @@ class BaseLoggedInController extends BaseController {
 //            $view->with('userFullName', $this->userFullName);
 //        });
 
+        }
     }
 
     public function isDocent()
@@ -32,4 +36,4 @@ class BaseLoggedInController extends BaseController {
         }
         return true;
     }
-}
+} 

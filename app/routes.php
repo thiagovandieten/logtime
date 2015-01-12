@@ -48,7 +48,13 @@ Route::get('logout', array('as' => 'logout', function(){
     return Redirect::to('login');
 }));
 
-Route::get('dashboard', array('as' => 'dashboard','before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
+Route::get('dashboard', array('as' => 'dashboard', 'before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
+
+Route::get('handleiding', 'GuideController@index');
+
+Route::resource('logboek',  'LogbookController');
+
+Route::post('logbook/opslaan', 'logbookController@store');
 
 Route::group(array('before' => array('auth', 'leerling')), function()
 {
@@ -56,7 +62,13 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     Route::resource('projects', 'ProjectManagementController');
     Route::get('persoonlijke-instellingen', 'personalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'personalSettingsController@store');
-    Route::get('groepsinstellingen', 'groupSettingsController@group_settings');
+    Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
+    Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
+    Route::get('handleiding', 'GuideController@index');
+
+    Route::resource('logboek',  'LogbookController');
+
+    Route::post('logbook/opslaan', 'logbookController@store');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
@@ -69,3 +81,6 @@ Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), f
 Event::listen('illuminate.query', function($query){
 	//var_dump($query);
 });
+
+
+

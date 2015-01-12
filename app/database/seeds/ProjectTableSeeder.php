@@ -27,6 +27,10 @@ class ProjectTableSeeder extends Seeder {
         $project->level_type_id = 1;
         $project->save();
 
+        $project = Project::find(1);
+        $categorie = Categorie::find(1);
+
+        $project->categorie()->sync([1,1]);
         $this->call('TaskTableSeeder');
     }
 

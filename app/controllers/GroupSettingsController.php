@@ -10,29 +10,40 @@ class GroupSettingsController extends BaseLoggedInController {
 
         
     public function group_settings()
-    {
+    {        
+        $group_id = $this->user->project_group_id;
+        $group = ProjectGroup::find($group_id);
         
-          //$project_group  = showWelcome->project_group_id; 
-          //dd($user->project_group_id);
+        $wages = StudentWage::find($group_id);
+        $group_wage = $group->wage;
+                
+        //dd($group_wage);
+                       
+        return View::make('group_settings')->with(array('group_name' => $group->name, 'group_image' => $group->image_path, 'group_wage' => $group->wage));
         
-        $user = User::find(Auth::id());    
-        $group_data = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'phone_number' => $user->phone_number);
-
-        return View::make('group_settings')->with(array(
-            'group_data' => $group_data
-             ));
+        
     }
     
     public function store()
     {
-        $user = User::find(Auth::id());
-        var_dump(Input::all());
         
-         // create the validation rules ------------------------
+        //Data for image upload -------------------------------
+        if(Input::hasFile('group_image')){
+        $destinatonPath = '';
+        $filename = '';
+        $file = Input::file('group_image');
+        $destinationPath = public_path().'/images/';
+        $filename = str_random(3).'_'.$file->getClientOriginalName();
+        $uploadSuccess = $file->move($destinationPath, $filename);
+        }else{
+            $filename = $user->user_image_path;    
+        }
+        
+        // create the validation rules ------------------------
         $rules = array(
-            'wage'       => 'required', 						// just a normal required validation
+            'group_name'       => 'required', 						// just a normal required validation
         );
-
+        
         // do the validation ----------------------------------
         // validate against the inputs from our form
         $validator = Validator::make(Input::all(), $rules);
@@ -55,14 +66,12 @@ class GroupSettingsController extends BaseLoggedInController {
             // let him enter the database
 
             // create the data
-            $group_data = User::find(Auth::id());
-            $group_data->first_name       = Input::get('first_name');
-            $group_data->last_name        = Input::get('last_name');
-            $group_data->phone_number     = Input::get('phone_number');
-            //$duck->password = Hash::make(Input::get('password'));
-
+            $group_data              = ProjectGroup::find($this->user->project_group_id);
+            $group_data->name        = Input::get('group_name');
+            $group_data->image_path  = $filename;
+            
             // save our data
-            $user_data->save();
+            $group_data->save();
 
             // redirect ----------------------------------------
             // redirect our user back to the form so they can do it all over again

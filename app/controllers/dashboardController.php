@@ -28,14 +28,14 @@ class dashboardController extends BaseLoggedInController {
 		{
 			//Ingelogte USER
 			$this->user = User::find(Auth::id());
-			
+
 			//Project Group ID ophalen
 			$this->group_id = $this->user->project_group_id;
-			
+
 			$this->projects = ProjectGroup::find($this->group_id)->project;
-			
+
 		}
-	
+
 		return View::make('dashboard')->with(array(
 			'projects' => $this->projects));
 	}

@@ -16,7 +16,7 @@ class CreateStreetsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('street', 255);
-			$table->integer('house_number');
+			$table->string('house_number', 6);
 			$table->timestamps();
 		});
 	}

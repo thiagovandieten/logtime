@@ -91,7 +91,7 @@
     <div style="clear:both"></div> <!-- AUB Clearfix gebruiken! -->
     @if($user_role == 1)
     <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
-    <a href="#"><span>{{HTML::image('images/icons/logboek.png', 'Logboek')}}</span>Logboek</a>
+    <a href="logboek"><span>{{HTML::image('images/icons/logboek.png', 'Logboek')}}</span>Logboek</a>
     <a href="projects"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
     <a href="groepsinstellingen"><span>{{HTML::image('images/icons/instellingen.png', 'Instellingen')}}</span>Groeps instellingen</a>
     <a href="#"><span>{{HTML::image('images/icons/handleiding.png', 'Handleiding')}}</span>Handleiding</a>
