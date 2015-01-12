@@ -82,7 +82,7 @@
     </nav>
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left menu-mob-width cbp-spmenu-open" id="cbp-spmenu-s1">
     <div class="profiel-mob">
-            {{HTML::image('images/foto.jpg', 'avatar', array('class' => 'avatar-mob') )}}
+            {{HTML::image('images/'.$user_avatar, 'avatar', array('class' => 'avatar') )}}
         <a href="persoonlijke-instellingen">
             <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
         </a>
@@ -165,7 +165,6 @@
         </section>
 
         <section class="ac-container">
-          {{--@yield('return_projects')--}}
           @yield('content')
          </section>
      {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}

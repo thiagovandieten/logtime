@@ -12,6 +12,15 @@ h1, h2, h3, p{
 
 input, select{
     outline: none;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover{
+    opacity: 0.8;
+}
+
+input[type="submit"]:active{
+    opacity: 1;
 }
 
 a{
@@ -1413,6 +1422,10 @@ button:active{
 .buttons-wrap{
     float: left;
 }
+.buttons-wrap-student{
+    width: 20%;
+    float: left;
+}
 
 .filter-omgeving p{
     color: #999;
@@ -1473,4 +1486,191 @@ thead{
 
 input[type='checkbox']:checked + span {
     background: red!important;
+}
+
+.personal-settings img{
+    width: 100%;
+    max-width: 80px;
+    height: 80px;
+    border-radius: 80px;
+    position: absolute;
+    margin: auto;
+    left: 0px;
+    right: 0px;
+    top: 60px;
+}
+
+.personal-settings{
+    position: relative;
+    width: 300px;
+}
+
+.img-omvang{
+    height: 165px;
+}
+
+.avatar-veranderen{
+   position: absolute;
+    width: 70px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    margin-bottom: 20px;
+    top: 150px;
+}
+
+
+.personal-settings input[type='text'],  .personal-settings input[type='password']{
+    width: 100%;
+    background: #e2e2e2;
+    border-radius: 3px;
+    color: #666;
+    padding: 15px;
+    border: 0px;
+    margin-bottom: 20px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Wijzigen';
+    display: inline-block;
+    background: #eb9001;
+    border: 0px;
+    border-radius: 3px;
+    padding: 10px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.custom-file-input:hover::before {
+    opacity: 0.8;
+}
+
+.personal-settings input[type='submit']{
+    padding: 12px 20px 12px 20px;
+    color: #fff;
+    background: #eb9001;
+    border-radius: 3px;
+    border: 0px;
+    float: right;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+.personal-settings input[type='submit']:hover{
+    opacity: 0.8;
+}
+
+.personal-settings input[type='submit']:active{
+    opacity: 1;
+}
+
+.personal-settings h1{
+    color: #999;
+    font-weight: normal;
+}
+
+.ww-aanpassen{
+    margin-top: 100px;
+}
+
+.klant-gegevens-aanpassen{
+    padding: 12px 20px 12px 20px;
+    background: #66bb6a;
+    color: #fff;
+    border-radius: 3px;
+    transition: 0.3s;
+    border: 0px;
+    cursor: pointer;
+    outline: none;
+}
+
+.klant-gegevens-aanpassen:hover {
+    opacity: 0.8;
+}
+
+.klant-gegevens-aanpassen:active {
+    opacity: 1;
+}
+
+.buttons-wrap input[type='submit'], .buttons-wrap a{
+    float: left;
+}
+
+.studenten-overzicht{
+    overflow: auto;
+}
+
+.studenten-overzicht td{
+    padding: 0px;
+}
+
+.studenten-overzicht table{
+    width: 100%;
+    margin-top:20px;
+    font-size: 16px;
+    color: #999;
+}
+
+.studenten-overzicht table p{
+    padding: 4px;
+}
+
+tr.studenten-overzicht td{
+    border-bottom: 1px solid #d0d0d0;
+    background: #fff!important;
+    cursor: auto!important;
+}
+
+.studenten-overzicht tr:hover{
+    background: #cfdbe3!important;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.studenten-overzicht a{
+    text-decoration: none;
+    color: #999;
+}
+
+.buttons-wrap-student a:hover{
+    opacity: 0.8;
+    text-decoration: none;
+}
+
+.buttons-wrap-student a, .buttons-wrap-student input[type='submit']{
+    transition: 0.3s;
+}
+.buttons-wrap-student a:active{
+    opacity: 1;
+}
+
+.buttons-wrap-student input[type='submit']:hover{
+    opacity: 0.8;
+}
+.buttons-wrap-student input[type='submit']:active{
+    opacity: 1;
+}
+.studenten-bewerken{
+    padding: 10px;
+    border: 0px;
+    color: #fff;
+    border-radius: 3px;
+    background: #eb9001;
+    cursor: pointer;
+}
+
+.studenten-verwijderen{
+    padding: 10px;
+    border: 0px;
+    color: #fff;
+    border-radius: 3px;
+    background: #e83c46;
+    cursor: pointer;
 }

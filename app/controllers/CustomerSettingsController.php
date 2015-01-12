@@ -1,6 +1,6 @@
 <?php
 
-class GroupSettingsController extends BaseLoggedInController {
+class CustomerSettingsController extends BaseLoggedInController {
    	
         // ophalen van de volgende gegevens:
         // voornaam, achternaam, straatnaam, huisnummer, postcode, woonplaats, telefoonnummer, wachtwoord 
@@ -9,7 +9,7 @@ class GroupSettingsController extends BaseLoggedInController {
         // wachtwoord van tabel users
 
         
-    public function group_settings()
+    public function customer_settings()
     {                
         $group_id       = $this->user->project_group_id;
         $group          = ProjectGroup::find($group_id);
@@ -30,10 +30,10 @@ class GroupSettingsController extends BaseLoggedInController {
                 
         //dd($group_wage);
                        
-        return View::make('group_settings')->with(array('group_name' => $group->name, 'street' => $street->street, 
+        return View::make('customer_settings')->with(array('customer_name' => $group->name, 'street' => $street->street, 
                                                         'house_number' => $street->house_number, 'city' => $city->city, 
-                                                        'zipcode' => $zipcode->zipcode, 'group_image' => $group->image_path, 
-                                                        'group_wage' => $group_wage));
+                                                        'zipcode' => $zipcode->zipcode, 'customer_image' => $group->image_path, 
+                                                        ));
         
         
     }
@@ -59,41 +59,17 @@ class GroupSettingsController extends BaseLoggedInController {
         //dd($group->image_path);
         
         //Data for image upload -------------------------------
-            if(Input::hasFile('group_image')){
-                $destinatonPath     = '';
-                $filename           = '';
-                $file               = Input::file('group_image');
-                $filesize           = Input::file('group_image')->getSize();
-                $destinationPath    = public_path().'/images/';
-                $filename           = str_random(6).'_'.$file->getClientOriginalName();
-
-                // Validation check for extension
-                $extension = Input::file('group_image')->getClientOriginalExtension();
-                $allowed =  array('png','jpg');
-
-                if(!in_array($extension,$allowed) ) {
-                    dd('Dit bestand is niet geldig');
-                }
-                else {
-                    $rules = array('group_image' => 'max:5000000');              // limited file size of 500kb
-                    $validator = Validator::make(Input::all(), $rules);
-                    
-                    if ($validator->fails()){
-                        // get the error messages from the validator
-                        $messages = $validator->messages('Er is iets fout gegaan');
-
-                        // redirect our user back to the form with the errors from the validator
-                        return Redirect::to('group_settings')
-                            ->withErrors($validator);
-                    }
-
-                    $uploadSuccess = $file->move($destinationPath, $filename);
-                    File::delete(public_path().'/images/'.$group->image_path);
-                }
-            }
-            else{
-                $filename = $group->image_path;    
-            }
+        if(Input::hasFile('group_image')){
+        $destinatonPath = '';
+        $filename = '';
+        $file = Input::file('group_image');
+        $destinationPath = public_path().'/images/';
+        $filename = str_random(3).'_'.$file->getClientOriginalName();
+        $uploadSuccess = $file->move($destinationPath, $filename);
+            File::delete(public_path().'/images/'.$group->image_path);
+        }else{
+            $filename = $group->image_path;    
+        }
                 
         // create the validation rules ------------------------
         $rules = array(
@@ -103,7 +79,7 @@ class GroupSettingsController extends BaseLoggedInController {
             'zipcode'          => 'required', 	                    // just a normal required validation
             'city'             => 'required', 	                    // just a normal required validation
             'group_wage'       => 'required', 						// just a normal required validation
-            //'group_image'      => 'max:5000000|mimes:png',              // limited file size of 500kb
+            'image'            => 'image|max:5000000'                     // limited file size of 500kb
         );
         
         // do the validation ----------------------------------
@@ -130,8 +106,8 @@ class GroupSettingsController extends BaseLoggedInController {
             // create the data
             $group_data              = ProjectGroup::find($this->user->project_group_id);
             $group_data->name        = Input::get('group_name');
-            $street->street          = Input::get('street');
             $street->house_number    = Input::get('house_number');
+            $street->street          = Input::get('street');
             $zipcode->zipcode        = Input::get('zipcode');
             $city->city              = Input::get('city');
             
