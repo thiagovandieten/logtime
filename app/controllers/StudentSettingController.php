@@ -423,9 +423,16 @@ class StudentSettingController extends BaseLoggedInController {
 			/**
 				Table: project_groups
 			**/
-			DB::table('project_groups')
-            ->where('id', 1)
-            ->update(array('votes' => 1));
+			$project_groups = DB::table('project_groups')
+					->where(array('user_id' => $id
+					))->first();
+			
+			// Als de opgegeven straat niet bestaat voer hem in
+			if(!empty($project_groups->user_id)){
+				DB::table('project_groups')
+           		 	->where('user_id', $id)
+            		->update('user', 'NULL');
+			}
 			
 			return Redirect::to('studentsettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol op inactief gezet!');		
 		}
