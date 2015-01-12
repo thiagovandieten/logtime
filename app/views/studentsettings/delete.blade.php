@@ -22,7 +22,4 @@
 {{ Form::hidden('user', $_GET['user'], array('id' => 'invisible_id')) }}
 {{ Form::submit('Hard Delete')}}
 {{ Form::close() }}
-
-
-
 @stop

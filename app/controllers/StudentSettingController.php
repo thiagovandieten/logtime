@@ -352,11 +352,9 @@ class StudentSettingController extends BaseLoggedInController {
 			DB::table('users')
 				->where('id', $id)
 				->update(array('adress_id' => $getAdressesid));
-			
-			
+		
             // redirect our user back to the form so they can do it all over again
 		    return Redirect::to('studentsettings/create')->with(array("message" => "Nieuwe gebruiker is succesvol aangemaakt in het systeem!"));
-
         }
 	}
 
@@ -380,6 +378,59 @@ class StudentSettingController extends BaseLoggedInController {
 	public function hard_delete()
 	{
 		// Deleet alles van de USER
+		
+		/**
+		* Tables waarin verwijderd moet worden : 
+		* `users`, `estimated_time`, `user_logs`, `user_notifications`, `user_sub_groups`
+		*
+		* Tables die aangepast moeten worden : 
+		*	`project_groups`
+		**/
+		// Verkrijg de user data
+		
+		$id = $_GET['user'];
+		$user = User::find($id); 
+		
+		// User bestaat niet link terug naar het overzicht
+		if(empty($user)){
+			return Redirect::to('studentsettings');	
+		}else{
+			/**
+				Table: user_sub_groups
+			**/
+			DB::table('user_sub_groups')->where('user_id', $id)->delete();
+			
+			/**
+				Table: user_notifications
+			**/
+			DB::table('user_notifications')->where('user_id', $id)->delete();
+			
+			/**
+				Table: user_logs
+			**/
+			DB::table('user_logs')->where('user_id', $id)->delete();
+			
+			/**
+				Table: estimated_time
+			**/
+			DB::table('estimated_time')->where('user_id', $id)->delete();
+			
+			/**
+				Table: users
+			**/
+			DB::table('users')->where('user_id', $id)->delete();
+			
+			/**
+				Table: project_groups
+			**/
+			DB::table('project_groups')
+            ->where('id', 1)
+            ->update(array('votes' => 1));
+			
+			return Redirect::to('studentsettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol op inactief gezet!');		
+		}
+		
+		
 	}
 	
 	public function soft_delete()
