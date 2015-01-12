@@ -1,24 +1,24 @@
 @extends('template.main')
 {{--Fatih's spul--}}
-@section('content')
-<table>
-	<tr>
-		<td>Projectnaam</td>
-		<td>Laatst geupdate</td>
-	</tr>
-	@foreach ($projects as $project) 
-		<tr>
-			<td>{{$project->project_name}}</td>
-			<td>{{$project->updated_at}}</td>
-		</tr>
-	@endforeach
-	<tr>
-		<td>Kasboekje</td>
-		<td>1-1-2001</td>
-	</tr>
-</table>
+{{--@section('content')--}}
+{{--<table>--}}
+	{{--<tr>--}}
+		{{--<td>Projectnaam</td>--}}
+		{{--<td>Laatst geupdate</td>--}}
+	{{--</tr>--}}
+	{{--@foreach ($projects as $project) --}}
+		{{--<tr>--}}
+			{{--<td>{{$project->project_name}}</td>--}}
+			{{--<td>{{$project->updated_at}}</td>--}}
+		{{--</tr>--}}
+	{{--@endforeach--}}
+	{{--<tr>--}}
+		{{--<td>Kasboekje</td>--}}
+		{{--<td>1-1-2001</td>--}}
+	{{--</tr>--}}
+{{--</table>--}}
 
-@stop
+{{--@stop--}}
 
 @section('content')
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
@@ -165,24 +165,3 @@
         });
     </script>
 @stop
-=======
-<table>
-	<tr>
-		<td>Projectnaam</td>
-		<td>Laatst geupdate</td>
-	</tr>
-	@foreach ($projects as $project) 
-		<tr>
-			<td>{{$project->project_name}}</td>
-			<td>{{$project->updated_at}}</td>
-		</tr>
-	@endforeach
-	<tr>
-		<td>Kasboekje</td>
-		<td>1-1-2001</td>
-	</tr>
-</table>
-
-@stop
-
->>>>>>> Temporary merge branch 2
