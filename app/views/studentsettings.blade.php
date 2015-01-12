@@ -4,8 +4,6 @@
 
 
 
-{{(string)Session::get('msg')}}
-
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <div class="filter-wrap">
         <div class="buttons-wrap-student">
@@ -45,7 +43,7 @@
             {{ $error }}
         @endforeach
     @endif
-
+   <p class="student-error"> {{(string)Session::get('msg')}}</p>
     <div class="studenten-overzicht">
         <table class="order-table table" cellspacing="0">
             <thead>
@@ -85,7 +83,7 @@
                     <td>
                         {{Form::open(array('url' => 'studentsettings/delete', 'method' => 'get')) }}   
                         {{Form::hidden('user', $data->id, array('id' => 'invisible_id')) }}
-                        {{Form::submit('Verwijder', ['class'=>'studenten-verwijderen'])}}
+                        {{Form::submit('Verwijder', ['class'=>'studenten-verwijderen', 'style'=>'margin-top: -20px;'])}}
                         {{Form::close() }}
                     </td>
 
