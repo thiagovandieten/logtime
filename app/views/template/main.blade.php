@@ -99,7 +99,9 @@
     @endif
     @if($user_role == 2)
         <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
+        <a href="{{route('docent.projects.index')}}"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
         <a href="{{route('logout')}}"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
+        
     @endif
     @if($user_role == 1)
     <h2>Uren bijwerken</h2>
@@ -173,6 +175,7 @@
         {{HTML::script(asset('js/menuleft.js')) }}
              {{HTML::script(asset('js/legacy.js')) }}
              {{HTML::script(asset('js/Chart.js')) }}
+        <!--TODO: Mijn editor zeurt dat hier een </div> ontbreekt, klopt dat? -->
         </body>
         </html><!---------------------Credits---------------------
 

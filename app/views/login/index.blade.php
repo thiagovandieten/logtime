@@ -34,10 +34,8 @@
 
 
 {{Form::model(array('route' => 'login.authentication'))}}
-    {{Form::label('', '')}}
-    {{Form::text('login','',['placeholder' => 'Gebruikersnaam']) }}
 
-    {{Form::label('', '')}}
+    {{Form::text('login','',['placeholder' => 'Gebruikersnaam']) }}
     {{Form::password('password', ['placeholder'=>'Wachtwoord'])}}
 
     {{Form::submit('Inloggen')}}
