@@ -7,39 +7,39 @@
 
 
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<div class="filter-wrap">
-    <div class="buttons-wrap-student">
-        {{HTML::link('studentsettings/create', 'Nieuw', ['class'=>'nieuw-knop', 'style'=>'float: left; margin-right: 10px; padding: 13px 20px 15px 40px!important'])}}
+    <div class="filter-wrap">
+        <div class="buttons-wrap-student">
+            {{HTML::link('studentsettings/create', 'Nieuw', ['class'=>'nieuw-knop', 'style'=>'float: left; margin-right: 10px; padding: 13px 20px 15px 40px!important'])}}
 
-        {{Form::open(array('url' => 'studentsettings/delete', 'files' => false, 'method' => 'post')) }}
-        {{Form::submit('Verwijderen', ['class'=>'delete-knop'])}}
-        {{Form::close()}}
+            {{Form::open(array('url' => 'studentsettings/delete', 'files' => false, 'method' => 'post')) }}
+            {{Form::submit('Verwijderen', ['class'=>'delete-knop'])}}
+            {{Form::close()}}
+        </div>
+        <div class="filter-omgeving">
+            <p>Filter op</p>
+            <form>
+                <select class="light-table-filter" data-table="order-table" name='leerjaar'>
+                    <option value=" ">Leerjaar</option>
+                    <option value="Leerjaar 1">Leerjaar 1</option>
+                    <option value="Leerjaar 2">Leerjaar 2</option>
+                    <option value="Leerjaar 3">Leerjaar 3</option>
+                </select>
+                <select class="light-table-filter" data-table="order-table" name='periode'>
+                    <option value=" ">Periode</option>
+                    <option value="periode 1">Periode 1</option>
+                    <option value="periode 2">Periode 2</option>
+                    <option value="periode 3">Periode 3</option>
+                    <option value="periode 4">Periode 4</option>
+                </select>
+                <select class="light-table-filter" data-table="order-table" name='klas'>
+                    <option>Klas</option>
+                    <option value="Klas 1D0W">1D0W</option>
+                    <option value="Klas 3H3W">3H0W </option>
+                    <option value="Klas 3H0W">3H0W</option>
+                </select>
+            </form>
+        </div>
     </div>
-    <div class="filter-omgeving">
-        <p>Filter op</p>
-        <form>
-            <select class="light-table-filter" data-table="order-table" name='leerjaar'>
-                <option value=" ">Leerjaar</option>
-                <option value="Leerjaar 1">Leerjaar 1</option>
-                <option value="Leerjaar 2">Leerjaar 2</option>
-                <option value="Leerjaar 3">Leerjaar 3</option>
-            </select>
-            <select class="light-table-filter" data-table="order-table" name='periode'>
-                <option value=" ">Periode</option>
-                <option value="periode 1">Periode 1</option>
-                <option value="periode 2">Periode 2</option>
-                <option value="periode 3">Periode 3</option>
-                <option value="periode 4">Periode 4</option>
-            </select>
-            <select class="light-table-filter" data-table="order-table" name='klas'>
-                <option>Klas</option>
-                <option value="Klas 1D0W">1D0W</option>
-                <option value="Klas 3H3W">3H0W </option>
-                <option value="Klas 3H0W">3H0W</option>
-            </select>
-        </form>
-    </div>
-</div>
     @if ($errors->has())
         @foreach ($errors->all() as $error)
             {{ $error }}
