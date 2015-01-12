@@ -12,6 +12,15 @@ h1, h2, h3, p{
 
 input, select{
     outline: none;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover{
+    opacity: 0.8;
+}
+
+input[type="submit"]:active{
+    opacity: 1;
 }
 
 a{
@@ -1413,6 +1422,10 @@ button:active{
 .buttons-wrap{
     float: left;
 }
+.buttons-wrap-student{
+    width: 20%;
+    float: left;
+}
 
 .filter-omgeving p{
     color: #999;
@@ -1584,4 +1597,80 @@ input[type='checkbox']:checked + span {
 
 .klant-gegevens-aanpassen:active {
     opacity: 1;
+}
+
+.buttons-wrap input[type='submit'], .buttons-wrap a{
+    float: left;
+}
+
+.studenten-overzicht{
+    overflow: auto;
+}
+
+.studenten-overzicht td{
+    padding: 0px;
+}
+
+.studenten-overzicht table{
+    width: 100%;
+    margin-top:20px;
+    font-size: 16px;
+    color: #999;
+}
+
+.studenten-overzicht table p{
+    padding: 4px;
+}
+
+tr.studenten-overzicht td{
+    border-bottom: 1px solid #d0d0d0;
+    background: #fff!important;
+    cursor: auto!important;
+}
+
+.studenten-overzicht tr:hover{
+    background: #cfdbe3!important;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.studenten-overzicht a{
+    text-decoration: none;
+    color: #999;
+}
+
+.buttons-wrap-student a:hover{
+    opacity: 0.8;
+    text-decoration: none;
+}
+
+.buttons-wrap-student a, .buttons-wrap-student input[type='submit']{
+    transition: 0.3s;
+}
+.buttons-wrap-student a:active{
+    opacity: 1;
+}
+
+.buttons-wrap-student input[type='submit']:hover{
+    opacity: 0.8;
+}
+.buttons-wrap-student input[type='submit']:active{
+    opacity: 1;
+}
+.studenten-bewerken{
+    padding: 10px;
+    border: 0px;
+    color: #fff;
+    border-radius: 3px;
+    background: #eb9001;
+    cursor: pointer;
+}
+
+.studenten-verwijderen{
+    padding: 10px;
+    border: 0px;
+    color: #fff;
+    border-radius: 3px;
+    background: #e83c46;
+    cursor: pointer;
 }
