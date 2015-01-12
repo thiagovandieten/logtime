@@ -1,25 +1,27 @@
 <?php
-use Illuminate\Auth\AuthManager as Auth;
 
 class BaseLoggedInController extends BaseController {
 
     protected $userFullName;
-    protected $string;
+    protected $user;
+    protected $user_avatar;
+
     public function __construct()
     {
 
-        if(\Auth::check())
+        if (Auth::check())
         {
-            $this->userFullName = \Auth::user()->first_name . ' ' . \Auth::user()->last_name;
-        }
+            $this->user = Auth::user();
+            $this->userFullName = $this->userFullName = \Auth::user()->first_name . ' ' . \Auth::user()->last_name;
 
-        View::share('userFullName', $this->userFullName);
+            View::share(array('userFullName' => $this->userFullName, 'user_avatar' => $this->user->user_image_path));
 
 //        View::composer(array('dashboard', 'projectmanagement.index' ), function($view)
 //        {
 //            $view->with('userFullName', $this->userFullName);
 //        });
 
+        }
     }
 
     public function isDocent()
@@ -30,4 +32,4 @@ class BaseLoggedInController extends BaseController {
         }
         return true;
     }
-}
+} 

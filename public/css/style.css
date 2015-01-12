@@ -12,6 +12,15 @@ h1, h2, h3, p{
 
 input, select{
     outline: none;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover{
+    opacity: 0.8;
+}
+
+input[type="submit"]:active{
+    opacity: 1;
 }
 
 a{
@@ -37,7 +46,7 @@ a:hover{
 .top-header{
     width: 100%;
     height: 49px;
-    background: #2a80b9;
+    background: #6588ae;
     position: fixed;
     z-index: 20;
 }
@@ -196,6 +205,7 @@ nav select, #input_01{
 
 #wrapper{
     margin: 49px 0px 0px 0px;
+    width: 84.8%;
 }
 
 .title-place{
@@ -204,7 +214,7 @@ nav select, #input_01{
 }
 
 .title-place h1{
-    padding: 3px 0px 0px 4px;
+    padding: 9px 0px 0px 4px;
     margin: 0px;
     color: #fff;
     font-weight: normal;
@@ -252,7 +262,7 @@ nav select, #input_01{
     z-index: 1000;
     padding: 8px;
     font-size: 16px;
-    background-color: #2a80b9;
+    background-color: #6588ae;
     width: 300px;
     color: #fff;
 }
@@ -261,7 +271,7 @@ nav select, #input_01{
     padding: 10px;
 }
 #notificationFooter {
-    background-color: #2a80b9;
+    background-color: #6588ae;
     text-align: center;
     padding: 8px;
     font-size: 12px;
@@ -277,7 +287,7 @@ nav select, #input_01{
 }
 
 .profiel-mob{
-    border-bottom: 1px solid #34759f;
+    border-bottom: 1px solid #6588ae;
     min-height: 95px;
     padding: 25px 0px 0px 8px;
     font-size: 18px;
@@ -332,7 +342,7 @@ nav select, #input_01{
 
 .mob-notification{
     padding: 10px;
-    border-bottom: 1px solid #34759f;
+    border-bottom: 1px solid #6588ae;
     min-height: 90px;
     font-size: 14px;
 }
@@ -362,7 +372,7 @@ nav select, #input_01{
 
 .noti-mob-instellingen{
     overflow: auto;
-    border-bottom: 1px solid #34759f;
+    border-bottom: 1px solid #6588ae;
     padding: 5px;
 }
 
@@ -396,7 +406,7 @@ nav select, #input_01{
 .uren-mob-invullen{
     height: 41px!important;
     font-size: 14px!important;
-    background: #2a80b9!important;
+    background: #6588ae!important;
     color: #fff!important;
     text-align: center!important;
     border-left: 0px!important;
@@ -795,7 +805,7 @@ nav select, #input_01{
     background: #eaeaea;
     float: left;
     margin: 0px 15px 35px 15px;
-    border-left: 5px solid #66a8d4;
+    border-left: 5px solid #6588ae;
     position: relative;
 }
 
@@ -905,7 +915,7 @@ nav select, #input_01{
     padding: 40px;
     min-height: 200px;
     float: left;
-    border-left: 5px solid #66a8d4;
+    border-left: 5px solid #6588ae;
 }
 
 .pieID {
@@ -926,7 +936,6 @@ nav select, #input_01{
     z-index: 1;
     width: 100px;
     height: 100px;
-    background: #EEE;
     border-radius: 50%;
     top: 50px;
     left: 50px;
@@ -937,7 +946,6 @@ nav select, #input_01{
     width: 120px;
     background: rgba(0,0,0,0.1);
     border-radius: 50%;
-    box-shadow: 0 0 3px 4px rgba(0,0,0,0.1);
     margin: 220px auto;
 
 }
@@ -1198,11 +1206,12 @@ p:-ms-input-placeholder { /* Internet Explorer 10+ */
     margin: 10px 0px 10px 0px;
     cursor: pointer;
     -webkit-appearance: none;
+    display: none;
 }
 
 
 .ww-vergeten-wrap input[type='password']{
-    width: 100%;
+    width: 89%;
     padding: 20px;
     color: #666;
     border: 0px;
@@ -1232,4 +1241,436 @@ p:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 .ww-vergeten-wrap :-ms-input-placeholder { /* Internet Explorer 10+ */
     color:    #666;
+}
+
+#divCheckPasswordMatch{
+    color: #fff;
+    width: 94.5%;
+    word-wrap: break-word;
+    padding: 10px;
+    background: #e74c3c!important;
+    display: none;
+}
+.destop-instellingen{
+    float: right!important;
+    margin: 17px 0px 0px 0px!important;
+}
+
+
+
+.eenmalig-wrap{
+    position: absolute;
+    width: 340px;
+    min-height: 20px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    top: 5%;
+    background: #fff;
+    padding: 30px;
+    border-radius: 3px;
+}
+
+.eenmalig-wrap h1{
+    font-size: 31px;
+    padding: 0px;
+    font-weight: normal;
+    color: #6588ae;
+    text-align: center;
+    margin: 0px 0px 15px 0px;
+
+}
+
+.eenmalig-wrap input[type='submit']{
+    width: 100%;
+    padding: 20px;
+    background: #eb9001;
+    color: #fff;
+    border: 0px;
+    font-size: 18px;
+    border-radius: 3px;
+    margin: 10px 0px 10px 0px;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+
+.eenmalig-wrap input[type='text']{
+    width: 89%;
+    padding: 20px;
+    color: #666;
+    border: 0px;
+    font-size: 16px;
+    border-radius: 3px;
+    margin: 10px 0px 10px 0px;
+    background: #ededed;
+}
+
+.eenmalig-wrap input[type='submit']:hover{
+    opacity: 0.8;
+}
+.eenmalig-wrap input[type='submit']:active{
+    opacity: 1;
+}
+
+.eenmalig-wrap ::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #666;
+}
+.eenmalig-wrap :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #666;
+    opacity:  1;
+}
+.eenmalig-wrap ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #666;
+    opacity:  1;
+}
+.eenmalig-wrap :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #666;
+}
+
+.adres{
+    width: 48.5%!important;
+    float: left;
+}
+
+.postcode{
+    width: 22%!important;
+    float: left;
+    margin-left: 20px!important;
+}
+.upload-foto{
+    position: relative;
+    height: 150px;
+}
+
+.upload-foto img{
+    width: 89px;
+    height: 89px;
+    border-radius: 89px;
+    margin: auto;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+}
+
+.upload-foto input[type='submit']{
+    width: 25%;
+    padding: 10px;
+    background: #eb9001;
+    color: #fff;
+    border: 0px;
+    font-size: 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    right: 0px;
+    margin: auto;
+    top: 102px;
+}
+
+.eenmalig-error{
+    width: 95%!important;
+    margin: 0px 0px 15px 0px;
+}
+
+.filter-wrap{
+    width: 110%;
+    min-height:68px;
+    background: #e3e3e3;
+    margin: -20px 0px 0px -20px;
+    padding: 10px;
+    overflow: auto;
+}
+
+.nieuw-knop{
+     border: 0px;
+     background: #66bb6a url('../images/icons/nieuw.png') no-repeat 10px 13px;
+     padding: 15px 20px 15px 40px;
+     border-radius: 3px;
+     color: #fff;
+     font-size: 16px;
+     cursor: pointer;
+     outline: none;
+ }
+
+button:hover{
+    opacity: 0.8;
+}
+
+button:active{
+    opacity: 1;
+}
+
+.delete-knop{
+    border: 0px;
+    background: #e83c46 url('../images/icons/verwijder.png') no-repeat 10px 13px;
+    padding: 15px 20px 15px 40px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
+
+.filter-omgeving{
+    float: left;
+    margin-left: 20px;
+    width: 50%;
+}
+
+.buttons-wrap{
+    float: left;
+}
+.buttons-wrap-student{
+    width: 20%;
+    float: left;
+}
+
+.filter-omgeving p{
+    color: #999;
+    padding: 14px;
+    float: left;
+}
+
+.filter-omgeving select{
+    padding: 13px;
+    border: 0px;
+    border-radius: 3px;
+    float: left;
+    margin-right: 13px;
+    color: #999;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.projecten-overzicht{
+    overflow: auto;
+}
+
+.projecten-overzicht td{
+    padding: 10px;
+}
+
+.projecten-overzicht table{
+    width: 100%;
+    margin-top:20px;
+    font-size: 16px;
+    color: #999;
+}
+
+.projecten-overzicht table p{
+    padding: 4px;
+}
+
+tr.border_bottom td{
+    border-bottom: 1px solid #d0d0d0;
+    background: #fff!important;
+    cursor: auto!important;
+}
+
+.projecten-overzicht tr:hover{
+     background: #cfdbe3!important;
+     cursor: pointer;
+     transition: 0.3s;
+ }
+
+.projecten-overzicht a{
+    text-decoration: none;
+    color: #999;
+}
+
+thead{
+    background: #fff!important;
+}
+
+input[type='checkbox']:checked + span {
+    background: red!important;
+}
+
+.personal-settings img{
+    width: 100%;
+    max-width: 80px;
+    height: 80px;
+    border-radius: 80px;
+    position: absolute;
+    margin: auto;
+    left: 0px;
+    right: 0px;
+    top: 60px;
+}
+
+.personal-settings{
+    position: relative;
+    width: 300px;
+}
+
+.img-omvang{
+    height: 165px;
+}
+
+.avatar-veranderen{
+   position: absolute;
+    width: 70px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    margin-bottom: 20px;
+    top: 150px;
+}
+
+
+.personal-settings input[type='text'],  .personal-settings input[type='password']{
+    width: 100%;
+    background: #e2e2e2;
+    border-radius: 3px;
+    color: #666;
+    padding: 15px;
+    border: 0px;
+    margin-bottom: 20px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Wijzigen';
+    display: inline-block;
+    background: #eb9001;
+    border: 0px;
+    border-radius: 3px;
+    padding: 10px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.custom-file-input:hover::before {
+    opacity: 0.8;
+}
+
+.personal-settings input[type='submit']{
+    padding: 12px 20px 12px 20px;
+    color: #fff;
+    background: #eb9001;
+    border-radius: 3px;
+    border: 0px;
+    float: right;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+.personal-settings input[type='submit']:hover{
+    opacity: 0.8;
+}
+
+.personal-settings input[type='submit']:active{
+    opacity: 1;
+}
+
+.personal-settings h1{
+    color: #999;
+    font-weight: normal;
+}
+
+.ww-aanpassen{
+    margin-top: 100px;
+}
+
+.klant-gegevens-aanpassen{
+    padding: 12px 20px 12px 20px;
+    background: #66bb6a;
+    color: #fff;
+    border-radius: 3px;
+    transition: 0.3s;
+    border: 0px;
+    cursor: pointer;
+    outline: none;
+}
+
+.klant-gegevens-aanpassen:hover {
+    opacity: 0.8;
+}
+
+.klant-gegevens-aanpassen:active {
+    opacity: 1;
+}
+
+.buttons-wrap input[type='submit'], .buttons-wrap a{
+    float: left;
+}
+
+.studenten-overzicht{
+    overflow: auto;
+}
+
+.studenten-overzicht td{
+    padding: 0px;
+}
+
+.studenten-overzicht table{
+    width: 100%;
+    margin-top:20px;
+    font-size: 16px;
+    color: #999;
+}
+
+.studenten-overzicht table p{
+    padding: 4px;
+}
+
+tr.studenten-overzicht td{
+    border-bottom: 1px solid #d0d0d0;
+    background: #fff!important;
+    cursor: auto!important;
+}
+
+.studenten-overzicht tr:hover{
+    background: #cfdbe3!important;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.studenten-overzicht a{
+    text-decoration: none;
+    color: #999;
+}
+
+.buttons-wrap-student a:hover{
+    opacity: 0.8;
+    text-decoration: none;
+}
+
+.buttons-wrap-student a, .buttons-wrap-student input[type='submit']{
+    transition: 0.3s;
+}
+.buttons-wrap-student a:active{
+    opacity: 1;
+}
+
+.buttons-wrap-student input[type='submit']:hover{
+    opacity: 0.8;
+}
+.buttons-wrap-student input[type='submit']:active{
+    opacity: 1;
+}
+.studenten-bewerken{
+    padding: 10px;
+    border: 0px;
+    color: #fff;
+    border-radius: 3px;
+    background: #eb9001;
+    cursor: pointer;
+}
+
+.studenten-verwijderen{
+    padding: 10px;
+    border: 0px;
+    color: #fff;
+    border-radius: 3px;
+    background: #e83c46;
+    cursor: pointer;
 }

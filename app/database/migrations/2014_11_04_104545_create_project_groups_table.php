@@ -22,7 +22,7 @@ class CreateProjectGroupsTable extends Migration {
             $table->integer('user_id')->unsigned()->nullable();
             $table->boolean('active')->default(true);
 			$table->string('name', 255);
-			$table->string('image_path', 255);
+			$table->string('image_path', 255)->default('placeholder.png');
 			$table->timestamps();
 		});
 	}

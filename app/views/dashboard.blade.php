@@ -19,22 +19,16 @@
 	Hier komen de notificaties
 @stop
 
-<!-- Get the user name -->
-@section('username')
-	Maaria van de Visser
-@stop
 
 <!-- Return the group projects -->
-@section('content')
-    @if(isset($projects))
-        @foreach($projects as $project)
-            <div>
-                <input id="ac-{{$project->id}}" name="accordion" type="checkbox" />
-                <label for="ac-{{$project->id}}">Voortgang van het project ({{$project->project_name}})</label>
-                <article class="ac-small"> Content</article>
-            </div>
-        @endforeach
-    @endif
+@section('return_projects')
+    @foreach($projects as $project)
+        <div>
+            <input id="ac-{{$project->id}}" name="accordion" type="checkbox" />
+            <label for="ac-{{$project->id}}">Voortgang van het project ({{$project->project_name}})</label>
+            <article class="ac-small"> Content</article>
+        </div>
+    @endforeach
 @stop
 <!-- Fast Fill new project -->
 @section('fast_fill')

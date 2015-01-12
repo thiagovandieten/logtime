@@ -35,6 +35,11 @@ class Project extends Eloquent {
 		return $this->hasMany('Task');
 	}
 
+	public function customers()
+	{
+		return $this->hasMany('Customer');
+	}
+
 	public function estimatedTime()
 	{
 		return $this->hasMany('EstimatedTime');

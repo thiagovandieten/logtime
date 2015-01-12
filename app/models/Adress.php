@@ -27,4 +27,9 @@ class Adress extends Eloquent {
 		return $this->hasMany('ProjectGroup');
 	}
 
+	public function customers()
+	{
+		return $this->hasMany('Customer');
+	}
+
 }

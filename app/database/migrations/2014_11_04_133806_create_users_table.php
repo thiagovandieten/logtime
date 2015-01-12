@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration {
 			$table->string('first_name',255);
 			$table->string('last_name',255);
 			$table->string('email',255);
+			$table->string('user_image_path',255)->default('placeholder.png');
 			$table->string('phone_number',16);
-			$table->string('user_image_path',255);
 			$table->boolean('active')->default(true);
 			$table->timestamp('last_time_online');
             $table->rememberToken();
