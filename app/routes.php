@@ -43,7 +43,7 @@ Route::group(array('prefix' => 'login', 'before' => 'guest'), function(){
     ));
 });
 
-Route::get('logout', function(){
+Route::get('logout', array( 'as' => 'logout', function(){
     Auth::logout();
     return Redirect::to('login');
 }));
