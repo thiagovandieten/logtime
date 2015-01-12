@@ -43,7 +43,7 @@ Route::group(array('prefix' => 'login', 'before' => 'guest'), function(){
     ));
 });
 
-Route::get('logout', array('as' => 'logout', function(){
+Route::get('logout', function(){
     Auth::logout();
     return Redirect::to('login');
 }));
@@ -79,8 +79,10 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     Route::resource('logboek',  'LogbookController');
 
     Route::post('logbook/opslaan', 'logbookController@store');
+    
+    Route::get('klantinstellingen/wijzig/{id}', 'CustomerSettingsController@customer_settings_edit');
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
-    Route::post('klantinstellingen/opslaan', 'CustomerSettingsController@store');
+    Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){

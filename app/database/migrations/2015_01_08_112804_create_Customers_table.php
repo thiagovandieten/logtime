@@ -22,7 +22,7 @@ class CreateCustomersTable extends Migration {
             $table->integer('adress_id')->unsigned()->nullable();
             $table->foreign('adress_id')->references('id')->on('adresses');
             $table->string('customer_name',255);
-            $table->string('companie',255);
+            $table->string('company',255);
 			$table->timestamps();
 		});
 	}

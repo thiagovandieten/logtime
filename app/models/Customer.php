@@ -1,6 +1,6 @@
 <?php
 
-class Customer  extends Eloquent {
+class Customer extends Eloquent {
 
 	protected $fillable = [];
 
@@ -14,10 +14,9 @@ class Customer  extends Eloquent {
 		return $this->hasOne('Adress');
 	}
 
-		public function projectGroup()
+    public function projectGroup()
 	{
 		return $this->hasOne('ProjectGroup');
 	}
 
-	}
 }

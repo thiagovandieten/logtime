@@ -12,9 +12,34 @@ class CustomerSettingsController extends BaseLoggedInController {
     public function customer_settings()
     {                
         $group_id       = $this->user->project_group_id;
-        $group          = ProjectGroup::find($group_id);
         
-        $adress_id      = Adress::find($group->adress_id);
+        // Projecten ophalen op id
+        $projects         = GroupProjectPeriode::find($group_id);
+        $project_id       = $projects->project_group_id;
+        //$project          = Project::find($project_id);
+        
+       $project = DB::table('group_project_periode')
+            ->join('projects', 'group_project_periode.id', '=', 'projects.id')
+            ->select('projects.id', 'projects.project_name')
+            ->get();
+                
+        //dd($project);
+                                       
+        return View::make('customer_settings')->with(array('projecten' => $project));
+        
+        
+        
+       
+    }
+    
+    public function customer_settings_edit($id)
+    {                
+        $project_id     = Request::segment(3);
+        $group_id       = $this->user->project_group_id;
+                   
+        $customer       = Customer::find($project_id);
+        
+        $adress_id      = Adress::find($customer->adress_id);
 
         $street_id      = $adress_id->street_id;
         $street         = Street::find($street_id);
@@ -25,25 +50,24 @@ class CustomerSettingsController extends BaseLoggedInController {
         $zipcode_id     = $adress_id->zipcode_id;
         $zipcode        = Zipcode::find($zipcode_id);
         
-        $wages          = StudentWage::find($group_id); 
-        $group_wage     = str_replace('.', ',', $wages->wage);
-                
-        //dd($group_wage);
-                       
-        return View::make('customer_settings')->with(array('customer_name' => $group->name, 'street' => $street->street, 
+        
+        
+       //dd($customer);
+                                               
+        return View::make('customer_settings_edit')->with(array('customer_name' => $customer->customer_name, 'company' => $customer->company, 'street' => $street->street, 
                                                         'house_number' => $street->house_number, 'city' => $city->city, 
-                                                        'zipcode' => $zipcode->zipcode, 'customer_image' => $group->image_path, 
+                                                        'zipcode' => $zipcode->zipcode, 'project_id' => $project_id
                                                         ));
-        
-        
+       
     }
     
     public function store()
     {
+        $project_id     = Request::segment(3);
         $group_id       = $this->user->project_group_id;
-        $group          = ProjectGroup::find($group_id);
+        $customer       = Customer::find($group_id);
         
-        $adress_id      = Adress::find($group->adress_id);
+        $adress_id      = Adress::find($customer->adress_id);
 
         $street_id      = $adress_id->street_id;
         $street         = Street::find($street_id);
@@ -53,33 +77,15 @@ class CustomerSettingsController extends BaseLoggedInController {
 
         $zipcode_id     = $adress_id->zipcode_id;
         $zipcode        = Zipcode::find($zipcode_id);
-        
-        $wages          = StudentWage::find($group_id); 
-        $group_wage     = str_replace('.', ',', $wages->wage);
-        //dd($group->image_path);
-        
-        //Data for image upload -------------------------------
-        if(Input::hasFile('group_image')){
-        $destinatonPath = '';
-        $filename = '';
-        $file = Input::file('group_image');
-        $destinationPath = public_path().'/images/';
-        $filename = str_random(3).'_'.$file->getClientOriginalName();
-        $uploadSuccess = $file->move($destinationPath, $filename);
-            File::delete(public_path().'/images/'.$group->image_path);
-        }else{
-            $filename = $group->image_path;    
-        }
-                
+                        
         // create the validation rules ------------------------
         $rules = array(
-            'group_name'       => 'required', 						// just a normal required validation
+            'customer_name'    => 'required', 						// just a normal required validation
+            'company'          => 'required', 						// just a normal required validation
             'street'           => 'required',                       // just a normal required validation
             'house_number'     => 'required', 						// just a normal required validation
             'zipcode'          => 'required', 	                    // just a normal required validation
-            'city'             => 'required', 	                    // just a normal required validation
-            'group_wage'       => 'required', 						// just a normal required validation
-            'image'            => 'image|max:5000000'                     // limited file size of 500kb
+            'city'             => 'required' 	                    // just a normal required validation
         );
         
         // do the validation ----------------------------------
@@ -93,7 +99,7 @@ class CustomerSettingsController extends BaseLoggedInController {
             $messages = $validator->messages('Er is iets fout gegaan');
 
             // redirect our user back to the form with the errors from the validator
-            return Redirect::to('groepsinstellingen')
+            return Redirect::to('klantsinstellingen')
                 ->withErrors($validator);
 
         } else {
@@ -104,26 +110,25 @@ class CustomerSettingsController extends BaseLoggedInController {
             // let him enter the database
 
             // create the data
-            $group_data              = ProjectGroup::find($this->user->project_group_id);
-            $group_data->name        = Input::get('group_name');
+            $customer_data                = Customer::find($project_id);
+            //dd($customer_data);
+            $customer_data->customer_name = Input::get('customer_name');
+            $customer_data->company       = Input::get('company');
             $street->house_number    = Input::get('house_number');
             $street->street          = Input::get('street');
             $zipcode->zipcode        = Input::get('zipcode');
             $city->city              = Input::get('city');
             
-            $group_data->image_path  = $filename;
-            $wages->wage             = str_replace(',', '.', Input::get('group_wage'));
-            
             // save our data
-            $group_data->save();
+            $customer_data->save();
             $street->save();
             $zipcode->save();
             $city->save();
-            $wages->save();
+
 
             // redirect ----------------------------------------
             // redirect our user back to the form so they can do it all over again
-            return Redirect::to('groepsinstellingen');
+            return Redirect::to('klantinstellingen');
 
         }
     }
