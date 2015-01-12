@@ -4,7 +4,7 @@
 
 
 
-
+{{(string)Session::get('msg')}}
 
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <div class="filter-wrap">
@@ -67,7 +67,14 @@
                     <td>Periode 1</td>
                     <td>Klas 1D0W</td>
                     <td>  {{$data->first_name}} {{$data->last_name}} </td>
-                    <td>actief</td>
+                    <td>
+                    	 @if ($data->active == 1)
+                            actief
+                        @else($data->active == 1)
+                            inactief
+                        @endif
+                        
+                    </td>
                     <td>
                         {{Form::open(array('url' => 'studentsettings/edit', 'method' => 'post')) }}
                         {{Form::hidden('invisible', $data->id, array('id' => 'invisible_id')) }}
@@ -77,9 +84,9 @@
 
                     <td>
                         {{Form::open(array('url' => 'studentsettings/delete', 'method' => 'get')) }}   
-                             {{Form::hidden('user', $data->id, array('id' => 'invisible_id')) }}
-                            {{Form::submit('Verwijder', ['class'=>'studenten-verwijderen'])}}
-                            {{Form::close() }}
+                        {{Form::hidden('user', $data->id, array('id' => 'invisible_id')) }}
+                        {{Form::submit('Verwijder', ['class'=>'studenten-verwijderen'])}}
+                        {{Form::close() }}
                     </td>
 
                 </tr>
