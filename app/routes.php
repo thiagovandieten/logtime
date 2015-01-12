@@ -72,8 +72,10 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     Route::post('persoonlijke-instellingen/wachtwoord-wijzigen', 'personalSettingsController@store');
     Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
     Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
+    
+    Route::get('klantinstellingen/wijzig/{id}', 'CustomerSettingsController@customer_settings_edit');
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
-    Route::post('klantinstellingen/opslaan', 'CustomerSettingsController@store');
+    Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){

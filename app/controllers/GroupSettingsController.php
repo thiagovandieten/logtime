@@ -27,9 +27,7 @@ class GroupSettingsController extends BaseLoggedInController {
         
         $wages          = StudentWage::find($group_id); 
         $group_wage     = str_replace('.', ',', $wages->wage);
-                
-        //dd($group_wage);
-                       
+                                       
         return View::make('group_settings')->with(array('group_name' => $group->name, 'street' => $street->street, 
                                                         'house_number' => $street->house_number, 'city' => $city->city, 
                                                         'zipcode' => $zipcode->zipcode, 'group_image' => $group->image_path, 

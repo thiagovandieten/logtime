@@ -10,21 +10,10 @@
 
 @endif
 
-<h1>Klantgegevens</h1>
+<h1>Projecten</h1>
 
-<img src="/images/" width="150"/> <br />
-{{Form::open(array('url' => 'groepsinstellingen/opslaan', 'files' => true, 'method' => 'post')) }}
-{{Form::file('group_image')}}<br /><br />
-{{Form::text('group_name', '', ['placeholder' => 'Bedrijfsnaam']) }}<br />
-
-{{Form::text('street', '', ['placeholder' => 'Straatnaam']) }}<br />
-{{Form::text('house_number', '', ['placeholder' => 'Huisnummer']) }}<br />
-{{Form::text('zipcode', '', ['placeholder' => 'Postcode']) }}<br />
-{{Form::text('city', '', ['placeholder' => 'Woonplaats']) }}<br /><br />
-
-<br />
-
-{{Form::submit('Opslaan')}}
-{{ Form::close() }}
+ @foreach ($projecten as $project)
+    <a href="/klantinstellingen/wijzig/{{$project->id}}">{{ $project->project_name }}</a><br />
+ @endforeach
 
 @stop
