@@ -20,12 +20,16 @@ class LogbookController extends BaseLoggedInController
 
 	public function index()
 	{
-
-		return View::make('logbook')->with(array('userFullName' => $this->userFullName, 'userLogs' => $this->userLogs));
+		$user = User::find(Auth::id());
+		$logCategories = LogCategorie::where('project_group_id','=',$user->project_group_id)->get();
+		$projectIds = GroupProjectPeriode::where('project_group_id','=',$user->project_group_id)->get();
+		dd($projectIds);
+		$userLogs = $this->userLogs->where('user_id','=', $user->id)->get();
+		return View::make('logbook')->with(array('userFullName' => $this->userFullName, 'userLogs' => $userLogs));
 	}
 
 
-	/**
+	/**userLogs
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response

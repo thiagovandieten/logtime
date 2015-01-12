@@ -12,7 +12,7 @@ class UserLogTableSeeder extends Seeder {
 		Eloquent::unguard();
 		$this->call('LogCategorieTableSeeder');
 		$userlog = new UserLog();
-		$userlog->user_id = "2";
+		$userlog->user_id = "4";
 		$userlog->task_id = "1";
 		$userlog->log_categorie_id = "1";
 		$userlog->start_time = "2015-01-06 08:44:54";
