@@ -83,7 +83,7 @@
                     <td>
                         {{Form::open(array('url' => 'studentsettings/delete', 'method' => 'get')) }}   
                         {{Form::hidden('user', $data->id, array('id' => 'invisible_id')) }}
-                        {{Form::submit('Verwijder', ['class'=>'studenten-verwijderen', 'style'=>'margin-top: -20px;'])}}
+                        {{Form::submit('Verwijder', ['class'=>'studenten-verwijderen'])}}
                         {{Form::close() }}
                     </td>
 

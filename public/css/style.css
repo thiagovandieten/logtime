@@ -1608,7 +1608,7 @@ input[type='checkbox']:checked + span {
 }
 
 .studenten-overzicht td{
-    padding: 0px;
+    padding: 10px;
 }
 
 .studenten-overzicht table{
@@ -1689,4 +1689,8 @@ tr.studenten-overzicht td{
 .student-error{
     color: #66bb6a!important;
     padding: 10px;
+}
+
+.studenten-overzicht input{
+    display: inline;
 }
