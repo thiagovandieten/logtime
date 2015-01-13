@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'logtime',
-			'username'  => 'root',
-			'password'  => '',
+			'database'  => 'logtime_nl',
+			'username'  => 'logtime_nl',
+			'password'  => 'yRtKBHuW',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
