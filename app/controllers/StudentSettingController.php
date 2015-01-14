@@ -289,6 +289,8 @@ class StudentSettingController extends BaseLoggedInController {
 			'user_code'			=> 'required|numeric'			
 		);
 		
+		
+		
 		// valideer de input fields
         $validator = Validator::make(Input::all(), $rules);
 		
@@ -322,12 +324,12 @@ class StudentSettingController extends BaseLoggedInController {
 			$user_type = DB::table('user_types')->where('id', Input::get('user_type'))->first();
 			
 			// Als de opgegeven stad niet bestaat voer hem in
-			if(!isset($user_type->id)){
-				$getUserTypeid = $user_type->id;
+			if(!empty($user_type)){
+				$getUserTypeid = Input::get('user_type');
 			}else{
 				$getUserTypeid = 1;
 			}
-			
+
 			// location tabel
 			// Check of de location bestaat
 			$locations = DB::table('locations')->where('id', Input::get('location'))->first();
@@ -459,7 +461,7 @@ class StudentSettingController extends BaseLoggedInController {
 		**/
 		// Verkrijg de user data
 		
-		$id = $_GET['user'];
+		$id = Input::get('user');
 		$user = User::find($id); 
 		
 		// User bestaat niet link terug naar het overzicht
@@ -489,14 +491,14 @@ class StudentSettingController extends BaseLoggedInController {
 			/**
 				Table: users
 			**/
-			DB::table('users')->where('user_id', $id)->delete();
+			DB::table('users')->where('id', $id)->delete();
 			
 			/**
 				Table: project_groups
 			**/
 			DB::table('project_groups')
             ->where('user_id', $id)
-            ->update('user_id', 'NULL');
+            ->update(array('user_id'=>'NULL'));
 			
 			return Redirect::to('studentsettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol verwijderd!');		
 		}
@@ -533,16 +535,6 @@ class StudentSettingController extends BaseLoggedInController {
 		//return Redirect::to('studentsettings')->with('error_msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' inactief gezet!');
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 
 
 }

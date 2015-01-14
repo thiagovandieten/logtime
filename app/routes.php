@@ -66,7 +66,6 @@ Route::group(array('before' => array('auth', 'leerling')), function()
 	Route::post('studentsettings/create',  'StudentSettingController@save_new_user');
 	Route::get('studentsettings/delete',  'StudentSettingController@delete');
 	Route::post('studentsettings/delete',  'StudentSettingController@hard_delete');
-	Route::post('studentsettings/delete',  'StudentSettingController@soft_delete');
 });
 
 Route::group(array('before' => array('auth', 'leerling')), function()
