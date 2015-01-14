@@ -9,8 +9,12 @@
     @endforeach
 
 @endif
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
+<div class="projecten-overzicht">
+    <div class="personal-settings">
 <h1>Selecteer een project</h1>
+    </div>
 
 <table class="order-table table" cellspacing="0">
     <thead>
@@ -23,20 +27,26 @@
     </thead>
 
     @foreach( $projecten as $index => $project )
-        <tr>
-            <td><span><a href="/klantinstellingen/wijzig/{{$project->id}}">{{ $project->project_name }}</a></span></td>
-            <td>{{ $customers[$index]->customer_name }}</td>
-            <td>{{ $customers[$index]->company }}</td>
+       <tr>
+            <td><a href="/klantinstellingen/wijzig/{{$project->id}}">{{ $project->project_name }}</a></td>
+            <td><a href="/klantinstellingen/wijzig/{{$project->id}}">{{ $customers[$index]->customer_name }}</a></td>
+            <td><a href="/klantinstellingen/wijzig/{{$project->id}}">{{ $customers[$index]->company }}</a></td>
 
-            <td>@if($project->is_done == '0') 
+            <td><a href="/klantinstellingen/wijzig/{{$project->id}}">@if($project->is_done == '0')
                 {{ $project->is_done = 'Nee' }}
                 @else 
                 {{ $project->is_done = 'Ja' }} 
                 @endif
-            </td>
-        </tr>  
+                </a> </td>
+         </tr>
     @endforeach 
 
 </table>
-
+    <script>
+        $(document).ready(function()
+        {
+            $("table tr:odd").css("background-color", "#ededed");
+        });
+    </script>
+</div>
 @stop
