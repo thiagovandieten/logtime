@@ -23,21 +23,24 @@
         <td style="color: #666; width: 10%">Klant</td>
         <td style="color: #666; width: 10%">Bedrijfsnaam</td>
         <td style="color: #666; width: 10%">Project voltooid</td>
+        <td style="color: #666; width: 10%">Bewerken</td>
     </tr>
     </thead>
 
     @foreach( $projecten as $index => $project )
        <tr>
-            <td><a href="/klantinstellingen/wijzig/{{$project->id}}">{{ $project->project_name }}</a></td>
-            <td><a href="/klantinstellingen/wijzig/{{$project->id}}">{{ $customers[$index]->customer_name }}</a></td>
-            <td><a href="/klantinstellingen/wijzig/{{$project->id}}">{{ $customers[$index]->company }}</a></td>
+            <td>{{ $project->project_name }}</td>
+            <td>{{ $customers[$index]->customer_name }}</td>
+            <td>{{ $customers[$index]->company }}</td>
 
-            <td><a href="/klantinstellingen/wijzig/{{$project->id}}">@if($project->is_done == '0')
+            <td>
+                @if($project->is_done == '0')
                 {{ $project->is_done = 'Nee' }}
                 @else 
                 {{ $project->is_done = 'Ja' }} 
                 @endif
-                </a> </td>
+            </td>
+           <td><a href="/klantinstellingen/wijzig/{{$project->id}}"><button class="studenten-bewerken">Bewerken</button</a></td>
          </tr>
     @endforeach 
 
