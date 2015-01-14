@@ -1705,3 +1705,11 @@ tr.studenten-overzicht td{
     text-decoration: none;
     opacity: 1;
 }
+
+.personal-settings h1{
+    padding-bottom: 10px;
+}
+
+.personal-settings{
+    color: #666;
+}
