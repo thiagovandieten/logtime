@@ -24,6 +24,7 @@
 @section('content')
     @if(isset($projects))
     @foreach($projects as $project)
+        <section class="ac-container">
         <div>
             <input id="ac-{{$project->id}}" name="accordion-1" type="checkbox" />
             <label for="ac-{{$project->id}}">Voortgang van het project ({{$project->project_name}})
@@ -203,7 +204,7 @@
                                 </div>
                             </div>
 
-
+</section>
             <!---hier eindigt de inhoud--->
 
 

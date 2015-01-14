@@ -164,9 +164,9 @@
     </div>
         </section>
 
-        <section class="ac-container">
+
           @yield('content')
-         </section>
+
      {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
         {{HTML::script(asset('js/notificatie.js')) }}
                      {{HTML::script(asset('js/picker.js')) }}
