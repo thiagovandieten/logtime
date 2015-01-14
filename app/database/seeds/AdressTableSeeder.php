@@ -13,7 +13,7 @@ class AdressTableSeeder extends Seeder {
 
 		$this->call('StreetTableSeeder');
 		$this->call('CityTableSeeder');
-		$this->call('ZipcodeTableseeder');
+		$this->call('ZipcodeTableSeeder');
 
 		$adress = new Adress();
 

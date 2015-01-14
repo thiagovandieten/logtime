@@ -31,14 +31,29 @@ class DocentProjectManagement extends \BaseLoggedInController {
     {
         $location = \Auth::user()->location_id;
         $projects = \Project::where('location_id', '=', $location)->get();
-        foreach($projects as $project)
-        {
-            //var_dump($project->project_name);
-        }
         //TODO: Er moet een link komen tussen project groepen en de locaties waar het toe hoort
-        //$projectGroepen = \ProjectGroup::where('year_id');
-        die();
-		return $this->view->make('projectmanagement.docent.create');
+
+		//Pak de meeste recent leerjaar die bij de docent's locatie toebehoort
+		$years = \Year::where('location_id', '=', $location)->
+						orderBy('id', 'desc')->
+						take(4)->get();
+
+		/*
+		* Each zorgt dat er een loop is voor elke Year object in Years
+		* Die wordt vervolgens toegevoegd aan de $year_ids array
+		* de & voor $year_ids zorgt ervoor dat deze array gewijzigd kan worden
+		*/
+		$year_ids = array();
+		$years->each(function($year) use (&$year_ids)
+		{
+			$year_ids[] = $year->id;
+		});
+		$projectGroepen = \ProjectGroup::whereIn('year_id', $year_ids)->
+							orderBy('year_id')->get(array('name', 'year_id', 'code'));
+		return $this->view->make('projectmanagement.docent.create')->with(array(
+			'years' => $years,
+			'projectgroepen' => $projectGroepen
+		));
 	}
 
 

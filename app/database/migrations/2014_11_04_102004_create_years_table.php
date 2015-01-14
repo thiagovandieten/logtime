@@ -17,6 +17,8 @@ class CreateYearsTable extends Migration {
 			$table->increments('id');
 			$table->date('year');
 			$table->string('nickname')->nullable();
+			$table->integer('location_id')->unsigned();
+			$table->foreign('location_id')->references('id')->on('locations');
 			$table->timestamps();
 		});
 	}
