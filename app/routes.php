@@ -69,9 +69,9 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     
     Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
     Route::resource('projects', 'ProjectManagementController');
-    Route::get('persoonlijke-instellingen', 'personalSettingsController@index');
-    Route::post('persoonlijke-instellingen/opslaan', 'personalSettingsController@store');
-    Route::post('persoonlijke-instellingen/wachtwoord-wijzigen', 'personalSettingsController@store');
+    Route::get('persoonlijke-instellingen', 'PersonalSettingsController@index');
+    Route::post('persoonlijke-instellingen/opslaan', 'PersonalSettingsController@store');
+    Route::post('persoonlijke-instellingen/wachtwoord-wijzigen', 'PersonalSettingsController@store');
     Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
     Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
     Route::get('handleiding', 'GuideController@index');
