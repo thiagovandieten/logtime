@@ -25,9 +25,10 @@ class CustomerSettingsController extends BaseLoggedInController {
         
         $project = DB::table('group_project_periode')->where('group_project_periode.project_group_id', '=', $group_id)
             ->join('projects', 'group_project_periode.project_id', '=', 'projects.id')
-            ->select('projects.id', 'projects.project_name')
+            ->select('group_project_periode.is_done', 'projects.id', 'projects.project_name')
             ->get();
         
+            
         //dd($project);
         $customer = array();
                 
