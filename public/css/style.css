@@ -1695,3 +1695,13 @@ tr.studenten-overzicht td{
 .studenten-overzicht input{
     display: inline;
 }
+
+.buttons-wrap a:hover{
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.buttons-wrap a:active{
+    text-decoration: none;
+    opacity: 1;
+}
