@@ -59,16 +59,10 @@ Route::post('logbook/opslaan', 'logbookController@store');
 //Student settings
 Route::group(array('before' => array('auth', 'leerling')), function()
 {
-	Route::get('studentsettings',  'StudentSettingController@index');
-	Route::post('studentsettings/edit',  'StudentSettingController@edit');
-	Route::post('studentsettings/save',  'StudentSettingController@save');
-	Route::get('studentsettings/create',  'StudentSettingController@create');
-	Route::post('studentsettings/create',  'StudentSettingController@save_new_user');
-	Route::get('studentsettings/delete',  'StudentSettingController@delete');
-	Route::post('studentsettings/delete',  'StudentSettingController@hard_delete');
+	
 });
 
-Route::group(array('before' => array('auth', 'leerling')), function()
+Route::group(array('before' => array('auth', 'docent')), function()
 {
     Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
     Route::resource('projects', 'ProjectManagementController');
@@ -79,6 +73,13 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
     Route::post('klantinstellingen/opslaan', 'CustomerSettingsController@store');
+	Route::get('studentsettings',  'StudentSettingController@index');
+	Route::post('studentsettings/edit',  'StudentSettingController@edit');
+	Route::post('studentsettings/save',  'StudentSettingController@save');
+	Route::get('studentsettings/create',  'StudentSettingController@create');
+	Route::post('studentsettings/create',  'StudentSettingController@save_new_user');
+	Route::get('studentsettings/delete',  'StudentSettingController@delete');
+	Route::post('studentsettings/delete',  'StudentSettingController@hard_delete');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
