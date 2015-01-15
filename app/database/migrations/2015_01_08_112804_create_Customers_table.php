@@ -12,7 +12,7 @@ class CreateCustomersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Customers', function(Blueprint $table)
+		Schema::create('customers', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('project_group_id')->unsigned();
@@ -22,7 +22,7 @@ class CreateCustomersTable extends Migration {
             $table->integer('adress_id')->unsigned()->nullable();
             $table->foreign('adress_id')->references('id')->on('adresses');
             $table->string('customer_name',255);
-            $table->string('companie',255);
+            $table->string('company',255);
 			$table->timestamps();
 		});
 	}
@@ -34,7 +34,7 @@ class CreateCustomersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Customers');
+		Schema::drop('customers');
 	}
 
 }

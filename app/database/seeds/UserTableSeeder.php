@@ -41,7 +41,7 @@ class UserTableSeeder extends Seeder {
 		$user->location_id = 1;
 		$user->adress_id = 1;
 		$user->save();
-
+        
         $user = new User();
 		$user->user_code = "262503";
 		$user->password = Hash::make("orangesource");

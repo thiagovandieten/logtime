@@ -1,5 +1,6 @@
 @extends('template.main')
 @section('content')
+    <div class="personal-settings">
 <h1>Nieuwe student aanmaken!</h1>
 @if ($errors->has())
 		
@@ -17,18 +18,16 @@
     {{$succes}}
 @endif
 
-<p>Avatar</p>
 
 {{Form::open(array('action' => 'StudentSettingController@save_new_user', 'files' => true, 'method' => 'post')) }}
-{{Form::file('avatar')}}<br />
-{{Form::text('user_code','',  ['placeholder' => 'Leerling code']) }}<br />
-{{Form::text('first_name','',  ['placeholder' => 'voornaam']) }}<br />
-{{Form::text('last_name','', ['placeholder' => 'achternaam']) }}<br />
-{{Form::text('street_name','',  ['placeholder' => 'Straatnaam']) }}<br />
-{{Form::text('house_number','',  ['placeholder' => 'Huisnummer']) }}<br />
-{{Form::text('zipcode','',  ['placeholder' => 'Postcode']) }}<br />
-{{Form::text('city','', ['placeholder' => 'Woonplaats']) }}<br />
-{{Form::text('phone_number','',  ['placeholder' => 'telefoonnummer']) }}<br />
+{{Form::text('user_code','',  ['placeholder' => 'Leerling code']) }}
+{{Form::text('first_name','',  ['placeholder' => 'voornaam']) }}
+{{Form::text('last_name','', ['placeholder' => 'achternaam']) }}
+{{Form::text('street_name','',  ['placeholder' => 'Straatnaam']) }}
+{{Form::text('house_number','',  ['placeholder' => 'Huisnummer']) }}
+{{Form::text('zipcode','',  ['placeholder' => 'Postcode']) }}
+{{Form::text('city','', ['placeholder' => 'Woonplaats']) }}
+{{Form::text('phone_number','',  ['placeholder' => 'telefoonnummer']) }}
 
 <select name='location'> 
 @foreach ($locations as $location_data)
@@ -47,5 +46,5 @@
 <br />
 {{Form::submit('Opslaan')}}
 {{ Form::close() }}
-
+    </div>
 @stop

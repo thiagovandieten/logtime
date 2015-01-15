@@ -69,7 +69,7 @@ class ForgotPasswordController extends \BaseController {
         }
 
         //Zie of de ww's kloppen
-        if (\Input::get('password') !== \Input::get('passwordagain'))
+        if (\Input::get('password') !== \Input::get('password1'))
         {
             return Redirect::route('forgotpassword.create', $token)->withMessage('De twee ingevoerde wachtworden komen niet met elkaar overheen.');
         }

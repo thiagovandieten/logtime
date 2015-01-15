@@ -18,16 +18,17 @@
   </head>
   <body>
  <div class="top-header">
-<img src="images/menu.png" alt="menu" id="showLeftPush">
+
+     {{HTML::image('images/menu.png', 'menu', array('id' => 'showLeftPush') )}}
     <div class="title-place">
         <h1>Logtime</h1>
     </div>
     <div class="mob-noti">
-        <img src="images/noti.png" alt="meldingen" id="showRight">
+        {{HTML::image('images/noti.png', 'meldingen', array('id' => 'showRight') )}}
         <span class="noti-aantal-mob">9</span>  {{--TODO:Hier moet de aantal notificaties komen--}}
     </div>
     <span class="noti-aantal">9</span> {{--TODO:Hier moet de aantal notificaties komen--}}
-    <a href="#" id="notificationLink"> <img src="images/noti.png" alt="meldingen" class="noti"></a>
+    <a href="#" id="notificationLink">{{HTML::image('images/noti.png', 'meldingen', array('class' => 'noti') )}}</a>
     <div id="notificationContainer">
         <div id="notificationTitle">Notificatie</div>
         <div id="notificationsBody" class="notifications">
@@ -38,10 +39,14 @@
         <div id="notificationFooter"><a href="#">Bekijk alles</a></div>
     </div>
     {{--TODO:hier de link naar instellingen van leerling--}}
-    <a href="persoonlijke-instellingen"><img src="images/icons/instellingen-mob.png" class="destop-instellingen" alt="Instellingen" title="Instellingen">
+    <a href="persoonlijke-instellingen">{{HTML::image('images/icons/instellingen-mob.png', 'Instellingen', array('class' => 'destop-instellingen', 'title' => 'Instellingen') )}}
         <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
     </a>
-    <img src="images/{{$user_avatar}}" class="avatar" alt="avatar">
+     @if(isset($user_avatar) && $user_avatar != '')
+         {{HTML::image('images/'.$user_avatar, 'avatar', array('class' => 'avatar') )}}
+     @else
+         {{HTML::image('images/geenfoto.png', 'avatar', array('class' => 'avatar') )}}
+    @endif
 
 </div>
 <div class="cbp-spmenu-push cbp-spmenu-push-toright" id="wrapper">
@@ -51,25 +56,25 @@
                 <a href="#">  2 ongelezen</a>
             </div>
             <div class="mob-markeer-alles">
-                <a href="#">Markeer alles als gelezen  <img src="images/icons/oog.png" alt="gelezen"></a>
+                <a href="#">Markeer alles als gelezen {{HTML::image('images/icons/oog.png', 'gelezen' )}}</a>
             </div>
         </div>
         <div class="mob-notification">
-            <img src="images/icons/avatar-empty.png">
+            {{HTML::image('images/icons/avatar-empty.png' )}}
             <p><b>Leerling naam </b>is aangewezen als
                 nieuwe projectleider van de groep.</p>
             <span>12 feb 2014 12:45</span>
         </div>
 
         <div class="mob-notification">
-            <img src="images/icons/avatar-empty.png">
+            {{HTML::image('images/icons/avatar-empty.png' )}}
             <p><b>Leerling naam </b>is aangewezen als
                 nieuwe projectleider van de groep.</p>
             <span>12 feb 2014 12:45</span>
         </div>
 
         <div class="mob-notification">
-            <img src="images/icons/avatar-empty.png">
+            {{HTML::image('images/icons/avatar-empty.png' )}}
             <p><b>Leerling naam </b>is aangewezen als
                 nieuwe projectleider van de groep.</p>
             <span>12 feb 2014 12:45</span>
@@ -77,20 +82,28 @@
     </nav>
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left menu-mob-width cbp-spmenu-open" id="cbp-spmenu-s1">
     <div class="profiel-mob">
-            <img src="images/{{$user_avatar}}" class="avatar" alt="avatar">
+            {{HTML::image('images/'.$user_avatar, 'avatar', array('class' => 'avatar') )}}
         <a href="persoonlijke-instellingen">
             <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
         </a>
-            <img src="images/icons/instellingen-mob.png" class="mob-instellingen" alt="Instellingen" title="Instellingen">
+            {{HTML::image('images/icons/instellingen-mob.png', 'Instellingen', array('class' => 'mob-instellingen', 'title' => 'Instellingen') )}}
     </div>
-    <div style="clear:both"></div>
-    <a href="dashboard"><span><img src="images/icons/dashboard.png" alt="Dashboard"></span>Dashboard</a>
-    <a href="logboek"><span><img src="images/icons/logboek.png" alt="Logboek"></span>Logboek</a>
-    <a href="projects"><span><img src="images/icons/map.png" alt="Project aanmaken"></span>Project beheer</a>
-    <a href="groepsinstellingen"><span><img src="images/icons/instellingen.png" alt="Instellingen"></span>Groeps instellingen</a>
-    <a href="#"><span><img src="images/icons/handleiding.png" alt="Handleiding"></span>Handleiding</a>
-    <a href="logout"><span><img src="images/icons/uitloggen.png" alt="Uitloggen"></span>Uitloggen</a>
-
+    <div style="clear:both"></div> <!-- AUB Clearfix gebruiken! -->
+    @if($user_role == 1)
+    <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
+    <a href="logboek"><span>{{HTML::image('images/icons/logboek.png', 'Logboek')}}</span>Logboek</a>
+    <a href="projects"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
+    <a href="groepsinstellingen"><span>{{HTML::image('images/icons/instellingen.png', 'Instellingen')}}</span>Groeps instellingen</a>
+    <a href="#"><span>{{HTML::image('images/icons/handleiding.png', 'Handleiding')}}</span>Handleiding</a>
+    <a href="logout"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
+    @endif
+    @if($user_role == 2)
+        <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
+        <a href="{{route('docent.projects.index')}}"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
+        <a href="{{route('logout')}}"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
+        
+    @endif
+    @if($user_role == 1)
     <h2>Uren bijwerken</h2>
            <form method="post">
                <select>
@@ -115,6 +128,7 @@
                <textarea placeholder="Omschrijving"></textarea>
                <input type="submit" class="bijwerken" value="Bijwerken">
            </form>
+        @endif
 </nav>
     <section class="ac-container container-mob">
     <div>
@@ -153,15 +167,14 @@
         <section class="ac-container">
           @yield('content')
          </section>
-     {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}     {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
+     {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
         {{HTML::script(asset('js/notificatie.js')) }}
-                     {{HTML::script(asset('js/picker.js')) }}
-                     {{HTML::script(asset('js/picker.date.js')) }}
                      {{HTML::script(asset('js/picker.js')) }}
                      {{HTML::script(asset('js/picker.date.js')) }}
         {{HTML::script(asset('js/menuleft.js')) }}
              {{HTML::script(asset('js/legacy.js')) }}
              {{HTML::script(asset('js/Chart.js')) }}
+        <!--TODO: Mijn editor zeurt dat hier een </div> ontbreekt, klopt dat? -->
         </body>
         </html><!---------------------Credits---------------------
 

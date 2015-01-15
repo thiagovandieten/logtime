@@ -28,8 +28,17 @@ class DocentProjectManagement extends \BaseLoggedInController {
 	 * @return Response
 	 */
 	public function create()
-	{
-		//
+    {
+        $location = \Auth::user()->location_id;
+        $projects = \Project::where('location_id', '=', $location)->get();
+        foreach($projects as $project)
+        {
+            //var_dump($project->project_name);
+        }
+        //TODO: Er moet een link komen tussen project groepen en de locaties waar het toe hoort
+        //$projectGroepen = \ProjectGroup::where('year_id');
+        die();
+		return $this->view->make('projectmanagement.docent.create');
 	}
 
 

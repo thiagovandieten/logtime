@@ -1,7 +1,7 @@
 @extends('template.main')
 
 @section('content')
-    <button>Toevoegen</button>
+    {{HTML::linkRoute('docent.projects.create', 'Toevoegen')}}
     <button>Wijzigen</button>
     <button>Verwijderen</button>
     <p>Filter op</p>
