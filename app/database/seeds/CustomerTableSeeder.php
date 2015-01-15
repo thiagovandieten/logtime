@@ -1,6 +1,6 @@
 <?php
 
-class CustomerGroupTableSeeder extends Seeder {
+class CustomerTableSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.

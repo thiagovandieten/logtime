@@ -13,6 +13,7 @@ class YearTableSeeder extends Seeder {
 		$year = new Year();
 		$year->year = "2011-08-01";
 		$year->nickname = "Lions";
+		$year->location_id = 1;
 		$year->save();
 	}
 

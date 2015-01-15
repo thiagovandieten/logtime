@@ -7,4 +7,8 @@ class Year extends Eloquent {
 		return $this->hasMany('ProjectGroup');
 	}
 
+	public function location()
+	{
+		return $this->belongsTo('Location');
+	}
 }

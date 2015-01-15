@@ -11,6 +11,10 @@ class LevelTypeTableSeeder extends Seeder {
 		$leveltype = new LevelType();
 		$leveltype->level_type_name = "Werk methode";
 		$leveltype->save();
+
+		$leveltype = new LevelType();
+		$leveltype->level_type_name = "gebruiker";
+		$leveltype->save();
 	}
 
 }

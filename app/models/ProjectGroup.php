@@ -24,7 +24,7 @@ class ProjectGroup extends Eloquent {
 
 	public function studentWages()
 	{
-		return $this->hasMany('studentWage');
+		return $this->hasMany('StudentWage');
 	}
 
 	public function userSubGroups()
@@ -49,9 +49,18 @@ class ProjectGroup extends Eloquent {
 
 	public function customer()
 	{
-		return $this->hasOne('Customer');
+		return $this->belongsTo('Customer');
 	}
 
+	public function categories()
+	{
+		return $this->hasMany('Categorie');
+	}
+
+	public function tasks()
+	{
+		return $this->hasMany('Task');
+	}
 
 
 }

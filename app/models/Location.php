@@ -14,6 +14,11 @@ class Location extends Eloquent {
 
 	public function periodes()
 	{
-		return $this->hasMany('periode');
+		return $this->hasMany('Periode');
+	}
+
+	public function years()
+	{
+		return $this->hasMany('Year');
 	}
 }

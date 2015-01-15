@@ -15,8 +15,8 @@ class UserLogTableSeeder extends Seeder {
 		$userlog->user_id = "4";
 		$userlog->task_id = "1";
 		$userlog->log_categorie_id = "1";
-		$userlog->start_time = "2015-01-06 08:44:54";
-		$userlog->stop_time = "2015-01-06 09:44:54";
+		$userlog->start_time = "08:44:54";
+		$userlog->stop_time = "09:44:54";
 		$userlog->date = "2015-01-06";
 		$userlog->total_time_in_hours = "01:00:00";
 		$userlog->description = "briefing gehad van docent";
