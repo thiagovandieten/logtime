@@ -49,7 +49,7 @@ class DocentProjectManagement extends \BaseLoggedInController {
 			$year_ids[] = $year->id;
 		});
 		$projectGroepen = \ProjectGroup::whereIn('year_id', $year_ids)->
-							orderBy('year_id')->get(array('name', 'year_id', 'code'));
+							orderBy('year_id')->get();
 		return $this->view->make('projectmanagement.docent.create')->with(array(
 			'years' => $years,
 			'projectgroepen' => $projectGroepen
@@ -64,7 +64,21 @@ class DocentProjectManagement extends \BaseLoggedInController {
 	 */
 	public function store()
 	{
-		//
+        /*
+         * Sla de project naam op bij projects.project_name
+         * Koppel de level_type aan de project
+         * Kijk welke groepen deze project krijgen
+         * VOEG NOG DE PERIODE 
+         */
+        $project = new \Project();
+        $project->project_name = \Input::get('project_name');
+        $project->location_id = \Auth::user()->location_id;
+        $project->save();
+        // $project->level_type_id = false  Daar moet ff opnieuw naar gekeken worden in create!
+        $projectGroupIds = array();
+        $project->projectGroup()->attach(\Input::get('project_groups'));
+
+        return \Redirect::route('docent.projects.index');
 	}
 
 
