@@ -19,7 +19,7 @@
 @endif
 
 
-{{Form::open(array('action' => 'StudentSettingController@save_new_user', 'files' => true, 'method' => 'post')) }}
+{{Form::open(array('action' => 'UserSettingsController@save_new_user', 'files' => true, 'method' => 'post')) }}
 {{Form::text('user_code','',  ['placeholder' => 'Leerling code']) }}
 {{Form::text('first_name','',  ['placeholder' => 'voornaam']) }}
 {{Form::text('last_name','', ['placeholder' => 'achternaam']) }}

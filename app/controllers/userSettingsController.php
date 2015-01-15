@@ -1,6 +1,6 @@
 <?php
 
-class StudentSettingController extends BaseLoggedInController {
+class UserSettingsController extends BaseLoggedInController {
 
 	/**
 	 * Display a listing of the resource.
@@ -199,7 +199,7 @@ class StudentSettingController extends BaseLoggedInController {
 
             // redirect ----------------------------------------
             // redirect our user back to the form so they can do it all over again
-            return Redirect::to('studentsettings');
+            return Redirect::to('usersettings');
 			}
         }
     }
@@ -228,7 +228,7 @@ class StudentSettingController extends BaseLoggedInController {
             $messages = $validator->messages('Er is iets fout gegaan');
 
             // redirect our user back to the form with the errors from the validator
-             return View::make('studentsettings.edit')->with(array("validator" => $validator->messages('Er is iets fout gegaan')));
+             return View::make('usersettings.edit')->with(array("validator" => $validator->messages('Er is iets fout gegaan')));
             
             //dd($validator);
 
@@ -252,7 +252,7 @@ class StudentSettingController extends BaseLoggedInController {
 								   'street' => $street->street, 'house_number' => $street->house_number,
 								   'city' => $city->city, 'zipcode' => $zipcode->zipcode,  'id' => $id);
 	
-			return View::make('studentsettings.edit')->with(array
+			return View::make('usersettings.edit')->with(array
 				('personal_data' => $personal_data));
 
 			
@@ -267,7 +267,7 @@ class StudentSettingController extends BaseLoggedInController {
 		$locations = DB::table('locations')->get();
 		$user_types = DB::table('user_types')->get();
 		
-		return View::make('studentsettings.create')->with(array('locations' => $locations, 'user_types' => $user_types ));
+		return View::make('usersettings.create')->with(array('locations' => $locations, 'user_types' => $user_types ));
 
 	}
 	
@@ -309,7 +309,7 @@ class StudentSettingController extends BaseLoggedInController {
         // check if the validator failed -----------------------
         if ($validator->fails()) {
             // redirect our user back to the form with the errors from the validator
-            return Redirect::to('studentsettings/create')
+            return Redirect::to('usersettings/create')
                 ->withErrors($validator);
             
             //dd($validator);
@@ -427,7 +427,7 @@ class StudentSettingController extends BaseLoggedInController {
 				->update(array('adress_id' => $getAdressesid));
 		
             // redirect our user back to the form so they can do it all over again
-		    return Redirect::to('studentsettings/create')->with(array("message" => "Nieuwe gebruiker is succesvol aangemaakt in het systeem!"));
+		    return Redirect::to('usersettings/create')->with(array("message" => "Nieuwe gebruiker is succesvol aangemaakt in het systeem!"));
         }
 	}
 
@@ -440,10 +440,10 @@ class StudentSettingController extends BaseLoggedInController {
 		
 		// User bestaat niet link terug naar het overzicht
 		if(empty($user)){
-			return Redirect::to('studentsettings');	
+			return Redirect::to('usersettings');	
 		}else{
 		// De user bestaat wel
-			return View::make('studentsettings.delete');			
+			return View::make('usersettings.delete');			
 		}
 		
 	}
@@ -466,7 +466,7 @@ class StudentSettingController extends BaseLoggedInController {
 		
 		// User bestaat niet link terug naar het overzicht
 		if(empty($user)){
-			return Redirect::to('studentsettings');	
+			return Redirect::to('usersettings');	
 		}else{
 			/**
 				Table: user_sub_groups
@@ -500,7 +500,7 @@ class StudentSettingController extends BaseLoggedInController {
             ->where('user_id', $id)
             ->update(array('user_id'=>'NULL'));
 			
-			return Redirect::to('studentsettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol verwijderd!');		
+			return Redirect::to('usersettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol verwijderd!');		
 		}
 		
 		
@@ -528,7 +528,7 @@ class StudentSettingController extends BaseLoggedInController {
 				->where('id', $id)
 				->update(array('active' => 0));
 			
-			return Redirect::to('studentsettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol op inactief gezet!');
+			return Redirect::to('usersettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol op inactief gezet!');
 		}
 		
 		// Create view

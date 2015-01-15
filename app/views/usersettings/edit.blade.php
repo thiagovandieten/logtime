@@ -11,7 +11,7 @@
 
 <div class="personal-settings">
 <h1>Gegevens van {{$personal_data['first_name']}} {{$personal_data['last_name']}} </h1>
-{{Form::open(array('url' => 'studentsettings/save', 'files' => true, 'method' => 'post')) }}
+{{Form::open(array('url' => 'usersettings/save', 'files' => true, 'method' => 'post')) }}
 <img src="/images/{{$personal_data['avatar']}}" width="150" />
     <div class="img-omvang">
 {{Form::file('avatar', ['class'=>'avatar-veranderen custom-file-input', 'value'=>'Wijzigen'])}}
