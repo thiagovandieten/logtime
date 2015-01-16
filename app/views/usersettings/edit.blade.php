@@ -40,11 +40,13 @@
 
 
 <h1  class="ww-aanpassen">Wachtwoord aanpassen</h1>
-{{ Form::open() }}
-{{Form::text('first-password','',['placeholder' => 'Wachtwoord']) }} <br />
-{{Form::text('second_password','',['placeholder' => 'Wachtwoord herhalen']) }}
-
-{{Form::submit('Wijzigen')}}
+{{Form::open(array('url' => 'docent/usersettings/wachtwoord-wijzigen', 'files' => false, 'method' => 'post')) }}
+{{Form::password('old_password',['placeholder' => 'Huidig wachtwoord']) }}
+{{Form::password('new_password',['placeholder' => 'Nieuw wachtwoord']) }}
+{{Form::password('confirm_password',['placeholder' => 'Wachtwoord herhalen']) }}
+{{Form::hidden('invisible', $personal_data['id'], array('id' => 'invisible_id')) }}
+<br />
+<input type="submit" name="change" value="Wijzigen">
 {{ Form::close() }}
 </div>
 

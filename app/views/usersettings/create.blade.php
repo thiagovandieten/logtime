@@ -9,15 +9,7 @@
     @endforeach
 
 @endif
-@if (isset($message))
-	{{var_dump($message)}}
-    {{$message}}
-@endif
-@if (isset($succes))
-	{{var_dump($succes)}}
-    {{$succes}}
-@endif
-
+{{(string) Session::get('msg')}}
 
 {{Form::open(array('action' => 'UserSettingsController@save_new_user', 'files' => true, 'method' => 'post')) }}
 {{Form::text('user_code','',  ['placeholder' => 'Leerling code']) }}

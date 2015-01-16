@@ -12,14 +12,22 @@ class UserSettingsController extends BaseLoggedInController {
 	
 	public function index()
 	{
-		$this->all_students = DB::select('SELECT `first_name`, `last_name`, `id`, `active` FROM `users` ');
-		
 		$user = User::find(Auth::id());
+		
+		$all_students = DB::select('SELECT `users`.`first_name`, `users`.`last_name`, `users`.`id`, `users`.`active`, `users`.`project_group_id`, `project_groups`.`name`, `project_groups`.`year_id`, `years`.`nickname` FROM `users`
+								 LEFT JOIN `project_groups`
+								 INNER JOIN `years`
+								 ON `years`.`id`=`project_groups`.`id` 
+								 ON `users`.`project_group_id`=`project_groups`.`id` WHERE `users`.`location_id`='.$user->location_id.'');
+								 
+								 
+								 
+		
 		//print_r($user);
 			
 		return View::make('usersettings')->with(array(
 														'userFullName' => $this->userFullName,
-														'all_students' => $this->all_students));
+														'all_students' => $all_students));
 	}
 
 
@@ -213,6 +221,74 @@ class UserSettingsController extends BaseLoggedInController {
         }
     }
 
+	public function changepassword()
+	{
+		// create the validation rules ------------------------
+        $rules = array(
+            'invisible'       => 'required', 						// just a normal required validation
+			'old_password' => 'required',
+			'new_password' => 'required|min:6',
+			'confirm_password' => 'required|same:new_password' // required and has to match the password field
+           );
+
+        $messages = array(
+'old_password.required' => 'Het oude wachtwoord moet ingevuld worden',
+
+                 'new_password.required'                     => 'Het nieuwe wachtwoord moet ingevuld worden',
+                 'new_password.min'                          => 'Het wachtwoord moet minimaal 6 karakters bevatten',
+                 'confirm_password.required'                 => 'Het nieuwe wachtwoord moet nogmaals ingevuld worden',
+                 'confirm_password.same'                     => 'De wachtwoorden moeten overeen komen met elkaar'
+            );
+            
+			$id = Input::get('invisible');
+			$user = User::find($id);
+			$password = $user->password;
+			
+            // do the validation ----------------------------------
+            // validate against the inputs from our form
+            $validator = Validator::make(Input::all(), $rules, $messages);
+
+            // check if the validator failed -----------------------
+            if ($validator->fails()) {
+                // get the error messages from the validator
+                $messages = $validator->messages('Er is iets fout gegaan');
+
+                // redirect our user back to the form with the errors from the validator
+                return Redirect::to('docent/usersettings')
+                    ->withErrors($validator);
+
+                //dd($validator);
+
+            } else {
+
+                // validation successful ---------------------------
+                if (Hash::check(Input::get('old_password'), $password)){
+                    // our duck has passed all tests!
+                    // let him enter the database
+
+                    // create the data
+                    $passwords = User::find($id);
+                    $passwords->password = Hash::make(Input::get('new_password'));
+
+                    //dd($passwords);
+
+                    // save our data
+                    $passwords->save();
+
+                    // redirect ----------------------------------------
+                    // redirect our user back to the form so they can do it all over again
+                    return Redirect::to('docent/usersettings');            
+                
+                }
+                else {
+                    return Redirect::to('docent/usersettings')->with(array("msg" => "Het huidige wachtwoord klopt niet!"));
+                }
+
+            }	
+		
+	}
+
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -295,8 +371,8 @@ class UserSettingsController extends BaseLoggedInController {
 		
 		// Validatie regels voor het valideren
         $rules = array(
-            'first_name'       	=> 'required',
-			'last_name'       	=> 'required',
+            'first_name'       	=> '',
+			'last_name'       	=> '',
 			'user_type'			=> 'required|numeric',
 			'location'		    => 'required|numeric',
 			'user_code'			=> 'required|numeric'			
@@ -348,7 +424,7 @@ class UserSettingsController extends BaseLoggedInController {
 			$locations = DB::table('locations')->where('id', Input::get('location'))->first();
 			
 			// Als de opgegeven stad niet bestaat voer hem in
-			if(!isset($locations->id)){
+			if(!empty($locations->id)){
 				$getLocationsid = $locations->id;
 			}else{
 				$getLocationsid = 1;
@@ -440,7 +516,7 @@ class UserSettingsController extends BaseLoggedInController {
 				->update(array('adress_id' => $getAdressesid));
 		
             // redirect our user back to the form so they can do it all over again
-		    return Redirect::to('docent/usersettings/create')->with(array("message" => "Nieuwe gebruiker is succesvol aangemaakt in het systeem!"));
+		    return Redirect::to('docent/usersettings/create')->with(array("msg" => "Nieuwe gebruiker is succesvol aangemaakt in het systeem!"));
         }
 	}
 
