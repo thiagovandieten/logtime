@@ -60,6 +60,7 @@ Route::group(array('before' => array('auth', 'leerling')), function()
 {
     
     Route::get('eenmalige-gegevens','enteronetimedataController@index');
+	Route::post('eenmalige-gegevens','enteronetimedataController@save');
     Route::resource('projects', 'ProjectManagementController');
     Route::get('persoonlijke-instellingen', 'PersonalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'PersonalSettingsController@store');
@@ -81,7 +82,6 @@ Route::group(array('before' => array('auth', 'leerling')), function()
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
-	Route::get('eenmalige-gegevens','enteronetimedataController@index');
     Route::resource('projects', 'Controllers\ProjectManagement\DocentProjectManagement');
 	Route::get('usersettings',  'UserSettingsController@index');
     Route::post('usersettings/edit',  'UserSettingsController@edit');
