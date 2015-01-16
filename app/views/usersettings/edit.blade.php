@@ -1,17 +1,15 @@
 @extends('template.main')
 @section('content')
 
-@if ($errors->has())
-		
+@if ($errors->has())	
     @foreach ($errors->all() as $error)
         {{ $error }}		
     @endforeach
-
 @endif
 
 <div class="personal-settings">
 <h1>Gegevens van {{$personal_data['first_name']}} {{$personal_data['last_name']}} </h1>
-{{Form::open(array('url' => 'usersettings/save', 'files' => true, 'method' => 'post')) }}
+{{Form::open(array('url' => 'docent/usersettings/save', 'files' => true, 'method' => 'post')) }}
 <img src="/images/{{$personal_data['avatar']}}" width="150" />
     <div class="img-omvang">
 {{Form::file('avatar', ['class'=>'avatar-veranderen custom-file-input', 'value'=>'Wijzigen'])}}
@@ -27,6 +25,17 @@
 {{Form::hidden('invisible', $personal_data['id'], array('id' => 'invisible_id')) }}
 
 {{Form::submit('Opslaan')}}
+
+<br/>
+@if ($personal_data['active'] == 0)	
+    
+    	<input type='submit' name='set_active' value='Activeer Gebruiker'>
+  
+@else
+
+    	<input type='submit' name='set_inactive' value='Deactiveer Gebruiker'>
+
+@endif
 {{ Form::close() }}
 
 

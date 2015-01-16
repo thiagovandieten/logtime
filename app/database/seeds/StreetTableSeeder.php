@@ -13,8 +13,8 @@ class StreetTableSeeder extends Seeder {
 
 		$street = new Street();
 
-		$street->street = "Hertog Willemweg";
-		$street->house_number = "23";
+		$street->street = "";
+		$street->house_number = "";
 		$street->save();
 
 	}

@@ -90,7 +90,6 @@ Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), f
     Route::post('usersettings/create',  'UserSettingsController@save_new_user');
     Route::get('usersettings/delete',  'UserSettingsController@delete');
     Route::post('usersettings/delete',  'UserSettingsController@hard_delete');
-    Route::post('usersettings/delete',  'UserSettingsController@soft_delete');
 	
 
 });
