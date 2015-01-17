@@ -5,7 +5,7 @@
     <div class="filter-wrap">
         <div class="buttons-wrap">
             {{HTML::linkRoute('docent.projects.create', 'Nieuw', '',['class'=>'nieuw-knop', 'style'=>'float: left; margin-right: 10px; padding: 13px 20px 15px 40px!important'])}}
-            <button class="delete-knop" style="margin-left: 5px;">Verwijderen</button>
+            {{--<button class="delete-knop" style="margin-left: 5px;">Verwijderen</button>--}}
         </div>
         <div class="filter-omgeving">
             <p>Filter op</p>
@@ -53,6 +53,21 @@
                     <td>Klas 1D0W</td>
                     <td>{{$project->project_name}}</td>
                     <td>{{$project->updated_at}}</td>
+
+                    <td>
+                        {{Form::open(array('route' => array('docent.projects.edit',$project->id),
+                         'method' => 'post')) }}
+                        {{--{{Form::hidden('invisible', $data->id, array('id' => 'invisible_id')) }}--}}
+                        {{Form::submit('Bewerken', ['class'=>'studenten-bewerken'])}}
+                        {{Form::close() }}
+
+                    </td>
+                    <td>
+                        {{Form::open(array('route' => array('docent.projects.destroy',$project->id), 'method' => 'delete')) }}   
+                        {{--{{Form::hidden('user', $data->id, array('id' => 'invisible_id')) }}--}}
+                        {{Form::submit('Verwijder', ['class'=>'studenten-verwijderen'])}}
+                        {{Form::close() }}
+                    </td>
                 </tr>
             @endforeach
 

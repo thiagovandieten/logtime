@@ -19,7 +19,8 @@ class CreateProjectGroupsTable extends Migration {
             $table->foreign('year_id')->references('id')->on('years');
             $table->integer('adress_id')->unsigned()->nullable();
             $table->foreign('adress_id')->references('id')->on('adresses');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('coach_id')->unsigned()->nullable();
+			$table->integer('leader_id')->unsigned()->nullable();
             $table->boolean('active')->default(true);
 			$table->string('code', 45);
 			$table->string('name', 255);

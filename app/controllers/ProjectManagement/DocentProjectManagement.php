@@ -1,15 +1,7 @@
 <?php
 namespace Controllers\ProjectManagement;
-use Illuminate\View\Factory as View;
 
 class DocentProjectManagement extends \BaseLoggedInController {
-
-	protected $view;
-	function __construct(View $view)
-	{
-		parent::__construct();
-		$this->view = $view;
-	}
 
 	/**
 	 * Display a listing of the resource.
@@ -18,7 +10,15 @@ class DocentProjectManagement extends \BaseLoggedInController {
 	 */
 	public function index()
 	{
-		return $this->view->make('projectmanagement.docent.index')->withProjects(\Project::all());
+		$projectGroups = \ProjectGroup::where('active', '=', '1')->get();
+
+		$projectIds = $this->extractProjectIds($projectGroups);
+		$projects = \Project::find($projectIds);
+
+		return \View::make('projectmanagement.docent.index')->with(array(
+			'projects' => $projects,
+			'projectgroups' => $projectGroups
+		));
 	}
 
 
@@ -50,7 +50,7 @@ class DocentProjectManagement extends \BaseLoggedInController {
 		});
 		$projectGroepen = \ProjectGroup::whereIn('year_id', $year_ids)->
 							orderBy('year_id')->get();
-		return $this->view->make('projectmanagement.docent.create')->with(array(
+		return \View::make('projectmanagement.docent.create')->with(array(
 			'years' => $years,
 			'projectgroepen' => $projectGroepen
 		));
@@ -126,8 +126,33 @@ class DocentProjectManagement extends \BaseLoggedInController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$project = \Project::find($id);
+		$project->projectGroup()->detach();
+		$project->delete();
+		return \Redirect::route('docent.projects.index');
 	}
 
+
+	/**
+	 * @param ProjectGroups $projectGroups
+	 * @return array
+     */
+	public function extractProjectIds($projectGroups)
+	{
+		$projects = array();
+		$projectGroups->each(function ($projectGroup)  use (&$projects)
+		{
+			$projectGroup->project->each(function ($project) use (&$projects)
+			{
+				if(!in_array($project->id, $projects))
+				{
+					$projects[] = $project->id;
+				}
+
+			});
+
+		});
+		return $projects;
+	}
 
 }

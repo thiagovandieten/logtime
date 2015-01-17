@@ -45,4 +45,9 @@ class Project extends Eloquent {
 		return $this->hasMany('EstimatedTime');
 	}
 
+	public function years()
+	{
+		return $this->hasManyThrough('Year', 'ProjectGroup');
+	}
+
 }
