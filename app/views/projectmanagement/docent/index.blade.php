@@ -56,7 +56,7 @@
 
                     <td>
                         {{Form::open(array('route' => array('docent.projects.edit',$project->id),
-                         'method' => 'post')) }}
+                         'method' => 'get')) }}
                         {{--{{Form::hidden('invisible', $data->id, array('id' => 'invisible_id')) }}--}}
                         {{Form::submit('Bewerken', ['class'=>'studenten-bewerken'])}}
                         {{Form::close() }}
