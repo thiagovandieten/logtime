@@ -1,0 +1,1 @@
+* * * * * php /home/vagrant/Sites/logtime/artisan scheduled:run 1>> /dev/null 2>&1

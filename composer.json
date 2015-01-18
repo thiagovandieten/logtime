@@ -8,10 +8,9 @@
     "license": "MIT",
     "require": {
         "laravel/framework": "4.2.*",
-        "guzzlehttp/guzzle": "~4.0"
-    },
-    "require-dev": {
-        "phpspec/phpspec": "2.1.x-dev"
+        "guzzlehttp/guzzle": "~4.0",
+        "indatus/dispatcher": "~1.4",
+        "schickling/backup" : "~0.6"
     },
     "autoload": {
         "classmap": [
