@@ -1,16 +1,18 @@
 <?php
 namespace Controllers\ProjectManagement;
-use Illuminate\View\Factory as View;
 
+/**
+ * Class DocentProjectManagement
+ * @package Controllers\ProjectManagement
+ * @Author Thiago van Dieten
+ */
 class DocentProjectManagement extends \BaseLoggedInController {
 
-	protected $view;
-	function __construct(View $view)
+	public function __construct()
 	{
 		parent::__construct();
-		$this->view = $view;
+		$this->beforeFilter('csrf', array('on' => ['post', 'put']));
 	}
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -18,7 +20,15 @@ class DocentProjectManagement extends \BaseLoggedInController {
 	 */
 	public function index()
 	{
-		return $this->view->make('projectmanagement.docent.index')->withProjects(\Project::all());
+		$projectGroups = $this->getActiveProjectGroups();
+
+		$projectIds = $this->extractProjectIds($projectGroups);
+		$projects = \Project::find($projectIds);
+
+		return \View::make('projectmanagement.docent.index')->with(array(
+			'projects' => $projects,
+			'projectgroups' => $projectGroups
+		));
 	}
 
 
@@ -31,14 +41,25 @@ class DocentProjectManagement extends \BaseLoggedInController {
     {
         $location = \Auth::user()->location_id;
         $projects = \Project::where('location_id', '=', $location)->get();
-        foreach($projects as $project)
-        {
-            //var_dump($project->project_name);
-        }
         //TODO: Er moet een link komen tussen project groepen en de locaties waar het toe hoort
-        //$projectGroepen = \ProjectGroup::where('year_id');
-        die();
-		return $this->view->make('projectmanagement.docent.create');
+
+		//Pak de meeste recent leerjaar die bij de docent's locatie toebehoort
+		$years = \Year::where('location_id', '=', $location)->
+						orderBy('id', 'desc')->
+						take(4)->get();
+
+		/*
+		* Each zorgt dat er een loop is voor elke Year object in Years
+		* Die wordt vervolgens toegevoegd aan de $year_ids array
+		* de & voor $year_ids zorgt ervoor dat deze array gewijzigd kan worden
+		*/
+		$year_ids = $years->lists('id');
+		$projectGroups = \ProjectGroup::whereIn('year_id', $year_ids)->
+							orderBy('year_id')->get();
+		return \View::make('projectmanagement.docent.create')->with(array(
+			'years' => $years,
+			'projectgroepen' => $projectGroups
+		));
 	}
 
 
@@ -49,7 +70,30 @@ class DocentProjectManagement extends \BaseLoggedInController {
 	 */
 	public function store()
 	{
-		//
+		$rules = array(
+			'project_name' => 'required'
+		);
+
+		$messages = array(
+			'project_name.required' => 'Project naam is niet ingevuld!'
+		);
+
+		$validator = Validator::make(Input::all(), $rules, $messages);
+        /*
+         * Sla de project naam op bij projects.project_name
+         * Koppel de level_type aan de project
+         * Kijk welke groepen deze project krijgen
+         * VOEG NOG DE PERIODE 
+         */
+        $project = new \Project();
+        $project->project_name = \Input::get('project_name');
+        $project->location_id = \Auth::user()->location_id;
+        $project->save();
+        // $project->level_type_id = false  Daar moet ff opnieuw naar gekeken worden in create!
+        $projectGroupIds = array();
+        $project->projectGroup()->attach(\Input::get('project_groups'));
+
+        return \Redirect::route('docent.projects.index');
 	}
 
 
@@ -73,6 +117,34 @@ class DocentProjectManagement extends \BaseLoggedInController {
 	 */
 	public function edit($id)
 	{
+		$rules = array(
+			'project_name' => 'required'
+		);
+
+		$messages = array(
+			'project_name.required' => 'Project naam is niet ingevuld!'
+		);
+
+		$validator = Validator::make(Input::all(), $rules, $messages);
+		//Refactor voor hergebruik
+		$location = \Auth::user()->location_id;
+
+		//Refactor voor hergebruik
+		$projectGroups = $this->getActiveProjectGroups();
+		$project = \Project::findOrFail($id);
+
+		//Refactor voor hergebruik
+		$years = \Year::where('location_id', '=', $location)->
+		orderBy('id', 'desc')->
+		take(4)->get();
+
+		return \View::make('projectmanagement.docent.edit')->with(array(
+			'years' => $years,
+			'projectgroepen' => $projectGroups,
+			'project' => $project,
+			'selectedprojectgroepen' => $project->projectGroup()->get()->lists('id'))
+		);
+
 		//
 	}
 
@@ -97,8 +169,41 @@ class DocentProjectManagement extends \BaseLoggedInController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$project = \Project::find($id);
+		$project->projectGroup()->detach();
+		$project->delete();
+		return \Redirect::route('docent.projects.index');
 	}
 
+
+	/**
+	 * @param ProjectGroups $projectGroups
+	 * @return array
+     */
+	public function extractProjectIds($projectGroups)
+	{
+		$projects = array();
+		$projectGroups->each(function ($projectGroup)  use (&$projects)
+		{
+			$projectGroup->project->each(function ($project) use (&$projects)
+			{
+				if(!in_array($project->id, $projects))
+				{
+					$projects[] = $project->id;
+				}
+
+			});
+
+		});
+		return $projects;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getActiveProjectGroups()
+	{
+		return \ProjectGroup::where('active', '=', '1')->get();
+	}
 
 }
