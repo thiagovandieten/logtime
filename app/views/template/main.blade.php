@@ -101,33 +101,21 @@
         <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
         <a href="{{route('docent.projects.index')}}"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
         <a href="{{route('logout')}}"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
-        
+
     @endif
     @if($user_role == 1)
     <h2>Uren bijwerken</h2>
-           <form method="post">
-               <select>
-                   <option>Kies een project</option>
-                   <option>Logtime</option>
-                   <option>Pizza today</option>
-                   <option>Malcom</option>
-               </select>
-
-               <select>
-                   <option>Onderdeel</option>
-                   <option>Fase 4</option>
-               </select>
-               <select>
-                   <option>Taak</option>
-                   <option>Fase4A</option>
-               </select>
-               <input type="date" id="input_01" placeholder="Datum" name="date" class="datepicker">
-               <input type="text" placeholder="00:00"  class="uren">
-               <p class="uren-tot">tot</p>
-               <input type="text" placeholder="00:00"  class="uren">
-               <textarea placeholder="Omschrijving"></textarea>
-               <input type="submit" class="bijwerken" value="Bijwerken">
-           </form>
+          {{Form::open(array('route' => 'logboek.store', 'method' => 'POST')) }}
+              {{Form::select('log categorie' , $userProjects['Log_Categories'])}}
+              {{Form::select('project' , $userProjects['Projects'])}}
+              {{Form::select('categorie' , $userProjects['Categories'])}}
+              {{Form::select('taak' , $userProjects['Tasks'])}}
+              {{Form::text('date' , date('Y/m/d') )}}
+              {{Form::text('starttijd' , '00:00' , null , ['class' => 'uren'])}}
+              {{Form::text('stoptijd' , '00:00' , null , ['class' => 'uren'])}}
+              {{Form::textarea('omschrijving' , 'Omschrijving')}}
+            {{Form::submit('Bijwerken',['class' => 'Bijwerken'])}}
+          {{Form::close() }}
         @endif
 </nav>
     <section class="ac-container container-mob">
@@ -169,8 +157,8 @@
          </section>
      {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
         {{HTML::script(asset('js/notificatie.js')) }}
-                     {{HTML::script(asset('js/picker.js')) }}
-                     {{HTML::script(asset('js/picker.date.js')) }}
+<!--                      {{HTML::script(asset('js/picker.js')) }}
+                     {{HTML::script(asset('js/picker.date.js')) }} -->
         {{HTML::script(asset('js/menuleft.js')) }}
              {{HTML::script(asset('js/legacy.js')) }}
              {{HTML::script(asset('js/Chart.js')) }}
@@ -182,7 +170,7 @@
         Webdesign:      Fatih celik
         Mobile design:  Dennis eilander
         Programmers:    Thiago van Dieten
-                        Phillip Heemskerk
+                        Philip Heemskerk
                         Yannick Berendsen
                         Fatih Celik
                         Dennis Eilander

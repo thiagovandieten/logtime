@@ -33,17 +33,5 @@
 	    	</tr>
 	    @endforeach
 	</table>
-	{{Form::open(array('route' => 'logboek.create', 'method' => 'GET')) }}
-	    <h2>Uren bijwerken</h2>
-	    {{Form::select('log categorie' , $userProjects['Log_Categories'])}}
-	    {{Form::select('project' , $userProjects['Projects'])}}
-       	{{Form::select('categorie' , $userProjects['Categories'])}}
-       	{{Form::select('taak' , $userProjects['Tasks'])}}
-       	{{Form::input('date' , 'date' , null , ['class' => 'datepicker' , 'placeholder' => 'Datum' ])}}
-        {{Form::text('starttijd' , '00:00' , null , ['class' => 'uren'])}}
-        {{Form::text('stoptijd' , '00:00' , null , ['class' => 'uren'])}}
-        {{Form::textarea('omschrijving' , 'Omschrijving')}}
-		{{Form::submit('Bijwerken',['class' => 'Bijwerken'])}}
-	{{Form::close() }}
 </div>
 @stop

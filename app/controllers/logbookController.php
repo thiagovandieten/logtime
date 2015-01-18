@@ -20,72 +20,30 @@ class LogbookController extends BaseLoggedInController
 
 	public function index()
 	{
+		/**
+		* hier worden user opghaalt en de log Catgorie die van de user zijn
+		*/
 		$user = Auth::user();
 		$projectGroupId = $user->project_group_id;
 		$logCategories = LogCategorie::where( 'project_group_id' , '=' , $projectGroupId )->get();
-		$groupProjectPeriodes = GroupProjectPeriode::where( 'project_group_id' , '=' , $projectGroupId )->get();
-
-		$userProjects = array( 'Projects'=> array() , 'Categories' => array() , 'Tasks' => array() , 'Log Categories' => array());
-		foreach($groupProjectPeriodes as $groupProjectPeriode)
+		foreach ($logCategories as $logC)
 		{
-			$projects = Project::where('id','=', $groupProjectPeriode->project_id)->get();
-
-			foreach ($projects as $project)
-			{
-
-				foreach ($project->categorie as $categorie)
-				{
-
-					$typeName = $categorie->leveltype->level_type_name;
-					if ($typeName == 'Project')
-					{
-						$userProjects['Categories'][$categorie->id] = $categorie->categorie_name;
-					}
-					elseif ($typeName == 'User')
-					{
-						if ($categorie->project_group_Id == $projectGroupId)
-						{
-							$userProjects['Categories'][$categorie->id] = $categorie->categorie_name;
-						}
-					}
-				}
-
-				foreach ($project->tasks as $task)
-				{
-					$typeName = $task->leveltype->level_type_name;
-					if ($typeName == 'Project')
-					{
-						$userProjects['Tasks'][$task->id] = $task->task_name;
-					}
-					elseif ($typeName == 'User')
-					{
-						if ($task->project_group_Id == $projectGroupId)
-						{
-							$userProjects['task'][$task->id] = $task->task_name;
-						}
-					}
-				}
-
-				$typeName = $project->leveltype->level_type_name;
-					if ($typeName == 'Project')
-					{
-						$userProjects['Projects'][$project->id] = $project->project_name;
-					}
-			}
+			$userLogCategorie[$logC->id] = $logC->log_categorie_name;
 		}
-		foreach ($logCategories as $logCategorie)
-		{
-			$userProjects['Log_Categories'][$logCategorie->id] = $logCategorie->log_categorie_name;
-		}
+
+		/**
+		* userlogs wordt hier op gehaalt chunk omdat de user_logs table zich heel snel gaat opfullen
+		*chunK($aantal rijen , function($rijen) [use ($variable , &$wijzigbaar )])
+		*/
 		$userlogs = array();
-		Userlog::chunk(200, function($logs) use (&$userlogs , $user , $userProjects , $logCategories)
+		Userlog::chunk(200, function($logs) use (&$userlogs , $user , $userLogCategorie)
 		{
 			foreach ($logs as $log)
 			{
 				if($user->id == $log->user_id)
 				{
-					$userlogs[$log->id] = array('log_categorie' => $userProjects['Log_Categories'][$log->log_categorie_id] ,
-					 'task' => $userProjects['Tasks'][$log->task_id],
+					$userlogs[$log->id] = array('log_categorie' => $userLogCategorie[$log->log_categorie_id] ,
+					 'task' => $log->task->task_name,
 					 'start_time' => $log->start_time ,
 					 'stop_time' => $log->stop_time ,
 					 'total_time_in_hours' => $log->total_time_in_hours ,
@@ -93,11 +51,9 @@ class LogbookController extends BaseLoggedInController
 					 'date' => $log->date );
 				}
 			}
-			// dd($logCategories($log->log_categorie_id));
 		});
 
-
-		return View::make('logbook')->with(array('userFullName' => $this->userFullName, 'userlogs' => $userlogs, 'userProjects' => $userProjects));
+		return View::make('logbook')->with(array('userFullName' => $this->userFullName, 'userlogs' => $userlogs ));
 	}
 
 
@@ -105,7 +61,7 @@ class LogbookController extends BaseLoggedInController
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
-	 */
+	*/
 	public function create()
 	{
 		return View::make('logbook')->with(array('userFullName' => $this->userFullName));
@@ -121,19 +77,19 @@ class LogbookController extends BaseLoggedInController
 	{
 		//
 		$user = User::find(Auth::id());
-
 		// create the validation rules ------------------------
         $rules = array(
-            'description'       => 'required', 						// just a normal required validation
-            'task'        		=> 'required', 	                    // just a normal required validation
-            'start_time'     	=> 'required',                        // just a normal required validation
-			'end_time'    	 	=> 'required'                        // just a normal required validation
-            //'password'         => 'required',
-            //'password_confirm' => 'required|same:password' 		// required and has to match the password field
+            'omschrijving'       => 'required|alpha', 						// just a normal required validation
+            'taak'        		=> 'required|alpha_num', 	        // just a normal required validation
+            'starttijd'     	=> 'required',                      // just a normal required validation
+			'stoptijd'    	 	=> 'required',						// just a normal required validation
+			'date'    			=> 'required|date',                      // just a normal required validation
+			'log categorie'    	=> 'required|alpha_num',                      // just a normal required validation
         );
 
         // do the validation ----------------------------------
         // validate against the inputs from our form
+
         $validator = Validator::make(Input::all(), $rules);
         // check if the validator failed -----------------------
         if ($validator->fails()) {
@@ -143,13 +99,13 @@ class LogbookController extends BaseLoggedInController
 
             // redirect our user back to the form with the errors from the validator
 			var_dump($validator->messages());
-			//return Redirect::to('logbook')
-             //   ->withErrors($validator);
 
         } else {
             // validation successful ---------------------------
 
 		}
+        dd(Input::all());
+		return Redirect::back()->with('message' , 'opgeslagen');
 	}
 
 
