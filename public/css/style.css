@@ -84,6 +84,7 @@ nav textarea{
     margin: 1px 10px 5px 16px;
     padding: 8px;
     width: 184px;
+    height: 100px;
     border: 0px;
     color: #666;
     float: left;
@@ -154,7 +155,7 @@ nav h2{
     font-weight: normal;
     font-size: 18px;
     color: #fff;
-    margin: 25px 5px 0px 15px;
+    margin: 10px 5px 5px 15px;
 }
 
 nav select, #input_01{
@@ -1711,5 +1712,30 @@ tr.studenten-overzicht td{
 }
 
 .personal-settings{
+    color: #666;
+}
+
+#urenreg {
+    display: none;
+}
+
+.uren-wrapper{
+    position: fixed;
+    margin: auto;
+    left: 0px;
+    right: 0px;
+    width: 215px;
+    background: #5b7a9c;
+    top: 15%;
+    -moz-box-shadow: 0 0 10px #666;
+    -webkit-box-shadow: 0 0 10px #666;
+    box-shadow: 0 0 10px #666;
+}
+
+.datum-pop{
+    margin: 1px 10px 5px 16px;
+    padding: 8px;
+    width: 184px;
+    border: 0px;
     color: #666;
 }
