@@ -52,90 +52,82 @@ class enteronetimedataController extends BaseLoggedInController {
                 ->withErrors($validator);
 
         } else {
-                        
-            // validation successful ---------------------------
-			$id = User::find(Auth::id());
+ 			// adress is niet 1 dus geen nieuwe 	
+			$user = User::find(Auth::id());
+				
+			if($user->adress_id == 1){
+			// Cities Table
+			// Check of de stad al bestaat
+			$city = DB::table('cities')->where('city', Input::get('city'))->first();
 			
-			$inputArray = Input::only('street', 'house_number', 'zipcode', 'city');
-			$uniquevalueArray = array();
-			$adress_id;	
-			$street_id;
-			$street;		
-			$city_id;
-			$city;
-			$zipcode_id;
-			$zipcode;
-
-			
-			$adress_id     = Adress::find($id->adress_id);
-		
-		
-			// TODO: Wanneer adres id 1 is moet hij altijd aangepast worden naar en ander cijfer
-			
-			if($adress_id->id == 1)
-			{
-				// dan moet er een nieuwe  worden aangemaakt	
-				foreach($inputArray as $key => $data)
-				{
-					switch($key)
-					{
-						// zoek of de waarde al bestaat in Streets
-						case 'street' : 
-								$check_street = Street::where('street', '=', $data)->first();
-																
-								if($check_street != NULL)
-								{
-									$street = $check_street;
-								}else{
-									$street = new Street();
-								}
-						 
-						break;
-						case 'house_number' :  // zoek of de waarde al bestaat in Streets
-								
-										
-								if(!empty($street)){
-									$street->house_number = $data;
-									break;
-								}
-								
-								$check_house_number = Street::where('house_number', '=', $data)->first();
-								if($check_house_number != NULL)
-								{
-									$street = $check_house_number;
-								}else{
-									$street = new Street();
-								}
-								
-																
-								
-	
-						break;
-						case 'zipcode' : 	// zoek of de waarde al bestaat in zipcodes
-						$check_zipcode = Zipcode::where('zipcode', '=', $data)->first();
-																
-								if($check_zipcode != NULL)
-								{
-									$zipcode = $check_zipcode;	
-								}else{
-									$zipcode = new Zipcode();
-								}
-						break;
-						case 'city' : 		// zoek of de waarde al bestaat in cities
-						$check_city = City::where('city', '=', $data)->first();
-																
-								if($check_city != NULL)
-								{
-									$city = $check_city;	
-								}else{
-									$city = new City();
-								}
-						break;	
-					}
-				}	
+			// Als de opgegeven stad niet bestaat voer hem in
+			if(!isset($city)){
+				$getCityid = DB::table('cities')->insertGetId(
+					array('city' => Input::get('city'))
+				);
 			}else{
-			// adress is niet 1 dus geen nieuwe 	
-			$user = User::find($id);   
+			// Anders wijs hem toe
+				$getCityid = $city->id;	
+			}
+			
+			// Streets Table
+			// Check of de stad al bestaat
+			$streets = DB::table('streets')->where('street', Input::get('street'))->first();
+			
+			// Als de opgegeven straat niet bestaat voer hem in
+			if(!isset($streets->street)){
+				$getStreetsid = DB::table('streets')->insertGetId(
+					array('street' => Input::get('street'),
+						  'house_number' => Input::get('house_number'))
+				);
+			}else{
+			// Anders wijs hem toe
+				$getStreetsid = $streets->id;	
+			}
+	
+			// Zipcodes Table
+			// Check of de zipcode al bestaat
+			$zipcodes = DB::table('zipcodes')->where('zipcode', Input::get('zipcde'))->first();
+			
+			// Als de opgegeven zipcode niet bestaat voer hem in
+			if(!isset($zipcodes->zipcode)){
+				$getZipcodesid = DB::table('zipcodes')->insertGetId(
+					array('zipcode' => Input::get('zipcode'))
+				);
+			}else{
+			// Anders wijs hem toe
+				$getZipcodesid = $zipcodes->id;	
+			}
+			
+			// Adresses Table
+			// Check of de stad al bestaat
+			$adresses = DB::table('adresses')
+					->where(array('zipcode_id' => $getZipcodesid,
+								  'street_id' => $getStreetsid,
+								  'city_id' => $getCityid
+					))->first();
+			
+			// Als de opgegeven straat niet bestaat voer hem in
+			if(!isset($adresses->id)){
+				$getAdressesid = DB::table('adresses')->insertGetId(
+					array('zipcode_id' => $getZipcodesid,
+						  'street_id' => $getStreetsid,
+						  'city_id' => $getCityid)
+				);
+			}else{
+			// Anders wijs hem toe
+				$getAdressesid = $adresses->id;	
+			}
+			
+			//Update de Adresses ID van de user
+			DB::table('users')
+				->where('id', $user->id)
+				->update(array('adress_id' => $getAdressesid));
+				
+			}else{
+				
+			
+			
 			
 			
 			$adress_id      = Adress::find($user->adress_id);
@@ -181,11 +173,11 @@ class enteronetimedataController extends BaseLoggedInController {
 			
             // redirect ----------------------------------------
             // redirect our user back to the form so they can do it all over again
-			
+			}
 		
 			
             	return Redirect::to('dashboard');
-			}
+			
 		}
 	}
 }

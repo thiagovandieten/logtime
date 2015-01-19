@@ -13,6 +13,13 @@ class BaseLoggedInController extends BaseController {
         {
             $this->user = Auth::user();
             $this->userFullName = \Auth::user()->first_name . ' ' . \Auth::user()->last_name;
+			
+			if($this->user->adress_id == 1){
+				echo "Adres 1";	
+			}else{
+				echo "Adres 0";	
+			}
+			
         }
 
         View::share(array(
