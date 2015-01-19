@@ -71,7 +71,7 @@ class LogbookController extends BaseLoggedInController
 
 		// create the validation rules ------------------------
         $rules = array(
-            'omschrijving'      => 'requireds', 					// just a normal required validation
+            'omschrijving'      => 'required', 					// just a normal required validation
             'taak'        		=> 'required|alpha_num', 	        // just a normal required validation
             'starttijd'     	=> 'required|date_format:H:i',      // just a normal required validation
 			'stoptijd'    	 	=> 'required|date_format:H:i',		// just a normal required validation
