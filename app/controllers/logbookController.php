@@ -40,7 +40,7 @@ class LogbookController extends BaseLoggedInController
 					 'total_time_in_hours' => $log->total_time_in_hours ,
 					 'description' => $log->description ,
 					 'date' => $log->date ,
-					 'id' => $log->id 
+					 'id' => $log->id
 					 );
 				}
 			}
@@ -132,7 +132,10 @@ class LogbookController extends BaseLoggedInController
 	 */
 	public function edit($id)
 	{
-		//
+		$userLog = UserLog::find($id);
+		$task = $userLog->task;
+
+		return View::make('logbook_edit')->with(array('userlog' => $userLog));
 	}
 
 
