@@ -2,7 +2,6 @@
 @section('content')
 <div class='topbatr'>
   {{Form::open(array('route' => 'logboek.store', 'method' => 'POST')) }}
-      {{Form::select('log categorie' , $userProjects['Log_Categories'])}}
       {{Form::select('project' , $userProjects['Projects'])}}
       {{Form::select('categorie' , $userProjects['Categories'])}}
       {{Form::select('taak' , $userProjects['Tasks'])}}

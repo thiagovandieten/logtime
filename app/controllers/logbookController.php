@@ -129,10 +129,17 @@ class LogbookController extends BaseLoggedInController
 	 */
 	public function edit($id)
 	{
-		$userLog = UserLog::find($id);
-		$task = $userLog->task;
-
-		return View::make('logbook_edit')->with(array('userlog' => $userLog));
+		$userlog = UserLog::find($id);
+		$userlogs[$userlog->id] = array(
+					 'task' => $userlog->task->task_name,
+					 'start_time' => $userlog->start_time ,
+					 'stop_time' => $userlog->stop_time ,
+					 'total_time_in_hours' => $userlog->total_time_in_hours ,
+					 'description' => $userlog->description ,
+					 'date' => $userlog->date ,
+					 'id' => $userlog->id
+					 );
+		return View::make('logbook_edit')->with(array('userlog' => $userlogs));
 	}
 
 
@@ -158,7 +165,7 @@ class LogbookController extends BaseLoggedInController
 	{
 		$row = ['id' => $id , 'user_id' => Auth::id()];
 		Userlog::where($row)->delete();
-		return Redirect::back()->with('message' , 'opgeslagen');
+		return Redirect::back()->with('message' , 'verwijdert');
 	}
 
 
