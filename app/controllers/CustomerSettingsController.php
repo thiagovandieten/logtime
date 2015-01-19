@@ -13,19 +13,39 @@ class CustomerSettingsController extends BaseLoggedInController {
     {                
         $group_id       = $this->user->project_group_id;
         
+        //$customer       = Customer::find($project_id);
+        //dd($customer);
+        
         // Projecten ophalen op id
         $projects         = GroupProjectPeriode::find($group_id);
         $project_id       = $projects->project_group_id;
-        //$project          = Project::find($project_id);
+        //$project        = Project::find($project_id);
         
-       $project = DB::table('group_project_periode')
-            ->join('projects', 'group_project_periode.id', '=', 'projects.id')
-            ->select('projects.id', 'projects.project_name')
+        
+        
+        $project = DB::table('group_project_periode')->where('group_project_periode.project_group_id', '=', $group_id)
+            ->join('projects', 'group_project_periode.project_id', '=', 'projects.id')
+            ->select('group_project_periode.is_done', 'projects.id', 'projects.project_name')
             ->get();
-                
+        
+            
         //dd($project);
-                                       
-        return View::make('customer_settings')->with(array('projecten' => $project));
+        $customer = array();
+                
+        foreach ($project as $key => $projectid){
+            //array_add($customer, $key, DB::table('customers')->where('id', '=', $projectid->id)->get());
+            $customer[] = DB::table('customers')->where('id', '=', $projectid->id)->first();
+        }
+        
+        //var_dump($customer);
+        
+        $projecten = array('projecten' => $project);
+        //dd($projecten);
+           
+       
+        //var_dump($project_id);
+                    
+        return View::make('customer_settings')->with(array('projecten' => $project, 'customers' => $customer));
         
         
         

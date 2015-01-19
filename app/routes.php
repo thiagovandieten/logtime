@@ -65,8 +65,10 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     Route::get('persoonlijke-instellingen', 'PersonalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'PersonalSettingsController@store');
     Route::post('persoonlijke-instellingen/wachtwoord-wijzigen', 'PersonalSettingsController@store');
+ 	Route::resource('projects', 'Controllers\ProjectManagement\Leerling');
     Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
     Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
+    
     Route::get('handleiding', 'GuideController@index');
 
     Route::resource('logboek',  'LogbookController');
@@ -76,9 +78,8 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     Route::get('klantinstellingen/wijzig/{id}', 'CustomerSettingsController@customer_settings_edit');
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
     Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
-	
 
-	
+    Route::resource('tasks', 'TasksController');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
@@ -91,7 +92,7 @@ Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), f
     Route::get('usersettings/delete',  'UserSettingsController@delete');
     Route::post('usersettings/delete',  'UserSettingsController@hard_delete');
 	Route::post('usersettings/wachtwoord-wijzigen', 'UserSettingsController@changepassword');
-	
+	Route::resource('projects', 'Controllers\ProjectManagement\Docent');
 
 });
 

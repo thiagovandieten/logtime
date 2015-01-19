@@ -1,6 +1,13 @@
 <?php
 
-class ProjectManagementController extends BaseLoggedInController {
+namespace Controllers\ProjectManagement;
+
+/**
+ * Class Leerling
+ * @Author Thiago van Dieten
+ */
+
+class Leerling extends BaseLoggedInController {
 
 
 	/**
