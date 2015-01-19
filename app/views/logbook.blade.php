@@ -30,18 +30,18 @@
 		</tr>
 	    @foreach($userlogs as $userlog)
 	    	<tr>
-	    		<td>{{$userlog['log_categorie'] }}</td>
-	    		<td>{{$userlog['task']}}</td>
-	    		<td>{{$userlog['start_time']}}</td>
-	    		<td>{{$userlog['stop_time']}}</td>
-	    		<td>{{$userlog['total_time_in_hours']}}</td>
-	    		<td>{{$userlog['description']}}</td>
-				{{Form::open(array('route' => array('logboek.edit' , $userlog['id']),'method' => 'GET')) }}
-	    			<td>{{Form::submit('Edit')}}</td>
-	    		{{Form::close() }}
-	    		{{Form::open(array('route' => array('logboek.destroy' , $userlog['id']),'method' => 'DELETE')) }}
-	    			<td>{{Form::submit('Delete')}}</td>
-	    		{{Form::close() }}
+	    		<td>{{{$userlog['log_categorie']}}}</td>
+	    		<td>{{{$userlog['task']}}}</td>
+	    		<td>{{{$userlog['start_time']}}}</td>
+	    		<td>{{{$userlog['stop_time']}}}</td>
+	    		<td>{{{$userlog['total_time_in_hours']}}}</td>
+	    		<td>{{{$userlog['description']}}}</td>
+				{{{Form::open(array('route' => array('logboek.edit' , $userlog['id']),'method' => 'GET')) }}}
+	    			<td>{{{Form::submit('Edit')}}}</td>
+	    		{{{Form::close() }}}
+	    		{{{Form::open(array('route' => array('logboek.destroy' , $userlog['id']),'method' => 'DELETE')) }}}
+	    			<td>{{{Form::submit('Delete')}}}</td>
+	    		{{{Form::close() }}}
 	    	</tr>
 	    @endforeach
 	</table>
