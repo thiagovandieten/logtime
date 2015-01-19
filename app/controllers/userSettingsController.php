@@ -1,6 +1,6 @@
 <?php
 
-class StudentSettingController extends BaseLoggedInController {
+class UserSettingsController extends BaseLoggedInController {
 
 	/**
 	 * Display a listing of the resource.
@@ -12,14 +12,22 @@ class StudentSettingController extends BaseLoggedInController {
 	
 	public function index()
 	{
-		$this->all_students = DB::select('SELECT `first_name`, `last_name`, `id`, `active` FROM `users` ');
-		
 		$user = User::find(Auth::id());
+		
+		$all_students = DB::select('SELECT `users`.`first_name`, `users`.`last_name`, `users`.`id`, `users`.`active`, `users`.`project_group_id`, `project_groups`.`name`, `project_groups`.`year_id`, `years`.`nickname` FROM `users`
+								 LEFT JOIN `project_groups`
+								 INNER JOIN `years`
+								 ON `years`.`id`=`project_groups`.`id` 
+								 ON `users`.`project_group_id`=`project_groups`.`id` WHERE `users`.`location_id`='.$user->location_id.'');
+								 
+								 
+								 
+		
 		//print_r($user);
 			
-		return View::make('studentsettings')->with(array(
+		return View::make('usersettings')->with(array(
 														'userFullName' => $this->userFullName,
-														'all_students' => $this->all_students));
+														'all_students' => $all_students));
 	}
 
 
@@ -48,33 +56,8 @@ class StudentSettingController extends BaseLoggedInController {
         // validate against the inputs from our form
         $validator = Validator::make(Input::all(), $rules);
 		
+		$input = Input::all();
 		
-		$id = Input::get('invisible');
-        $user = User::find($id); 
-		
-		$user           = User::find($id);   
-		$adress_id      = Adress::find($user->adress_id);
-		
-		$street_id      = $adress_id->street_id;
-		$street         = Street::find($street_id);
-		
-		$city_id        = $adress_id->city_id;
-		$city           = City::find($city_id);
-		
-		$zipcode_id     = $adress_id->zipcode_id;
-		$zipcode        = Zipcode::find($zipcode_id);
-           
-        //Data for image upload -------------------------------
-        if(Input::hasFile('avatar')){
-            $destinatonPath     = '';
-            $filename           = '';
-            $file               = Input::file('avatar');
-            $destinationPath    = public_path().'/images/';
-            $filename           = str_random(6).'_'.$file->getClientOriginalName();
-            $uploadSuccess      = $file->move($destinationPath, $filename);
-        }else{
-            $filename = $user->user_image_path;    
-        }
 		
         // check if the validator failed -----------------------
         if ($validator->fails()) {
@@ -82,41 +65,229 @@ class StudentSettingController extends BaseLoggedInController {
             $messages = $validator->messages('Er is iets fout gegaan');
 
             // redirect our user back to the form with the errors from the validator
-            return Redirect::to('studentsettings')
+            return Redirect::to('docent/usersettings')
                 ->withErrors($validator);
-            
-            //dd($validator);
 
         } else {
                         
             // validation successful ---------------------------
+			$id = Input::get('invisible');
+			
+			$inputArray = Input::only('street', 'house_number', 'zipcode', 'city');
+			$uniquevalueArray = array();
+			$adress_id;	
+			$street_id;
+			$street;		
+			$city_id;
+			$city;
+			$zipcode_id;
+			$zipcode;
+			
+			$user = DB::table('users')->where('id', $id)->first();
+			
+			$adress_id = $user->adress_id;
+		
+			// TODO: Wanneer adres id 1 is moet hij altijd aangepast worden naar en ander cijfer
+			
+			if($adress_id == 1)
+			{
+				// dan moet er een nieuwe  worden aangemaakt	
+				foreach($inputArray as $key => $data)
+				{
+					switch($key)
+					{
+						// zoek of de waarde al bestaat in Streets
+						case 'street' : 
+								$check_street = Street::where('street', '=', $data)->first();
+																
+								if($check_street != NULL)
+								{
+									$street = $check_street;
+								}else{
+									$street = new Street();
+								}
+						 
+						break;
+						case 'house_number' :  // zoek of de waarde al bestaat in Streets
+								
+										
+								if(!empty($street)){
+									$street->house_number = $data;
+									break;
+								}
+								
+								$check_house_number = Street::where('house_number', '=', $data)->first();
+								if($check_house_number != NULL)
+								{
+									$street = $check_house_number;
+								}else{
+									$street = new Street();
+								}
+								
+																
+								
+	
+						break;
+						case 'zipcode' : 	// zoek of de waarde al bestaat in zipcodes
+						$check_zipcode = Zipcode::where('zipcode', '=', $data)->first();
+																
+								if($check_zipcode != NULL)
+								{
+									$zipcode = $check_zipcode;	
+								}else{
+									$zipcode = new Zipcode();
+								}
+						break;
+						case 'city' : 		// zoek of de waarde al bestaat in cities
+						$check_city = City::where('city', '=', $data)->first();
+																
+								if($check_city != NULL)
+								{
+									$city = $check_city;	
+								}else{
+									$city = new City();
+								}
+						break;	
+					}
+				}	
+			}else{
+			// adress is niet 1 dus geen nieuwe 	
+			$user = User::find($id);   
+			
+			
+			$adress_id      = Adress::find($user->adress_id);
+			
+			$street_id      = $adress_id->street_id;
+			$street         = Street::find($street_id);
+			
+			$city_id        = $adress_id->city_id;
+			$city           = City::find($city_id);
+			
+			$zipcode_id     = $adress_id->zipcode_id;
+			$zipcode        = Zipcode::find($zipcode_id);
+			
+			
+				   
+			//Data for image upload -------------------------------
+			if(Input::hasFile('avatar')){
+				$destinatonPath     = '';
+				$filename           = '';
+				$file               = Input::file('avatar');
+				$destinationPath    = public_path().'/images/';
+				$filename           = str_random(6).'_'.$file->getClientOriginalName();
+				$uploadSuccess      = $file->move($destinationPath, $filename);
+			}else{
+				$filename = $user->user_image_path;    
+			}
+            
 
-            // our duck has passed all tests!
-            // let him enter the database
-
-            // create the data
-			$user_data = User::find($id); 
-            $user_data->first_name       = Input::get('first_name');
-            $user_data->last_name        = Input::get('last_name');
-            $street->street           = Input::get('street');
-            $street->house_number     = Input::get('house_number');
+			
+			$user->first_name          = Input::get('first_name');
+            $user->last_name           = Input::get('last_name');
+            $street->street            = Input::get('street');
+            $street->house_number      = Input::get('house_number');
             $zipcode->zipcode          = Input::get('zipcode');
-            $city->city             = Input::get('city');
-            $user_data->phone_number     = Input::get('phone_number');
-            $user_data->user_image_path     = $filename;
-
-            // save our data
-            $user_data->save();
+            $city->city            	   = Input::get('city');
+            $user->phone_number    	   = Input::get('phone_number');
+            $user->user_image_path     = $filename;
 			$street->save();
+            $user->save();
 			$zipcode->save();
 			$city->save();
 
+			
             // redirect ----------------------------------------
             // redirect our user back to the form so they can do it all over again
-            return Redirect::to('studentsettings');
-
+			
+			
+			if(Input::get('set_active')){
+				DB::table('users')
+					->where('id', $id)
+					->update(array('active' => 1));
+				
+				return Redirect::to('docent/usersettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol op actief gezet!');	
+			
+			}elseif(Input::get('set_inactive')){
+				DB::table('users')
+					->where('id', $id)
+					->update(array('active' => 0));
+			
+				return Redirect::to('docent/usersettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol op inactief gezet!');
+			}
+			
+			
+            return Redirect::to('docent/usersettings');
+			}
         }
     }
+
+	public function changepassword()
+	{
+		// create the validation rules ------------------------
+        $rules = array(
+            'invisible'       => 'required', 						// just a normal required validation
+			'old_password' => 'required',
+			'new_password' => 'required|min:6',
+			'confirm_password' => 'required|same:new_password' // required and has to match the password field
+           );
+
+        $messages = array(
+'old_password.required' => 'Het oude wachtwoord moet ingevuld worden',
+
+                 'new_password.required'                     => 'Het nieuwe wachtwoord moet ingevuld worden',
+                 'new_password.min'                          => 'Het wachtwoord moet minimaal 6 karakters bevatten',
+                 'confirm_password.required'                 => 'Het nieuwe wachtwoord moet nogmaals ingevuld worden',
+                 'confirm_password.same'                     => 'De wachtwoorden moeten overeen komen met elkaar'
+            );
+            
+			$id = Input::get('invisible');
+			$user = User::find($id);
+			$password = $user->password;
+			
+            // do the validation ----------------------------------
+            // validate against the inputs from our form
+            $validator = Validator::make(Input::all(), $rules, $messages);
+
+            // check if the validator failed -----------------------
+            if ($validator->fails()) {
+                // get the error messages from the validator
+                $messages = $validator->messages('Er is iets fout gegaan');
+
+                // redirect our user back to the form with the errors from the validator
+                return Redirect::to('docent/usersettings')
+                    ->withErrors($validator);
+
+                //dd($validator);
+
+            } else {
+
+                // validation successful ---------------------------
+                if (Hash::check(Input::get('old_password'), $password)){
+                    // our duck has passed all tests!
+                    // let him enter the database
+
+                    // create the data
+                    $passwords = User::find($id);
+                    $passwords->password = Hash::make(Input::get('new_password'));
+
+                    //dd($passwords);
+
+                    // save our data
+                    $passwords->save();
+
+                    // redirect ----------------------------------------
+                    // redirect our user back to the form so they can do it all over again
+                    return Redirect::to('docent/usersettings');            
+                
+                }
+                else {
+                    return Redirect::to('docent/usersettings')->with(array("msg" => "Het huidige wachtwoord klopt niet!"));
+                }
+
+            }	
+		
+	}
+
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -142,7 +313,7 @@ class StudentSettingController extends BaseLoggedInController {
             $messages = $validator->messages('Er is iets fout gegaan');
 
             // redirect our user back to the form with the errors from the validator
-             return View::make('studentsettings.edit')->with(array("validator" => $validator->messages('Er is iets fout gegaan')));
+             return Redirect::to('docent/usersettings')->with(array("msg" => $validator->messages('Er is iets fout gegaan')));
             
             //dd($validator);
 
@@ -161,38 +332,31 @@ class StudentSettingController extends BaseLoggedInController {
 			$zipcode_id     = $adress_id->zipcode_id;
 			$zipcode        = Zipcode::find($zipcode_id);
 			
+			
 			$personal_data = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 
 								   'phone_number' => $user->phone_number, 'avatar' => $user->user_image_path, 
 								   'street' => $street->street, 'house_number' => $street->house_number,
-								   'city' => $city->city, 'zipcode' => $zipcode->zipcode,  'id' => $id);
+								   'city' => $city->city, 'zipcode' => $zipcode->zipcode,  'id' => $id,
+								   'active' => $user->active);
 	
-			return View::make('studentsettings.edit')->with(array
-				('personal_data' => $personal_data));
+			
 
 			
+			
+			return View::make('usersettings.edit')->with(array
+				('personal_data' => $personal_data));
 			 //return View::make('studentsettings.edit')->with(array("validator" => $name));	
 		}
 				
 	}
 
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		return 3;
-	}
 	
 	function create()
 	{
 		$locations = DB::table('locations')->get();
 		$user_types = DB::table('user_types')->get();
 		
-		return View::make('studentsettings.create')->with(array('locations' => $locations, 'user_types' => $user_types ));
+		return View::make('usersettings.create')->with(array('locations' => $locations, 'user_types' => $user_types ));
 
 	}
 	
@@ -207,17 +371,14 @@ class StudentSettingController extends BaseLoggedInController {
 		
 		// Validatie regels voor het valideren
         $rules = array(
-            'first_name'       	=> 'required|alpha',
-			'last_name'       	=> 'required|alpha',
+            'first_name'       	=> '',
+			'last_name'       	=> '',
 			'user_type'			=> 'required|numeric',
-			'street_name'       => 'required',
-			'house_number'      => 'required',
-			'zipcode'       	=> 'required',
-			'city'      	 	=> 'required',
-			'phone_number'      => 'required',
 			'location'		    => 'required|numeric',
 			'user_code'			=> 'required|numeric'			
 		);
+		
+		
 		
 		// valideer de input fields
         $validator = Validator::make(Input::all(), $rules);
@@ -237,7 +398,7 @@ class StudentSettingController extends BaseLoggedInController {
         // check if the validator failed -----------------------
         if ($validator->fails()) {
             // redirect our user back to the form with the errors from the validator
-            return Redirect::to('studentsettings/create')
+            return Redirect::to('docent/usersettings/create')
                 ->withErrors($validator);
             
             //dd($validator);
@@ -252,22 +413,23 @@ class StudentSettingController extends BaseLoggedInController {
 			$user_type = DB::table('user_types')->where('id', Input::get('user_type'))->first();
 			
 			// Als de opgegeven stad niet bestaat voer hem in
-			if(!isset($user_type->id)){
-				$getUserTypeid = $user_type->id;
+			if(!empty($user_type)){
+				$getUserTypeid = Input::get('user_type');
 			}else{
 				$getUserTypeid = 1;
 			}
-			
+
 			// location tabel
 			// Check of de location bestaat
 			$locations = DB::table('locations')->where('id', Input::get('location'))->first();
 			
 			// Als de opgegeven stad niet bestaat voer hem in
-			if(!isset($locations->id)){
+			if(!empty($locations->id)){
 				$getLocationsid = $locations->id;
 			}else{
 				$getLocationsid = 1;
 			}
+			
 			
 			// User Table
 			DB::table('users')->insert(
@@ -354,7 +516,7 @@ class StudentSettingController extends BaseLoggedInController {
 				->update(array('adress_id' => $getAdressesid));
 		
             // redirect our user back to the form so they can do it all over again
-		    return Redirect::to('studentsettings/create')->with(array("message" => "Nieuwe gebruiker is succesvol aangemaakt in het systeem!"));
+		    return Redirect::to('docent/usersettings/create')->with(array("msg" => "Nieuwe gebruiker is succesvol aangemaakt in het systeem!"));
         }
 	}
 
@@ -367,10 +529,10 @@ class StudentSettingController extends BaseLoggedInController {
 		
 		// User bestaat niet link terug naar het overzicht
 		if(empty($user)){
-			return Redirect::to('studentsettings');	
+			return Redirect::to('docent/usersettings');	
 		}else{
 		// De user bestaat wel
-			return View::make('studentsettings.delete');			
+			return View::make('usersettings.delete');			
 		}
 		
 	}
@@ -388,12 +550,12 @@ class StudentSettingController extends BaseLoggedInController {
 		**/
 		// Verkrijg de user data
 		
-		$id = $_GET['user'];
+		$id = Input::get('user');
 		$user = User::find($id); 
 		
 		// User bestaat niet link terug naar het overzicht
 		if(empty($user)){
-			return Redirect::to('studentsettings');	
+			return Redirect::to('docent/usersettings');	
 		}else{
 			/**
 				Table: user_sub_groups
@@ -418,16 +580,16 @@ class StudentSettingController extends BaseLoggedInController {
 			/**
 				Table: users
 			**/
-			DB::table('users')->where('user_id', $id)->delete();
+			DB::table('users')->where('id', $id)->delete();
 			
 			/**
 				Table: project_groups
 			**/
 			DB::table('project_groups')
-            ->where('id', 1)
-            ->update(array('votes' => 1));
+            ->where('user_id', $id)
+            ->update(array('user_id'=>'NULL'));
 			
-			return Redirect::to('studentsettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol op inactief gezet!');		
+			return Redirect::to('docent/usersettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol verwijderd!');		
 		}
 		
 		
@@ -445,7 +607,7 @@ class StudentSettingController extends BaseLoggedInController {
 		
 		if ($validator->fails()) {
             // redirect our user back to the form with the errors from the validator
-            return Redirect::to('studentsettings')
+            return Redirect::to('docent/studentsettings')
                 ->withErrors($validator);
         } else {
 			$id = Input::get('user');
@@ -455,23 +617,13 @@ class StudentSettingController extends BaseLoggedInController {
 				->where('id', $id)
 				->update(array('active' => 0));
 			
-			return Redirect::to('studentsettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol op inactief gezet!');
+			return Redirect::to('docent/usersettings')->with('msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' succesvol op inactief gezet!');
 		}
 		
 		// Create view
 		//return Redirect::to('studentsettings')->with('error_msg', 'Je hebt '.$user->first_name.' '.$user->last_name.' inactief gezet!');
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 
 
 }

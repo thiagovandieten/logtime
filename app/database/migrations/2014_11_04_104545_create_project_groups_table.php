@@ -21,8 +21,10 @@ class CreateProjectGroupsTable extends Migration {
             $table->foreign('adress_id')->references('id')->on('adresses');
             $table->integer('location_id')->unsigned();
             $table->foreign('location_id')->references('id')->on('locations');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('coach_id')->unsigned()->nullable();
+			$table->integer('leader_id')->unsigned()->nullable();
             $table->boolean('active')->default(true);
+			$table->string('code', 45);
 			$table->string('name', 255);
 			$table->string('image_path', 255)->default('placeholder.png');
 			$table->timestamps();

@@ -11,3 +11,5 @@
 |
 */
 
+Artisan::add(new BackupDBCommand);
+Artisan::add(new EmptyHash);
