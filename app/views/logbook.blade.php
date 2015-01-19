@@ -4,7 +4,7 @@
 	<table>
 		<tr>
 			<td>
-				Categorie
+				Date
 			</td>
 			<td>
 				Taak
@@ -30,7 +30,7 @@
 		</tr>
 	    @foreach($userlogs as $userlog)
 	    	<tr>
-	    		<td>{{$userlog['log_categorie']}}</td>
+	    		<td>{{$userlog['date']}}</td>
 	    		<td>{{$userlog['task']}}</td>
 	    		<td>{{$userlog['start_time']}}</td>
 	    		<td>{{$userlog['stop_time']}}</td>

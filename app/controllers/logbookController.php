@@ -16,24 +16,19 @@ class LogbookController extends BaseLoggedInController
 		*/
 		$user = Auth::user();
 		$projectGroupId = $user->project_group_id;
-		$logCategories = LogCategorie::where( 'project_group_id' , '=' , $projectGroupId )->get();
-		foreach ($logCategories as $logC)
-		{
-			$userLogCategorie[$logC->id] = $logC->log_categorie_name;
-		}
 
 		/**
 		* userlogs wordt hier op gehaalt chunk omdat de user_logs table zich heel snel gaat opfullen
 		*chunK($aantal rijen , function($rijen) [use ($variable , &$wijzigbaar )])
 		*/
 		$userlogs = array();
-		Userlog::chunk(200, function($logs) use (&$userlogs , $user , $userLogCategorie)
+		Userlog::chunk(200, function($logs) use (&$userlogs , $user )
 		{
 			foreach ($logs as $log)
 			{
 				if($user->id == $log->user_id)
 				{
-					$userlogs[$log->id] = array('log_categorie' => $userLogCategorie[$log->log_categorie_id] ,
+					$userlogs[$log->id] = array(
 					 'task' => $log->task->task_name,
 					 'start_time' => $log->start_time ,
 					 'stop_time' => $log->stop_time ,
@@ -45,6 +40,10 @@ class LogbookController extends BaseLoggedInController
 				}
 			}
 		});
+		function sortFunction( $a, $b ) {
+    		return strtotime($a["date"]) - strtotime($b["date"]);
+		}
+		usort($userlogs, "sortFunction");
 		return View::make('logbook')->with(array('userFullName' => $this->userFullName, 'userlogs' => $userlogs ));
 	}
 
@@ -76,7 +75,6 @@ class LogbookController extends BaseLoggedInController
             'starttijd'     	=> 'required|date_format:H:i',      // just a normal required validation
 			'stoptijd'    	 	=> 'required|date_format:H:i',		// just a normal required validation
 			'date'    			=> 'required|date',                 // just a normal required validation
-			'log_categorie'    	=> 'required|alpha_num',            // just a normal required validation
         );
 
         // do the validation ----------------------------------
@@ -102,7 +100,6 @@ class LogbookController extends BaseLoggedInController
            	$userLog->date = 				Input::get('date');
            	$userLog->description = 		Input::get('omschrijving');
            	$userLog->task_id = 			Input::get('taak');
-           	$userLog->log_categorie_id = 	Input::get('log_categorie');
            	$userLog->user_id = 			Auth::id();
            	$userLog->save();
 		}
