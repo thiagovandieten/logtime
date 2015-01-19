@@ -71,7 +71,7 @@ class LogbookController extends BaseLoggedInController
 
 		// create the validation rules ------------------------
         $rules = array(
-            'omschrijving'      => 'required', 			// just a normal required validation
+            'omschrijving'      => 'requireds', 					// just a normal required validation
             'taak'        		=> 'required|alpha_num', 	        // just a normal required validation
             'starttijd'     	=> 'required|date_format:H:i',      // just a normal required validation
 			'stoptijd'    	 	=> 'required|date_format:H:i',		// just a normal required validation
@@ -89,7 +89,7 @@ class LogbookController extends BaseLoggedInController
 
             // get the error messages from the validator
             $messages = $validator->messages();
-            dd($messages , Input::all());
+
             // redirect our user back to the form with the errors from the validator
 			return Redirect::back()->with('message' ,  $messages);
 

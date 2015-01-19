@@ -135,7 +135,7 @@
                 {{{Form::select('categorie' , $userProjects['Categories'])}}}
                 {{{Form::select('taak' , $userProjects['Tasks'])}}}
                 {{{Form::text('date' , date('Y/m/d'), ['class'=>'datum-pop'] )}}}
-                {{{Form::text('starttijd' , '00:00'  , ['class' => 'uren'])}}
+                {{{Form::text('starttijd' , '00:00'  , ['class' => 'uren'])}}}
                 <p class="uren-tot">tot</p>
                 {{{Form::text('stoptijd' , '00:00'  , ['class' => 'uren'])}}}
                 {{{Form::textarea('omschrijving' , 'Omschrijving')}}}
