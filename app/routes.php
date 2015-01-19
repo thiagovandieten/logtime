@@ -68,12 +68,16 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     Route::post('studentsettings/delete',  'StudentSettingController@soft_delete');
     
     Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
-    Route::resource('projects', 'ProjectManagementController');
+
+    Route::resource('projects', 'Controllers\ProjectManagement\Leerling');
+
     Route::get('persoonlijke-instellingen', 'PersonalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'PersonalSettingsController@store');
     Route::post('persoonlijke-instellingen/wachtwoord-wijzigen', 'PersonalSettingsController@store');
+
     Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
     Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
+    
     Route::get('handleiding', 'GuideController@index');
 
     Route::resource('logboek',  'LogbookController');
@@ -83,11 +87,13 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     Route::get('klantinstellingen/wijzig/{id}', 'CustomerSettingsController@customer_settings_edit');
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
     Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
+
+    Route::resource('tasks', 'TasksController');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
 
-    Route::resource('projects', 'Controllers\ProjectManagement\DocentProjectManagement');
+    Route::resource('projects', 'Controllers\ProjectManagement\Docent');
 
 });
 

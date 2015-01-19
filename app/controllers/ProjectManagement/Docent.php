@@ -2,11 +2,10 @@
 namespace Controllers\ProjectManagement;
 
 /**
- * Class DocentProjectManagement
- * @package Controllers\ProjectManagement
+ * Class Docent
  * @Author Thiago van Dieten
  */
-class DocentProjectManagement extends \BaseLoggedInController {
+class Docent extends \BaseLoggedInController {
 
 	public function __construct()
 	{
