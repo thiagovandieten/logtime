@@ -1,6 +1,8 @@
 <?php
 
-class TasksController extends \BaseController {
+namespace Controllers\TaskManagement;
+
+class Leerling extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.

@@ -14,6 +14,7 @@ class BaseLoggedInController extends BaseController {
         {
             $this->user = Auth::user();
             $this->userFullName = \Auth::user()->first_name . ' ' . \Auth::user()->last_name;
+			
         }
 
         View::share(array(
