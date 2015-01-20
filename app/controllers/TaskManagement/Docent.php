@@ -1,25 +1,23 @@
 <?php
 
-namespace Controllers\ProjectManagement;
+namespace Controllers\TaskManagement;
 
-/**
- * Class Leerling
- * @Author Thiago van Dieten
- */
-
-class Leerling extends \BaseLoggedInController {
-
+class Docent extends \BaseLoggedInController {
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($projectId)
 	{
-		$projectGroup = \ProjectGroup::findOrFail(\Auth::user()->project_group_id);
-		$projects = $projectGroup->project()->get();
-		return \View::make('projectmanagement.index')->withProjects($projects);
+		$project = \Project::find($projectId);
+		$tasks = \Task::where('project_id', '=', $projectId)->get();
+
+		return \View::make('tasks.docent.index')->with(array(
+			'project' => $project,
+			'tasks' => $tasks
+		));
 	}
 
 
@@ -28,9 +26,9 @@ class Leerling extends \BaseLoggedInController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($projectId)
 	{
-		//
+		return \View::make('tasks.docent.create');
 	}
 
 
@@ -39,9 +37,9 @@ class Leerling extends \BaseLoggedInController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($projectId)
 	{
-		//
+		return Redirect::route('tasks.docent.index', $projectId);
 	}
 
 

@@ -15,9 +15,9 @@ class CreateUserLogsTable extends Migration {
 		Schema::create('user_logs', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->timestamp('start_time');
-            $table->timestamp('stop_time');
-            $table->timestamp('total_time_in_hours');
+            $table->time('start_time');
+            $table->time('stop_time');
+            $table->time('total_time_in_hours');
             $table->text('description');
             $table->date('date');
             $table->integer('user_id')->unsigned();

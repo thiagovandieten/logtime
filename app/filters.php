@@ -109,3 +109,9 @@ Route::filter('leerling', function(){
 		return Redirect::to('/');
 	}
 });
+
+Route::filter('geen_gegevens', function(){
+	if(Auth::user()->adress_id == 1){
+		return Redirect::to('eenmalige-gegevens');
+	}
+});

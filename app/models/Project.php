@@ -12,7 +12,7 @@ class Project extends Eloquent {
 
 	public function location()
 	{
-        return $this->hasOne('Location');
+        return $this->belongsTo('Location');
 	}
 
 	public function projectGroup()
@@ -27,7 +27,7 @@ class Project extends Eloquent {
 
 	public function LevelType()
 	{
-		return $this->hasOne('LevelType');
+		return $this->belongsTo('LevelType');
 	}
 
 	public function tasks()

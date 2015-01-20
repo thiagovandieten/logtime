@@ -17,5 +17,4 @@ class ZipcodeTableSeeder extends Seeder {
 		$zipcode->save();
 
 	}
-
 }

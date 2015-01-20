@@ -1,6 +1,7 @@
 @extends('template.main')
 
 @section('content')
+    <!-- TODO: PICO project generen -->
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <div class="filter-wrap">
         <div class="buttons-wrap">
@@ -50,9 +51,10 @@
                     <td><input type="checkbox"  style="display: block"></td>
                     <td><span>Leerjaar 2</span></td>
                     <td>Periode 1</td>
-                    <td><a href="#">Taken toevoegen</a></td>
+                    <td>{{HTML::linkRoute('docent.tasks.index', 'Taken beheren', $project->id)}}</td>
                     <td>{{$project->project_name}}</td>
                     <td>{{$project->updated_at}}</td>
+
 
                     <td>
                         {{Form::open(array('route' => array('docent.projects.edit',$project->id),
