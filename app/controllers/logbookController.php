@@ -66,8 +66,6 @@ class LogbookController extends BaseLoggedInController
 	 */
 	public function store()
 	{
-		//
-
 		// create the validation rules ------------------------
         $rules = array(
             'omschrijving'      => 'required', 					// just a normal required validation
@@ -130,10 +128,12 @@ class LogbookController extends BaseLoggedInController
 	public function edit($id)
 	{
 		$userlog = UserLog::find($id);
-		$userlogs[$userlog->id] = array(
-					 'task' => $userlog->task->task_name,
-					 'start_time' => $userlog->start_time ,
-					 'stop_time' => $userlog->stop_time ,
+		$userlogs = array(
+					 'task' => $userlog->task_id,
+					 'categorie' => $userlog->task->categorie_id,
+					 'project' => $userlog->task->project_id,
+					 'start_time' => date('H:i', (strtotime($userlog->start_time))) ,
+					 'stop_time' => date('H:i', (strtotime($userlog->stop_time))) ,
 					 'total_time_in_hours' => $userlog->total_time_in_hours ,
 					 'description' => $userlog->description ,
 					 'date' => $userlog->date ,
@@ -151,9 +151,43 @@ class LogbookController extends BaseLoggedInController
 	 */
 	public function update($id)
 	{
-		//
-	}
+		// create the validation rules ------------------------
+        $rules = array(
+            'omschrijving'      => 'required', 					// just a normal required validation
+            'taak'        		=> 'required|alpha_num', 	        // just a normal required validation
+            'starttijd'     	=> 'required|date_format:H:i',      // just a normal required validation
+			'stoptijd'    	 	=> 'required|date_format:H:i',		// just a normal required validation
+			'date'    			=> 'required|date',                 // just a normal required validation
+        );
 
+        // do the validation ----------------------------------
+        // validate against the inputs from our form
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        // check if the validator failed -----------------------
+        if ($validator->fails()) {
+
+            // get the error messages from the validator
+            $messages = $validator->messages();
+            dd($messages);
+            // redirect our user back to the form with the errors from the validator
+			return Redirect::back()->with('message' ,  $messages);
+		}
+		else{
+			$totalTime = date('H:i', mktime(0,(strtotime(Input::get('stoptijd')) - strtotime(Input::get('starttijd'))) / 60)) . ":00";
+        	$userLog = UserLog::find($id);
+           	$userLog->start_time = 			Input::get('starttijd');
+           	$userLog->stop_time = 			Input::get('stoptijd');
+           	$userLog->total_time_in_hours = $totalTime;
+           	$userLog->date = 				Input::get('date');
+           	$userLog->description = 		Input::get('omschrijving');
+           	$userLog->task_id = 			Input::get('taak');
+           	$userLog->user_id = 			Auth::id();
+           	$userLog->save();
+		}
+		return Redirect::to('logboek');
+	}
 
 	/**
 	 * Remove the specified resource from storage.

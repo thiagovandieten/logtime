@@ -1,14 +1,14 @@
 @extends('template.main')
 @section('content')
 <div class='topbatr'>
-  {{Form::open(array('route' => 'logboek.store', 'method' => 'POST')) }}
-      {{Form::select('project' , $userProjects['Projects'])}}
-      {{Form::select('categorie' , $userProjects['Categories'])}}
-      {{Form::select('taak' , $userProjects['Tasks'])}}
-      {{Form::text('date' , date('Y/m/d') )}}
-      {{Form::text('starttijd' , '00:00' , null , ['class' => 'uren'])}}
-      {{Form::text('stoptijd' , '00:00' , null , ['class' => 'uren'])}}
-      {{Form::textarea('omschrijving' , 'Omschrijving')}}
+  {{Form::open(array('route' => array('logboek.update' , $userlog['id']) , 'method' => 'PUT')) }}
+      {{Form::select('project' , $userProjects['Projects'] , $userlog['project'])}}
+      {{Form::select('categorie' , $userProjects['Categories'] , $userlog['categorie'])}}
+      {{Form::select('taak' , $userProjects['Tasks'] , $userlog['task'])}}
+      {{Form::text('date' , $userlog['date'] )}}
+      {{Form::text('starttijd' , $userlog['start_time'] , null , ['class' => 'uren'])}}
+      {{Form::text('stoptijd' , $userlog['stop_time'] , null , ['class' => 'uren'])}}
+      {{Form::textarea('omschrijving' , $userlog['description'])}}
     {{Form::submit('Bijwerken',['class' => 'Bijwerken'])}}
   {{Form::close() }}
 </div>
