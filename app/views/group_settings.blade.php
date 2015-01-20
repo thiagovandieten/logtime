@@ -4,7 +4,7 @@
 
 @if ($errors->has())
 		
-    @foreach ($errors->all() as $error)
+     @foreach ($errors->all(':message<br />') as $error)
         {{ $error }}		
     @endforeach
 

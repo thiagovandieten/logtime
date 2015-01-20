@@ -39,7 +39,7 @@
         <div id="notificationFooter"><a href="#">Bekijk alles</a></div>
     </div>
     {{--TODO:hier de link naar instellingen van leerling--}}
-    <a href="persoonlijke-instellingen">{{HTML::image('images/icons/instellingen-mob.png', 'Instellingen', array('class' => 'destop-instellingen', 'title' => 'Instellingen') )}}
+    <a href="/persoonlijke-instellingen">{{HTML::image('images/icons/instellingen-mob.png', 'Instellingen', array('class' => 'destop-instellingen', 'title' => 'Instellingen') )}}
         <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
     </a>
      @if(isset($user_avatar) && $user_avatar != '')
@@ -83,19 +83,26 @@
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left menu-mob-width cbp-spmenu-open" id="cbp-spmenu-s1">
     <div class="profiel-mob">
             {{HTML::image('images/'.$user_avatar, 'avatar', array('class' => 'avatar') )}}
-        <a href="persoonlijke-instellingen">
+        <a href="/persoonlijke-instellingen">
             <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
         </a>
             {{HTML::image('images/icons/instellingen-mob.png', 'Instellingen', array('class' => 'mob-instellingen', 'title' => 'Instellingen') )}}
     </div>
     <div style="clear:both"></div> <!-- AUB Clearfix gebruiken! -->
     @if($user_role == 1)
-    <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
-    <a href="/logboek"><span>{{HTML::image('images/icons/logboek.png', 'Logboek')}}</span>Logboek</a>
-    <a href="/projects"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
-    <a href="/groepsinstellingen"><span>{{HTML::image('images/icons/instellingen.png', 'Instellingen')}}</span>Groeps instellingen</a>
-    <a href="#"><span>{{HTML::image('images/icons/handleiding.png', 'Handleiding')}}</span>Handleiding</a>
-    <a href="/logout"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
+        <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
+        <a href="/logboek"><span>{{HTML::image('images/icons/logboek.png', 'Logboek')}}</span>Logboek</a>
+        <a href="/projects"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
+        <a href="#"><span>{{HTML::image('images/icons/handleiding.png', 'Handleiding')}}</span>Handleiding</a>
+        <a href="/logout"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
+    @endif
+    @if($user_role == 3)
+        <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
+        <a href="/logboek"><span>{{HTML::image('images/icons/logboek.png', 'Logboek')}}</span>Logboek</a>
+        <a href="/projects"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
+        <a href="/groepsinstellingen"><span>{{HTML::image('images/icons/instellingen.png', 'Instellingen')}}</span>Groeps instellingen</a>
+        <a href="#"><span>{{HTML::image('images/icons/handleiding.png', 'Handleiding')}}</span>Handleiding</a>
+        <a href="/logout"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
     @endif
     @if($user_role == 2)
         <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
@@ -167,13 +174,13 @@
         <section class="ac-container">
           @yield('content')
          </section>
-     {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
+        {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
         {{HTML::script(asset('js/notificatie.js')) }}
-                     {{HTML::script(asset('js/picker.js')) }}
-                     {{HTML::script(asset('js/picker.date.js')) }}
+        {{HTML::script(asset('js/picker.js')) }}
+        {{HTML::script(asset('js/picker.date.js')) }}
         {{HTML::script(asset('js/menuleft.js')) }}
-             {{HTML::script(asset('js/legacy.js')) }}
-             {{HTML::script(asset('js/Chart.js')) }}
+        {{HTML::script(asset('js/legacy.js')) }}
+        {{HTML::script(asset('js/Chart.js')) }}
         <!--TODO: Mijn editor zeurt dat hier een </div> ontbreekt, klopt dat? -->
         </body>
         </html><!---------------------Credits---------------------

@@ -104,9 +104,18 @@ class GroupSettingsController extends BaseLoggedInController {
             //'group_image'      => 'max:5000000|mimes:png',              // limited file size of 500kb
         );
         
+        $messages = array(
+            'group_name.required'       => 'De groepsnaam is verplicht',
+            'street.required'           => 'De straatnaam is verplicht',
+            'house_number.required'     => 'Het huisnummer is verplicht',
+            'zipcode.required'          => 'De postcode is verplicht',
+            'city.required'             => 'De woonplaats is verplicht',
+            'group_wage.required'       => 'Het uurloon is verplicht'
+        );
+        
         // do the validation ----------------------------------
         // validate against the inputs from our form
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $rules, $messages);
 
         // check if the validator failed -----------------------
         if ($validator->fails()) {

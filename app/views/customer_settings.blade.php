@@ -4,7 +4,7 @@
 
 @if ($errors->has())
 		
-    @foreach ($errors->all() as $error)
+     @foreach ($errors->all(':message<br />') as $error)
         {{ $error }}		
     @endforeach
 
@@ -15,7 +15,9 @@
     <div class="personal-settings">
 <h1>Selecteer een project</h1>
     </div>
-
+    
+   <p>{{ Session::get('message') }}</p> 
+    
 <table class="order-table table" cellspacing="0">
     <thead>
     <tr class="border_bottom">

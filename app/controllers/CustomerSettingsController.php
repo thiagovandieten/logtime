@@ -144,11 +144,13 @@ class CustomerSettingsController extends BaseLoggedInController {
             $street->save();
             $zipcode->save();
             $city->save();
+            
+            //$message = 'Het is gelukt';
 
 
             // redirect ----------------------------------------
             // redirect our user back to the form so they can do it all over again
-            return Redirect::to('klantinstellingen');
+            return Redirect::to('klantinstellingen')->with(array("message" => "De wijzigingen zijn succesvol opgeslagen!"));
 
         }
     }
