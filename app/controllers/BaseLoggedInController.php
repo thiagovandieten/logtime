@@ -15,13 +15,15 @@ class BaseLoggedInController extends BaseController {
             $this->userFullName = \Auth::user()->first_name . ' ' . \Auth::user()->last_name;
 			
 			if($this->user->adress_id == 1){
-				echo "Adres 1";	
+				return Redirect::to('eenmalige-gegevens');
 			}else{
-				echo "Adres 0";	
+				
 			}
 			
         }
-
+		
+		
+		
         View::share(array(
             'userFullName' => $this->userFullName,
             'user_avatar' => \Auth::user()->user_image_path,

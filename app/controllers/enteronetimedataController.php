@@ -173,10 +173,10 @@ class enteronetimedataController extends BaseLoggedInController {
 			
             // redirect ----------------------------------------
             // redirect our user back to the form so they can do it all over again
-			}
+			return Redirect::to('dashboard');}
 		
 			
-            	return Redirect::to('dashboard');
+            	
 			
 		}
 	}
