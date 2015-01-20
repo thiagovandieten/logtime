@@ -170,7 +170,7 @@ class LogbookController extends BaseLoggedInController
 
             // get the error messages from the validator
             $messages = $validator->messages();
-            dd($messages);
+
             // redirect our user back to the form with the errors from the validator
 			return Redirect::back()->with('message' ,  $messages);
 		}

@@ -52,13 +52,9 @@ Route::get('dashboard', array('as' => 'dashboard', 'before' => 'auth', 'uses' =>
 
 Route::get('handleiding', 'GuideController@index');
 
-Route::resource('logboek',  'LogbookController');
-
-Route::post('logbook/opslaan', 'logbookController@store');
-
 Route::group(array('before' => array('auth', 'leerling')), function()
 {
-    
+    Route::resource('logboek',  'LogbookController');
     Route::get('eenmalige-gegevens','enteronetimedataController@index');
 	Route::post('eenmalige-gegevens','enteronetimedataController@save');
     Route::resource('projects', 'ProjectManagementController');
@@ -68,13 +64,13 @@ Route::group(array('before' => array('auth', 'leerling')), function()
  	Route::resource('projects', 'Controllers\ProjectManagement\Leerling');
     Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
     Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
-    
+
     Route::get('handleiding', 'GuideController@index');
 
     Route::resource('logboek',  'LogbookController');
 
     Route::post('logbook/opslaan', 'logbookController@store');
-    
+
     Route::get('klantinstellingen/wijzig/{id}', 'CustomerSettingsController@customer_settings_edit');
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
     Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
@@ -93,6 +89,7 @@ Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), f
     Route::post('usersettings/delete',  'UserSettingsController@hard_delete');
 	Route::post('usersettings/wachtwoord-wijzigen', 'UserSettingsController@changepassword');
 	Route::resource('projects', 'Controllers\ProjectManagement\Docent');
+    Route::resource('teacherlogbook', 'TeacherLogbookController');
 
 });
 

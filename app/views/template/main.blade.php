@@ -122,6 +122,7 @@
     @if($user_role == 2)
         <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
         <a href="{{route('docent.projects.index')}}"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
+        <a href="{{route('docent.teacherlogbook.index')}}"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Logbook inzien</a>
         <a href="{{route('logout')}}"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
 
     @endif

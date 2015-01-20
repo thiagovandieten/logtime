@@ -39,7 +39,7 @@ class ProjectGroup extends Eloquent {
 
 	public function project()
 	{
-		return $this->belongsToMany('Project', 'group_project_periode')->withPivot('is_done')->withTimestamps();
+		return $this->belongsToMany('Project', 'group_project_periode', 'project_group_id')->withPivot('is_done')->withTimestamps();
 	}
 
 	public function levelType()
