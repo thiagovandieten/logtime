@@ -10,7 +10,9 @@
         "laravel/framework": "4.2.*",
         "guzzlehttp/guzzle": "~4.0",
         "indatus/dispatcher": "~1.4",
-        "schickling/backup" : "~0.6"
+        "schickling/backup" : "~0.6",
+        "dompdf/dompdf" : "0.6.*"
+       
     },
     "autoload": {
         "classmap": [
@@ -44,4 +46,7 @@
         "preferred-install": "dist"
     },
     "minimum-stability": "stable"
+    
 }
+
+

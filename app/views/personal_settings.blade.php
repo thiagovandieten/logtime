@@ -4,14 +4,17 @@
 
 @if ($errors->has())
 		
-    @foreach ($errors->all() as $error)
-       <div style="color: red"> {{ $error }}</div>
+    @foreach ($errors->all(':message<br />') as $error)
+        {{ $error }}		
     @endforeach
 
 @endif
 
 <div class="personal-settings">
 <h1>Persoonlijke gegevens</h1>
+    
+    <p>{{ Session::get('message') }}</p> 
+    
 {{Form::open(array('url' => 'persoonlijke-instellingen/opslaan', 'files' => true, 'method' => 'post')) }}
     <div class="img-omvang">
 <img src="/images/{{$personal_data['avatar']}}" width="150" />

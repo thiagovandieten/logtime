@@ -56,15 +56,32 @@ Route::resource('logboek',  'LogbookController');
 
 Route::post('logbook/opslaan', 'logbookController@store');
 
+
+//Student settings
+Route::group(array('before' => array('auth', 'leerling')), function()
+{
+	Route::get('studentsettings',  'StudentSettingController@index');
+	Route::post('studentsettings/edit',  'StudentSettingController@edit');
+	Route::post('studentsettings/save',  'StudentSettingController@save');
+	Route::get('studentsettings/create',  'StudentSettingController@create');
+	Route::post('studentsettings/create',  'StudentSettingController@save_new_user');
+	Route::get('studentsettings/delete',  'StudentSettingController@delete');
+	Route::post('studentsettings/delete',  'StudentSettingController@hard_delete');
+});
+
+
+
 Route::group(array('before' => array('auth', 'leerling')), function()
 {
     
     Route::get('eenmalige-gegevens','enteronetimedataController@index');
 	Route::post('eenmalige-gegevens','enteronetimedataController@save');
+    
     Route::resource('projects', 'ProjectManagementController');
     Route::get('persoonlijke-instellingen', 'PersonalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'PersonalSettingsController@store');
     Route::post('persoonlijke-instellingen/wachtwoord-wijzigen', 'PersonalSettingsController@store');
+
  	Route::resource('projects', 'Controllers\ProjectManagement\Leerling');
     Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
     Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
@@ -74,10 +91,23 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     Route::resource('logboek',  'LogbookController');
 
     Route::post('logbook/opslaan', 'logbookController@store');
-    
+});
+
+Route::group(array('before' => array('auth', 'projectleider')), function(){
+
+    Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
+    Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
+             
     Route::get('klantinstellingen/wijzig/{id}', 'CustomerSettingsController@customer_settings_edit');
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
     Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
+    
+    Route::resource('projects', 'Controllers\ProjectManagement\Leerling');
+    Route::get('handleiding', 'GuideController@index');
+
+    Route::resource('logboek',  'LogbookController');
+
+    Route::post('logbook/opslaan', 'logbookController@store');
 
     Route::resource('tasks', 'TasksController');
 });
