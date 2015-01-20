@@ -5,7 +5,7 @@
 @if ($errors->has())
 		
     @foreach ($errors->all() as $error)
-        {{ $error }}		
+        <div style="color: red"> {{ $error }}	</div>
     @endforeach
 
 @endif

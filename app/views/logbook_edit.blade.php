@@ -1,6 +1,7 @@
 @extends('template.main')
 @section('content')
-<div class='topbatr'>
+<div class='personal-settings'>
+    <h1>Aanpassen</h1>
   {{Form::open(array('route' => array('logboek.update' , $userlog['id']) , 'method' => 'PUT')) }}
       {{Form::select('project' , $userProjects['Projects'] , $userlog['project'])}}
       {{Form::select('categorie' , $userProjects['Categories'] , $userlog['categorie'])}}
