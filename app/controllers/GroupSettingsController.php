@@ -154,7 +154,7 @@ class GroupSettingsController extends BaseLoggedInController {
 
             // redirect ----------------------------------------
             // redirect our user back to the form so they can do it all over again
-            return Redirect::to('groepsinstellingen');
+            return Redirect::to('groepsinstellingen')->with(array("message" => "De wijzigingen zijn succesvol opgeslagen!"));
 
         }
     }
