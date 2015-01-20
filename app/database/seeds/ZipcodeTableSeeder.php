@@ -13,9 +13,8 @@ class ZipcodeTableSeeder extends Seeder {
 
 		$zipcode = new Zipcode();
 
-		$zipcode->Zipcode = "3882 BJ";
+		$zipcode->Zipcode = "";
 		$zipcode->save();
 
 	}
-
 }

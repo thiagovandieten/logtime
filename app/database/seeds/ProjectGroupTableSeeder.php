@@ -18,6 +18,7 @@ class ProjectGroupTableSeeder extends Seeder {
 		$projectGroup->active = 1;
 		$projectGroup->adress_id = 1;
 		$projectGroup->year_id = 1;
+		$projectGroup->location_id = 1;
 		$projectGroup->save();
 	}
 

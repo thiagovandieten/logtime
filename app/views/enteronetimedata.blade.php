@@ -18,29 +18,35 @@
 <div class="eenmalig-wrap">
 <h1>Voer uw gegevens in</h1>
 <div class="error eenmalig-error">
-[hier komt error berichten]
+@if ($errors->has())
+		
+    @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>		
+    @endforeach
+
+@endif
 </div>
 <div class="upload-foto">
 <img src="images/{{$user_avatar}}" alt="avatar" title="Avatar">
 <input type="submit" value="Wijzigen">
 </div>
-<input type="text" placeholder="Voornaam">
-<input type="text" placeholder="Achternaam">
-<input type="text" placeholder="Adres" class="adres">
-<input type="text" placeholder="Postcode" class="postcode">
-<input type="text" placeholder="Woonplaats">
-<input type="text" placeholder="Telefoonnummer">
-<input type="submit" value="Opslaan">
+
+
+{{Form::open(array('action' => 'enteronetimedataController@save', 'files' => true, 'method' => 'post')) }}
+{{Form::text('first_name','',  ['placeholder' => 'voornaam']) }}
+{{Form::text('last_name','', ['placeholder' => 'achternaam']) }}
+{{Form::text('street','',  ['placeholder' => 'Straatnaam', 'class' => 'adres']) }}
+{{Form::text('zipcode','',  ['placeholder' => 'Postcode', 'class' => 'postcode']) }}
+{{Form::text('house_number','',  ['placeholder' => 'Huisnummer']) }}
+{{Form::text('city','', ['placeholder' => 'Woonplaats']) }}
+{{Form::text('phone_number','',  ['placeholder' => 'telefoonnummer']) }}
+{{Form::submit('Opslaan')}}
+{{ Form::close() }}
+
 </div>
 
-
-
-
-
-
-
 <script>
-  $.backstretch( "{{asset("images/bg.png")}}" );
+  $.backstretch( "{{asset('images/bg.png')}}" );
 </script>
 
 

@@ -31,9 +31,9 @@ class dashboardController extends BaseLoggedInController {
 
 			//Project Group ID ophalen
 			$this->group_id = $this->user->project_group_id;
-
-			$this->projects = ProjectGroup::find($this->group_id)->project;
-
+			if(!empty($this->group_id)){
+				$this->projects = ProjectGroup::find($this->group_id)->project;
+			}
 		}
 
 		return View::make('dashboard')->with(array(

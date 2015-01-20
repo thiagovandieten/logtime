@@ -68,16 +68,21 @@
             </thead>
             @foreach ($projects as $project)
             <tr>
+
                 <td><input type="checkbox"  style="display: block"></td>
                 <td><span>Leerjaar 2</span></td>
                 <td>Periode 1</td>
-                <td>Klas 1D0W</td>
+                {{--<td>Klas 1D0W</td>--}}
                 <td>{{$project->project_name}}</td>
                 <td>{{$project->updated_at}}</td>
+
+
+
                 <td><div class="progress">
                         <div data-percentage="0%" style="width: 75%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div> <p>75%</p></td>
             </tr>
+
             @endforeach
 
         </table>

@@ -11,5 +11,4 @@ class Year extends Eloquent {
 	{
 		return $this->belongsTo('Location');
 	}
-
 }

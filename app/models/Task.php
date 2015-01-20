@@ -4,19 +4,19 @@ class Task extends Eloquent {
 
 	protected $fillable = [];
 
-	public function projects()
+	public function project()
 	{
-		return $table->hasOne('Project');
+		return $table->belongsTo('Project');
 	}
 
 	public function leveltype()
 	{
-		return $this->hasOne('LevelType');
+		return $this->belongsTo('LevelType', 'level_type_id');
 	}
 
 	public function categorie()
 	{
-		return $this->hasOne('Categorie');
+		return $this->belongsTo('Categorie');
 	}
 
 	public function estimatedTimes()
@@ -27,5 +27,10 @@ class Task extends Eloquent {
 	public function userLogs()
 	{
 		return $this->hasMany('UserLog');
+	}
+
+	public function projectGroups()
+	{
+		return $this->hasmany('ProjectGroup');
 	}
 }

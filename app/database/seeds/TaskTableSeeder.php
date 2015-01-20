@@ -9,6 +9,7 @@ class TaskTableSeeder extends Seeder {
 		$task->project_id = 1;
 		$task->categorie_id = 1;
 		$task->level_type_id = 1;
+		$task->project_group_id = 1;
 		$task->save();
 
 

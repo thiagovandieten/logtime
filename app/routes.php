@@ -69,13 +69,23 @@ Route::group(array('before' => array('auth', 'leerling')), function()
 	Route::post('studentsettings/delete',  'StudentSettingController@hard_delete');
 });
 
+
+
 Route::group(array('before' => array('auth', 'leerling')), function()
 {
-    Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
+    
+    Route::get('eenmalige-gegevens','enteronetimedataController@index');
+	Route::post('eenmalige-gegevens','enteronetimedataController@save');
+    
     Route::resource('projects', 'ProjectManagementController');
     Route::get('persoonlijke-instellingen', 'PersonalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'PersonalSettingsController@store');
     Route::post('persoonlijke-instellingen/wachtwoord-wijzigen', 'PersonalSettingsController@store');
+
+ 	Route::resource('projects', 'Controllers\ProjectManagement\Leerling');
+    Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
+    Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
+    
     Route::get('handleiding', 'GuideController@index');
 
     Route::resource('logboek',  'LogbookController');
@@ -92,7 +102,6 @@ Route::group(array('before' => array('auth', 'projectleider')), function(){
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
     Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
     
-    Route::get('eenmalige-gegevens','enteronetimedataController@showWelcome');
     Route::resource('projects', 'ProjectManagementController');
     Route::get('handleiding', 'GuideController@index');
 
@@ -100,11 +109,20 @@ Route::group(array('before' => array('auth', 'projectleider')), function(){
 
     Route::post('logbook/opslaan', 'logbookController@store');
 
+    Route::resource('tasks', 'TasksController');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
-
     Route::resource('projects', 'Controllers\ProjectManagement\DocentProjectManagement');
+	Route::get('usersettings',  'UserSettingsController@index');
+    Route::post('usersettings/edit',  'UserSettingsController@edit');
+    Route::post('usersettings/save',  'UserSettingsController@save');
+    Route::get('usersettings/create',  'UserSettingsController@create');
+    Route::post('usersettings/create',  'UserSettingsController@save_new_user');
+    Route::get('usersettings/delete',  'UserSettingsController@delete');
+    Route::post('usersettings/delete',  'UserSettingsController@hard_delete');
+	Route::post('usersettings/wachtwoord-wijzigen', 'UserSettingsController@changepassword');
+	Route::resource('projects', 'Controllers\ProjectManagement\Docent');
 
 });
 

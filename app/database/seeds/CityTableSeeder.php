@@ -13,7 +13,7 @@ class CityTableSeeder extends Seeder {
 
 		$city = new City();
 
-		$city->city = "Epe";
+		$city->city = "";
 		$city->save();
 
 	}

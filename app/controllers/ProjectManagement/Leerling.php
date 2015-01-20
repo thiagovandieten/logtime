@@ -1,6 +1,13 @@
 <?php
 
-class ProjectManagementController extends BaseLoggedInController {
+namespace Controllers\ProjectManagement;
+
+/**
+ * Class Leerling
+ * @Author Thiago van Dieten
+ */
+
+class Leerling extends \BaseLoggedInController {
 
 
 	/**
@@ -10,9 +17,9 @@ class ProjectManagementController extends BaseLoggedInController {
 	 */
 	public function index()
 	{
-		$projectGroup = ProjectGroup::findOrFail(Auth::user()->project_group_id);
+		$projectGroup = \ProjectGroup::findOrFail(\Auth::user()->project_group_id);
 		$projects = $projectGroup->project()->get();
-		return View::make('projectmanagement.index')->withProjects($projects);
+		return \View::make('projectmanagement.index')->withProjects($projects);
 	}
 
 
