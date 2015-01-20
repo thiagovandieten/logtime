@@ -78,8 +78,6 @@ Route::group(array('before' => array('auth', 'leerling')), function()
     Route::get('klantinstellingen/wijzig/{id}', 'CustomerSettingsController@customer_settings_edit');
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
     Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
-
-    Route::resource('tasks', 'TasksController');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
@@ -94,6 +92,12 @@ Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), f
 	Route::post('usersettings/wachtwoord-wijzigen', 'UserSettingsController@changepassword');
 	Route::resource('projects', 'Controllers\ProjectManagement\Docent');
 
+    Route::get('projects/{projectId}/1', array(
+        'as' => 'docent.tasks.index',
+        'uses' => 'Controllers\TaskManagement\Docent@index'));
+    Route::get('projects/{projectId}/1/create', array(
+        'as' => 'docent.tasks.create',
+        'uses' => 'Controllers\TaskManagement\Docent@create'));
 });
 
 
