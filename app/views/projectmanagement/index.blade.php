@@ -60,7 +60,6 @@
                 <td style="color: #666; width: 3%">#</td>
                 <td style="color: #666; width: 10%">Leerjaar</td>
                 <td style="color: #666; width: 10%">Periode</td>
-                <td style="color: #666; width: 10%">Klas</td>
                 <td style="color: #666; width: 30%">Projectnaam</td>
                 <td style="color: #666">Laats geupdated</td>
                 <td style="color: #666">Voortgang</td>

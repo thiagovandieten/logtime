@@ -80,6 +80,27 @@
             <span>12 feb 2014 12:45</span>
         </div>
     </nav>
+    <script src="http://code.jquery.com/jquery-latest.min.js"
+            type="text/javascript"></script>
+    <script>
+        $(document).ready(
+                function() {
+                    $("#urend").click(function() {
+                        $("#urenreg").toggle();
+                    });
+                });
+
+        $(document).mouseup(function (e)
+        {
+            var container = $("#urenreg");
+
+            if (!container.is(e.target) // if the target of the click isn't the container...
+                    && container.has(e.target).length === 0) // ... nor a descendant of the container
+            {
+                container.hide();
+            }
+        });
+    </script>
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left menu-mob-width cbp-spmenu-open" id="cbp-spmenu-s1">
     <div class="profiel-mob">
             {{HTML::image('images/'.$user_avatar, 'avatar', array('class' => 'avatar') )}}
@@ -98,11 +119,13 @@
     @endif
     @if($user_role == 3)
         <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
+        <div id="urend"> <a href="#"><span>{{HTML::image('images/icons/urenreg.png', 'uren')}}</span>Uren registreren</a></div>
         <a href="/logboek"><span>{{HTML::image('images/icons/logboek.png', 'Logboek')}}</span>Logboek</a>
         <a href="/projects"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
         <a href="/groepsinstellingen"><span>{{HTML::image('images/icons/instellingen.png', 'Instellingen')}}</span>Groeps instellingen</a>
         <a href="#"><span>{{HTML::image('images/icons/handleiding.png', 'Handleiding')}}</span>Handleiding</a>
         <a href="/logout"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
+
     @endif
     @if($user_role == 2)
         <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
@@ -110,20 +133,24 @@
         <a href="{{route('logout')}}"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
 
     @endif
-    @if($user_role == 1)
-    <h2>Uren bijwerken</h2>
-          {{Form::open(array('route' => 'logboek.store', 'method' => 'POST')) }}
-              {{Form::select('log categorie' , $userProjects['Log_Categories'])}}
-              {{Form::select('project' , $userProjects['Projects'])}}
-              {{Form::select('categorie' , $userProjects['Categories'])}}
-              {{Form::select('taak' , $userProjects['Tasks'])}}
-              {{Form::text('date' , date('Y/m/d') )}}
-              {{Form::text('starttijd' , '00:00' , null , ['class' => 'uren'])}}
-              {{Form::text('stoptijd' , '00:00' , null , ['class' => 'uren'])}}
-              {{Form::textarea('omschrijving' , 'Omschrijving')}}
-            {{Form::submit('Bijwerken',['class' => 'Bijwerken'])}}
-          {{Form::close() }}
-        @endif
+
+    <div id="urenreg">
+        <div class="uren-wrapper"> @if($user_role == 1)
+                <h2>Uren bijwerken</h2>
+                {{Form::open(array('route' => 'logboek.store', 'method' => 'POST')) }}
+                {{Form::select('project' , $userProjects['Projects'])}}
+                {{Form::select('taak' , $userProjects['Tasks'])}}
+                {{Form::text('date' , date('Y/m/d'), ['class'=>'datum-pop'] )}}
+                {{Form::text('starttijd' , '00:00'  , ['class' => 'uren'])}}
+                <p class="uren-tot">tot</p>
+                {{Form::text('stoptijd' , '00:00'  , ['class' => 'uren'])}}
+                {{Form::textarea('omschrijving' , 'Omschrijving')}}
+                {{Form::submit('Bijwerken', ['class' => 'bijwerken'])}}
+                {{Form::close() }}
+            @endif</div>
+    </div>
+
+
 </nav>
     <section class="ac-container container-mob">
     <div>

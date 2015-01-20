@@ -37,3 +37,4 @@
     <img src="images/foto.jpg" class="avatar" alt="avatar">
 
 </div>
+

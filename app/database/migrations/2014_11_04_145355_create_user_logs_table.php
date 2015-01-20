@@ -22,8 +22,6 @@ class CreateUserLogsTable extends Migration {
             $table->date('date');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('log_categorie_id')->unsigned();
-            $table->foreign('log_categorie_id')->references('id')->on('log_categories');
             $table->integer('task_id')->unsigned();
             $table->foreign('task_id')->references('id')->on('tasks');
             $table->timestamps();

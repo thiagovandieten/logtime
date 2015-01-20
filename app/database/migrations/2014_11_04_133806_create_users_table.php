@@ -38,7 +38,8 @@ class CreateUsersTable extends Migration {
 
 		Schema::table('project_groups', function(Blueprint $table)
 		{
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('coach_id')->references('id')->on('users');
+            $table->foreign('leader_id')->references('id')->on('users');
         });
 	}
 
@@ -51,7 +52,8 @@ class CreateUsersTable extends Migration {
 	{
 		Schema::table('project_groups', function(Blueprint $table)
 		{
-            $table->dropForeign('project_groups_user_id_foreign');
+            $table->dropForeign('project_groups_coach_id_foreign');
+            $table->dropForeign('project_groups_leader_id_foreign');
         });
 		Schema::drop('users');
 	}
