@@ -92,12 +92,15 @@ Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), f
 	Route::post('usersettings/wachtwoord-wijzigen', 'UserSettingsController@changepassword');
 	Route::resource('projects', 'Controllers\ProjectManagement\Docent');
 
-    Route::get('projects/{projectId}/1', array(
+    Route::get('projects/{projectId}/taken', array(
         'as' => 'docent.tasks.index',
         'uses' => 'Controllers\TaskManagement\Docent@index'));
-    Route::get('projects/{projectId}/1/create', array(
+    Route::get('projects/{projectId}/taken/create', array(
         'as' => 'docent.tasks.create',
         'uses' => 'Controllers\TaskManagement\Docent@create'));
+    Route::get('projects/{projectId}/taken/edit/{$taskId}', array(
+        'as' => 'docent.tasks.edit',
+        'uses' => 'Controllers\TaskManagement\Docent@edit'));
 });
 
 

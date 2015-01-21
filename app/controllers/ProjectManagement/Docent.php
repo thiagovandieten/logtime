@@ -124,7 +124,7 @@ class Docent extends \BaseLoggedInController {
 			'project_name.required' => 'Project naam is niet ingevuld!'
 		);
 
-		$validator = Validator::make(Input::all(), $rules, $messages);
+		$validator = \Validator::make(\Input::all(), $rules, $messages);
 		//Refactor voor hergebruik
 		$location = \Auth::user()->location_id;
 
@@ -179,6 +179,7 @@ class Docent extends \BaseLoggedInController {
 	 * @param ProjectGroups $projectGroups
 	 * @return array
      */
+
 	public function extractProjectIds($projectGroups)
 	{
 		$projects = array();
