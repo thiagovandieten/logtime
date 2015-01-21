@@ -56,8 +56,9 @@ Route::resource('logboek',  'LogbookController');
 
 Route::post('logbook/opslaan', 'logbookController@store');
 
-//Eenmalige-gegevens groep
-Route::group(array('before' => array('auth', 'leerling')), function(){
+Route::group(array('before' => array('auth', 'leerling')), function()
+{
+    
     Route::get('eenmalige-gegevens','enteronetimedataController@index');
     Route::post('eenmalige-gegevens','enteronetimedataController@save');
 });
@@ -81,9 +82,12 @@ Route::group(array('before' => array('auth', 'leerling', 'geen_gegevens')), func
     Route::get('klantinstellingen/wijzig/{id}', 'CustomerSettingsController@customer_settings_edit');
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
     Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
+
+    Route::resource('tasks', 'TasksController');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
+    Route::resource('projects', 'Controllers\ProjectManagement\DocentProjectManagement');
 	Route::get('usersettings',  'UserSettingsController@index');
     Route::post('usersettings/edit',  'UserSettingsController@edit');
     Route::post('usersettings/save',  'UserSettingsController@save');
@@ -92,6 +96,8 @@ Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), f
     Route::get('usersettings/delete',  'UserSettingsController@delete');
     Route::post('usersettings/delete',  'UserSettingsController@hard_delete');
 	Route::post('usersettings/wachtwoord-wijzigen', 'UserSettingsController@changepassword');
+	Route::resource('projects', 'Controllers\ProjectManagement\Docent');
+    Route::resource('teacherlogbook', 'TeacherLogbookController');
 
     Route::resource('projects', 'Controllers\ProjectManagement\Docent');
 

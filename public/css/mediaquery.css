@@ -88,6 +88,9 @@
         width: 100%!important;
         text-align: center;
     }
+    #urend{
+        display: none;
+    }
 
 }
 

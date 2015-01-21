@@ -205,13 +205,13 @@
                             </div>
 
 </section>
-            <!---hier eindigt de inhoud--->
-
+        <!---hier eindigt de inhoud--->
 
             </article>
         </div>
     @endforeach
     @endif
+
 @stop
 <!-- Fast Fill new project -->
 @section('fast_fill')

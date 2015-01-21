@@ -82,7 +82,7 @@ class Docent extends \BaseLoggedInController {
          * Sla de project naam op bij projects.project_name
          * Koppel de level_type aan de project
          * Kijk welke groepen deze project krijgen
-         * VOEG NOG DE PERIODE 
+         * VOEG NOG DE PERIODE
          */
         $project = new \Project();
         $project->project_name = \Input::get('project_name');

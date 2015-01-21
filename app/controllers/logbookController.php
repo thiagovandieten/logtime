@@ -16,25 +16,22 @@ class LogbookController extends BaseLoggedInController
 		*/
 		$user = Auth::user();
 		$projectGroupId = $user->project_group_id;
-		$logCategories = LogCategorie::where( 'project_group_id' , '=' , $projectGroupId )->get();
-		foreach ($logCategories as $logC)
-		{
-			$userLogCategorie[$logC->id] = $logC->log_categorie_name;
-		}
 
 		/**
 		* userlogs wordt hier op gehaalt chunk omdat de user_logs table zich heel snel gaat opfullen
 		*chunK($aantal rijen , function($rijen) [use ($variable , &$wijzigbaar )])
 		*/
 		$userlogs = array();
-		Userlog::chunk(200, function($logs) use (&$userlogs , $user , $userLogCategorie)
+		Userlog::chunk(200, function($logs) use (&$userlogs , $user )
 		{
 			foreach ($logs as $log)
 			{
 				if($user->id == $log->user_id)
 				{
-					$userlogs[$log->id] = array('log_categorie' => $userLogCategorie[$log->log_categorie_id] ,
+					$userlogs[$log->id] = array(
 					 'task' => $log->task->task_name,
+					 'project' => $log->task->project->project_name,
+					 'categorie' => $log->task->categorie->categorie_name,
 					 'start_time' => $log->start_time ,
 					 'stop_time' => $log->stop_time ,
 					 'total_time_in_hours' => $log->total_time_in_hours ,
@@ -45,6 +42,10 @@ class LogbookController extends BaseLoggedInController
 				}
 			}
 		});
+		function sortFunction( $a, $b ) {
+    		return strtotime($a["date"]) - strtotime($b["date"]);
+		}
+		usort($userlogs, "sortFunction");
 		return View::make('logbook')->with(array('userFullName' => $this->userFullName, 'userlogs' => $userlogs ));
 	}
 
@@ -67,16 +68,13 @@ class LogbookController extends BaseLoggedInController
 	 */
 	public function store()
 	{
-		//
-
 		// create the validation rules ------------------------
         $rules = array(
-            'omschrijving'       => 'required|alpha_dash', 			// just a normal required validation
+            'omschrijving'      => 'required', 					// just a normal required validation
             'taak'        		=> 'required|alpha_num', 	        // just a normal required validation
             'starttijd'     	=> 'required|date_format:H:i',      // just a normal required validation
 			'stoptijd'    	 	=> 'required|date_format:H:i',		// just a normal required validation
 			'date'    			=> 'required|date',                 // just a normal required validation
-			'log_categorie'    	=> 'required|alpha_num',            // just a normal required validation
         );
 
         // do the validation ----------------------------------
@@ -102,7 +100,6 @@ class LogbookController extends BaseLoggedInController
            	$userLog->date = 				Input::get('date');
            	$userLog->description = 		Input::get('omschrijving');
            	$userLog->task_id = 			Input::get('taak');
-           	$userLog->log_categorie_id = 	Input::get('log_categorie');
            	$userLog->user_id = 			Auth::id();
            	$userLog->save();
 		}
@@ -132,10 +129,19 @@ class LogbookController extends BaseLoggedInController
 	 */
 	public function edit($id)
 	{
-		$userLog = UserLog::find($id);
-		$task = $userLog->task;
-
-		return View::make('logbook_edit')->with(array('userlog' => $userLog));
+		$userlog = UserLog::find($id);
+		$userlogs = array(
+					 'task' => $userlog->task_id,
+					 'categorie' => $userlog->task->categorie_id,
+					 'project' => $userlog->task->project_id,
+					 'start_time' => date('H:i', (strtotime($userlog->start_time))) ,
+					 'stop_time' => date('H:i', (strtotime($userlog->stop_time))) ,
+					 'total_time_in_hours' => $userlog->total_time_in_hours ,
+					 'description' => $userlog->description ,
+					 'date' => $userlog->date ,
+					 'id' => $userlog->id
+					 );
+		return View::make('logbook_edit')->with(array('userlog' => $userlogs));
 	}
 
 
@@ -147,9 +153,43 @@ class LogbookController extends BaseLoggedInController
 	 */
 	public function update($id)
 	{
-		//
-	}
+		// create the validation rules ------------------------
+        $rules = array(
+            'omschrijving'      => 'required', 					// just a normal required validation
+            'taak'        		=> 'required|alpha_num', 	        // just a normal required validation
+            'starttijd'     	=> 'required|date_format:H:i',      // just a normal required validation
+			'stoptijd'    	 	=> 'required|date_format:H:i',		// just a normal required validation
+			'date'    			=> 'required|date',                 // just a normal required validation
+        );
 
+        // do the validation ----------------------------------
+        // validate against the inputs from our form
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        // check if the validator failed -----------------------
+        if ($validator->fails()) {
+
+            // get the error messages from the validator
+            $messages = $validator->messages();
+
+            // redirect our user back to the form with the errors from the validator
+			return Redirect::back()->with('message' ,  $messages);
+		}
+		else{
+			$totalTime = date('H:i', mktime(0,(strtotime(Input::get('stoptijd')) - strtotime(Input::get('starttijd'))) / 60)) . ":00";
+        	$userLog = UserLog::find($id);
+           	$userLog->start_time = 			Input::get('starttijd');
+           	$userLog->stop_time = 			Input::get('stoptijd');
+           	$userLog->total_time_in_hours = $totalTime;
+           	$userLog->date = 				Input::get('date');
+           	$userLog->description = 		Input::get('omschrijving');
+           	$userLog->task_id = 			Input::get('taak');
+           	$userLog->user_id = 			Auth::id();
+           	$userLog->save();
+		}
+		return Redirect::to('logboek');
+	}
 
 	/**
 	 * Remove the specified resource from storage.
@@ -161,7 +201,7 @@ class LogbookController extends BaseLoggedInController
 	{
 		$row = ['id' => $id , 'user_id' => Auth::id()];
 		Userlog::where($row)->delete();
-		return Redirect::back()->with('message' , 'opgeslagen');
+		return Redirect::back()->with('message' , 'verwijdert');
 	}
 
 
