@@ -43,7 +43,7 @@ class CustomerSettingsController extends BaseLoggedInController {
         //dd($projecten);
            
        
-        //var_dump($project_id);
+        //var_dump($project_id); 
                     
         return View::make('customer_settings')->with(array('projecten' => $project, 'customers' => $customer));
         
