@@ -44,7 +44,7 @@
             </td>
            <td><a href="/klantinstellingen/wijzig/{{$project->id}}"><button class="studenten-bewerken">Bewerken</button</a></td>
          </tr>
-    @endforeach 
+    @endforeach  
 
 </table>
     <script>

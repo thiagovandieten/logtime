@@ -8,7 +8,7 @@
         {{ $error }}		
     @endforeach
 
-@endif
+@endif 
 <div class="personal-settings">
     <h1 style="padding-bottom: 10px;">Klantgegevens</h1>
         
