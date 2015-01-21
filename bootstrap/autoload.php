@@ -73,3 +73,16 @@ if (is_dir($workbench = __DIR__.'/../workbench'))
 {
 	Illuminate\Workbench\Starter::start($workbench);
 }
+
+/*
+|--------------------------------------------------------------------------
+| Disable DOMPDF
+|--------------------------------------------------------------------------
+|
+| disable DOMPDF's internal autoloader if you are using Composer
+|
+*/
+
+    define('DOMPDF_ENABLE_AUTOLOAD', false);
+
+    require_once __DIR__.'/../vendor/dompdf/dompdf/dompdf_config.inc.php';

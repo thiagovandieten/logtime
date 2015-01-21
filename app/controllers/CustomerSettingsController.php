@@ -108,9 +108,18 @@ class CustomerSettingsController extends BaseLoggedInController {
             'city'             => 'required' 	                    // just a normal required validation
         );
         
+        $messages = array(
+                'customer_name.required'    => 'De naam is verplicht',
+                'company.required'          => 'De bedrijfsnaam is verplicht',
+                'street.required'           => 'De straatnaam is verplicht',
+                'house_number.required'     => 'Het huisnummer is verplicht',
+                'zipcode.required'          => 'De postcode is verplicht',
+                'city.required'             => 'De woonplaats is verplicht'
+             );
+        
         // do the validation ----------------------------------
         // validate against the inputs from our form
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $rules, $messages);
 
         // check if the validator failed -----------------------
         if ($validator->fails()) {
@@ -119,7 +128,7 @@ class CustomerSettingsController extends BaseLoggedInController {
             $messages = $validator->messages('Er is iets fout gegaan');
 
             // redirect our user back to the form with the errors from the validator
-            return Redirect::to('klantsinstellingen')
+            return Redirect::to('klantinstellingen')
                 ->withErrors($validator);
 
         } else {
@@ -144,11 +153,13 @@ class CustomerSettingsController extends BaseLoggedInController {
             $street->save();
             $zipcode->save();
             $city->save();
+            
+            //$message = 'Het is gelukt';
 
 
             // redirect ----------------------------------------
             // redirect our user back to the form so they can do it all over again
-            return Redirect::to('klantinstellingen');
+            return Redirect::to('klantinstellingen')->with(array("message" => "De wijzigingen zijn succesvol opgeslagen!"));
 
         }
     }

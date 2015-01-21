@@ -104,7 +104,14 @@ Route::filter('docent', function(){
 });
 
 Route::filter('leerling', function(){
-	if(Auth::user()->user_type['user_type'] != 'Leerling')
+	if(Auth::user()->user_type['user_type'] != 'Leerling' && Auth::user()->user_type['user_type'] != 'Projectleider')
+	{
+		return Redirect::to('/');
+	}
+});
+
+Route::filter('projectleider', function(){
+	if(Auth::user()->user_type['user_type'] != 'Projectleider')
 	{
 		return Redirect::to('/');
 	}

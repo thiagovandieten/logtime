@@ -21,7 +21,8 @@ class PersonalSettingsController extends BaseLoggedInController {
                                    'street' => $street->street, 'house_number' => $street->house_number,
                                    'city' => $city->city, 'zipcode' => $zipcode->zipcode, 'old_password' => $user->password);
 
-            return View::make('personal_settings')->with(array
+        
+        return View::make('personal_settings')->with(array
                 ('personal_data' => $personal_data));
         
     }
@@ -90,13 +91,21 @@ class PersonalSettingsController extends BaseLoggedInController {
                 'zipcode'          => 'required', 	                    // just a normal required validation
                 'city'             => 'required', 	                    // just a normal required validation
                 'phone_number'     => 'required',                       // just a normal required validation
-                'password'         => 'min:6',
-                'password_confirm' => 'same:password', 		            // required and has to match the password field
             );
+            
+            $messages = array(
+                'first_name.required'       => 'De voornaam is verplicht',
+                'last_name.required'        => 'De achternaam is verplicht',
+                'street.required'           => 'De straatnaam is verplicht',
+                'house_number.required'     => 'Het huisnummer is verplicht',
+                'zipcode.required'          => 'De postcode is verplicht',
+                'city.required'             => 'De woonplaats is verplicht',
+                'phone_number.required'     => 'Het telefoonnummer is verplicht'
+             );
 
             // do the validation ----------------------------------
             // validate against the inputs from our form
-            $validator = Validator::make(Input::all(), $rules);
+            $validator = Validator::make(Input::all(), $rules, $messages);
 
             // check if the validator failed -----------------------
             if ($validator->fails()) {
@@ -127,7 +136,7 @@ class PersonalSettingsController extends BaseLoggedInController {
                 $city->city                  = Input::get('city');
                 $user_data->phone_number     = Input::get('phone_number');
                 //$user_data->password = Hash::make(Input::get('password'));
-                $user_data->user_image_path     = $filename;
+                $user_data->user_image_path  = $filename;
 
                 //dd($user_data->phone_number);
 
@@ -139,7 +148,7 @@ class PersonalSettingsController extends BaseLoggedInController {
 
                 // redirect ----------------------------------------
                 // redirect our user back to the form so they can do it all over again
-                return Redirect::to('persoonlijke-instellingen');
+                return Redirect::to('persoonlijke-instellingen')->with(array("message" => "De wijzigingen zijn succesvol opgeslagen!"));
             }
         }
         
@@ -147,7 +156,7 @@ class PersonalSettingsController extends BaseLoggedInController {
         
         
         //Wachtwoord wijzigen ----------------------------------------------------------
-        elseif(Input::get('old_password')){
+        elseif(Input::get('change')){
             $user       = User::find(Auth::id());
             $password   = $user->password;
             
@@ -158,9 +167,17 @@ class PersonalSettingsController extends BaseLoggedInController {
                 'confirm_password'     => 'required|same:new_password' 		            // required and has to match the password field
             );
             
+             $messages = array(
+                 'old_password.required'                     => 'Het oude wachtwoord moet ingevuld worden',
+                 'new_password.required'                     => 'Het nieuwe wachtwoord moet ingevuld worden',
+                 'new_password.min'                          => 'Het wachtwoord moet minimaal 6 karakters bevatten',
+                 'confirm_password.required'                 => 'Het nieuwe wachtwoord moet nogmaals ingevuld worden',
+                 'confirm_password.same'                     => 'De wachtwoorden moeten overeen komen met elkaar'
+            );
+            
             // do the validation ----------------------------------
             // validate against the inputs from our form
-            $validator = Validator::make(Input::all(), $rules);
+            $validator = Validator::make(Input::all(), $rules, $messages);
 
             // check if the validator failed -----------------------
             if ($validator->fails()) {
@@ -191,13 +208,14 @@ class PersonalSettingsController extends BaseLoggedInController {
 
                     // redirect ----------------------------------------
                     // redirect our user back to the form so they can do it all over again
-                    return Redirect::to('persoonlijke-instellingen');
+                    return Redirect::to('persoonlijke-instellingen');            
+                
                 }
-                
-                
-            }
+                else {
+                    return Redirect::to('persoonlijke-instellingen')->with(array("message" => "Het huidige wachtwoord klopt niet!"));
+                }
 
+            }
         }
     }
-    
 }
