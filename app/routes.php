@@ -92,8 +92,6 @@ Route::group(array('before' => array('auth', 'leerling', 'geen_gegevens')), func
     Route::get('handleiding', 'GuideController@index');
 
     Route::resource('logboek',  'LogbookController');
-
-    Route::post('logbook/opslaan', 'logbookController@store');
 });
 
 Route::group(array('before' => array('auth', 'projectleider')), function(){
@@ -108,11 +106,6 @@ Route::group(array('before' => array('auth', 'projectleider')), function(){
     Route::resource('projects', 'Controllers\ProjectManagement\Leerling');
     Route::get('handleiding', 'GuideController@index');
 
-    Route::resource('logboek',  'LogbookController');
-
-    Route::post('logbook/opslaan', 'logbookController@store');
-
-    Route::resource('tasks', 'TasksController');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){

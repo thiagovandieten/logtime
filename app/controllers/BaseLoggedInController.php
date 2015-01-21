@@ -5,6 +5,7 @@ class BaseLoggedInController extends BaseController {
     protected $userFullName;
     protected $user;
     protected $user_avatar;
+    protected $userProjects;
 
     public function __construct()
     {
@@ -18,7 +19,8 @@ class BaseLoggedInController extends BaseController {
         View::share(array(
             'userFullName' => $this->userFullName,
             'user_avatar' => \Auth::user()->user_image_path,
-            'user_role' => \Auth::user()->user_type_id));
+            'user_role' => \Auth::user()->user_type_id,
+            'userProjects' => $this->setUserProjects()));
 
 //        View::composer(array('dashboard', 'projectmanagement.index' ), function($view)
 //        {
