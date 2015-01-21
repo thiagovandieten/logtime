@@ -30,6 +30,8 @@ class LogbookController extends BaseLoggedInController
 				{
 					$userlogs[$log->id] = array(
 					 'task' => $log->task->task_name,
+					 'project' => $log->task->project->project_name,
+					 'categorie' => $log->task->categorie->categorie_name,
 					 'start_time' => $log->start_time ,
 					 'stop_time' => $log->stop_time ,
 					 'total_time_in_hours' => $log->total_time_in_hours ,
