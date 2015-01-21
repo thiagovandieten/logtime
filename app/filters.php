@@ -111,7 +111,7 @@ Route::filter('leerling', function(){
 });
 
 Route::filter('geen_gegevens', function(){
-	if(Auth::user()->adress_id == 1){
+	if(Auth::user()->adress_id == 1 && Auth::user()->user_type_id != 2){
 		return Redirect::to('eenmalige-gegevens');
 	}
 });

@@ -48,7 +48,7 @@ Route::get('logout', array( 'as' => 'logout', function(){
     return Redirect::to('login');
 }));
 
-Route::get('dashboard', array('as' => 'dashboard', 'before' => 'auth', 'uses' => 'dashboardController@showWelcome'));
+Route::get('dashboard', array('as' => 'dashboard', 'before' => array('auth', 'geen_gegevens'), 'uses' => 'dashboardController@showWelcome'));
 
 Route::get('handleiding', 'GuideController@index');
 
@@ -56,11 +56,14 @@ Route::resource('logboek',  'LogbookController');
 
 Route::post('logbook/opslaan', 'logbookController@store');
 
-Route::group(array('before' => array('auth', 'leerling')), function()
-{
-    
+//Eenmalige-gegevens groep
+Route::group(array('before' => array('auth', 'leerling')), function(){
     Route::get('eenmalige-gegevens','enteronetimedataController@index');
-	Route::post('eenmalige-gegevens','enteronetimedataController@save');
+    Route::post('eenmalige-gegevens','enteronetimedataController@save');
+});
+
+Route::group(array('before' => array('auth', 'leerling', 'geen_gegevens')), function()
+{
     Route::resource('projects', 'ProjectManagementController');
     Route::get('persoonlijke-instellingen', 'PersonalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'PersonalSettingsController@store');
@@ -81,7 +84,6 @@ Route::group(array('before' => array('auth', 'leerling')), function()
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
-    Route::resource('projects', 'Controllers\ProjectManagement\DocentProjectManagement');
 	Route::get('usersettings',  'UserSettingsController@index');
     Route::post('usersettings/edit',  'UserSettingsController@edit');
     Route::post('usersettings/save',  'UserSettingsController@save');
@@ -90,7 +92,18 @@ Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), f
     Route::get('usersettings/delete',  'UserSettingsController@delete');
     Route::post('usersettings/delete',  'UserSettingsController@hard_delete');
 	Route::post('usersettings/wachtwoord-wijzigen', 'UserSettingsController@changepassword');
-	Route::resource('projects', 'Controllers\ProjectManagement\Docent');
+
+    Route::resource('projects', 'Controllers\ProjectManagement\Docent');
+
+    Route::get('taken', function(){
+       Redirect::route('docent.projects.index');
+    });
+
+    Route::get('projects/{projectId}/taken', array(
+        'as' => 'docent.tasks.index', 'uses' => 'Controllers\TaskManagement\Docent@index' ));
+    Route::get('projects/{projectId}/taken/create', array(
+        'as' => 'docent.tasks.create', 'uses' => 'Controllers\TaskManagement\Docent@create' ));
+
 
     Route::get('projects/{projectId}/taken', array(
         'as' => 'docent.tasks.index',
