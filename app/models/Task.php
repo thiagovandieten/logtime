@@ -6,7 +6,7 @@ class Task extends Eloquent {
 
 	public function project()
 	{
-		return $table->belongsTo('Project');
+		return $this->belongsTo('Project');
 	}
 
 	public function leveltype()

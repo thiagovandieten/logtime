@@ -10,6 +10,7 @@
         </div>
         <div class="filter-omgeving">
             <p>Filter op</p>
+
             <form>
                 <select class="light-table-filter" data-table="order-table">
                     <option value=" ">Leerjaar</option>
@@ -27,7 +28,7 @@
                 <select class="light-table-filter" data-table="order-table">
                     <option>Klas</option>
                     <option value="Klas 1D0W">1D0W</option>
-                    <option value="Klas 3H3W">3H0W </option>
+                    <option value="Klas 3H3W">3H0W</option>
                     <option value="Klas 3H0W">3H0W</option>
                 </select>
             </form>
@@ -48,7 +49,7 @@
             </thead>
             @foreach ($projects as $project)
                 <tr>
-                    <td><input type="checkbox"  style="display: block"></td>
+                    <td><input type="checkbox" style="display: block"></td>
                     <td><span>Leerjaar 2</span></td>
                     <td>Periode 1</td>
                     <td>{{HTML::linkRoute('docent.tasks.index', 'Taken beheren', $project->id)}}</td>
@@ -65,7 +66,8 @@
 
                     </td>
                     <td>
-                        {{Form::open(array('route' => array('docent.projects.destroy',$project->id), 'method' => 'delete')) }}   
+                        {{Form::open(array('route' => array('docent.projects.destroy',$project->id), 'method' => 'delete')) }}
+                          
                         {{--{{Form::hidden('user', $data->id, array('id' => 'invisible_id')) }}--}}
                         {{Form::submit('Verwijder', ['class'=>'studenten-verwijderen'])}}
                         {{Form::close() }}
@@ -74,26 +76,25 @@
             @endforeach
 
         </table>
-        </div>
+    </div>
     <script>
-        $(document).ready(function()
-        {
+        $(document).ready(function () {
             $("table tr:even").css("background-color", "#ededed");
         });
     </script>
     <script>
-        (function(document) {
+        (function (document) {
             'use strict';
 
-            var LightTableFilter = (function(Arr) {
+            var LightTableFilter = (function (Arr) {
 
                 var _input;
 
                 function _onInputEvent(e) {
                     _input = e.target;
                     var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                    Arr.forEach.call(tables, function(table) {
-                        Arr.forEach.call(table.tBodies, function(tbody) {
+                    Arr.forEach.call(tables, function (table) {
+                        Arr.forEach.call(table.tBodies, function (tbody) {
                             Arr.forEach.call(tbody.rows, _filter);
                         });
                     });
@@ -105,16 +106,16 @@
                 }
 
                 return {
-                    init: function() {
+                    init: function () {
                         var inputs = document.getElementsByClassName('light-table-filter');
-                        Arr.forEach.call(inputs, function(input) {
+                        Arr.forEach.call(inputs, function (input) {
                             input.oninput = _onInputEvent;
                         });
                     }
                 };
             })(Array.prototype);
 
-            document.addEventListener('readystatechange', function() {
+            document.addEventListener('readystatechange', function () {
                 if (document.readyState === 'complete') {
                     LightTableFilter.init();
                 }

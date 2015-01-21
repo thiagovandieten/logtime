@@ -39,7 +39,7 @@ class Docent extends \BaseLoggedInController {
 	 */
 	public function store($projectId)
 	{
-		return Redirect::route('tasks.docent.index', $projectId);
+		return \Redirect::route('tasks.docent.index', $projectId);
 	}
 
 
@@ -61,7 +61,7 @@ class Docent extends \BaseLoggedInController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($projectId, $taskId)
 	{
 		//
 	}

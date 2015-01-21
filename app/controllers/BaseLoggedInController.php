@@ -5,6 +5,7 @@ class BaseLoggedInController extends BaseController {
     protected $userFullName;
     protected $user;
     protected $user_avatar;
+    protected $userProjects;
 
     public function __construct()
     {
@@ -18,7 +19,8 @@ class BaseLoggedInController extends BaseController {
         View::share(array(
             'userFullName' => $this->userFullName,
             'user_avatar' => \Auth::user()->user_image_path,
-            'user_role' => \Auth::user()->user_type_id));
+            'user_role' => \Auth::user()->user_type_id,
+            'userProjects' => $this->setUserProjects()));
 
 //        View::composer(array('dashboard', 'projectmanagement.index' ), function($view)
 //        {
@@ -43,13 +45,12 @@ class BaseLoggedInController extends BaseController {
             * haalt de project id's op die de gebruiker heeft.
             */
             $projectGroupId = Auth::user()->project_group_id;
-            $logCategories = LogCategorie::where( 'project_group_id' , '=' , $projectGroupId )->get();
             $groupProjectPeriodes = GroupProjectPeriode::where( 'project_group_id' , '=' , $projectGroupId )->get();
 
             /**
             * deze foreach's controleren of het corecteprojecten zijn. daarna schijft hij ze weg in een array.
             */
-            $userProjects = array( 'Projects'=> array() , 'Categories' => array() , 'Tasks' => array() , 'Log Categories' => array());
+            $userProjects = array( 'Projects'=> array() , 'Categories' => array() , 'Tasks' => array() );
             foreach($groupProjectPeriodes as $groupProjectPeriode)
             {
                 $projects = Project::where('id','=', $groupProjectPeriode->project_id)->get();
@@ -97,11 +98,6 @@ class BaseLoggedInController extends BaseController {
                         }
                 }
             }
-            foreach ($logCategories as $logCategorie)
-            {
-                $userProjects['Log_Categories'][$logCategorie->id] = $logCategorie->log_categorie_name;
-            }
-
             return $userProjects;
         }
 

@@ -56,8 +56,24 @@ Route::resource('logboek',  'LogbookController');
 
 Route::post('logbook/opslaan', 'logbookController@store');
 
-//Eenmalige-gegevens groep
-Route::group(array('before' => array('auth', 'leerling')), function(){
+
+//Student settings
+Route::group(array('before' => array('auth', 'leerling')), function()
+{
+	Route::get('studentsettings',  'StudentSettingController@index');
+	Route::post('studentsettings/edit',  'StudentSettingController@edit');
+	Route::post('studentsettings/save',  'StudentSettingController@save');
+	Route::get('studentsettings/create',  'StudentSettingController@create');
+	Route::post('studentsettings/create',  'StudentSettingController@save_new_user');
+	Route::get('studentsettings/delete',  'StudentSettingController@delete');
+	Route::post('studentsettings/delete',  'StudentSettingController@hard_delete');
+});
+
+
+
+Route::group(array('before' => array('auth', 'leerling')), function()
+{
+    
     Route::get('eenmalige-gegevens','enteronetimedataController@index');
     Route::post('eenmalige-gegevens','enteronetimedataController@save');
 });
@@ -68,6 +84,7 @@ Route::group(array('before' => array('auth', 'leerling', 'geen_gegevens')), func
     Route::get('persoonlijke-instellingen', 'PersonalSettingsController@index');
     Route::post('persoonlijke-instellingen/opslaan', 'PersonalSettingsController@store');
     Route::post('persoonlijke-instellingen/wachtwoord-wijzigen', 'PersonalSettingsController@store');
+
  	Route::resource('projects', 'Controllers\ProjectManagement\Leerling');
     Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
     Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
@@ -75,15 +92,24 @@ Route::group(array('before' => array('auth', 'leerling', 'geen_gegevens')), func
     Route::get('handleiding', 'GuideController@index');
 
     Route::resource('logboek',  'LogbookController');
+});
 
-    Route::post('logbook/opslaan', 'logbookController@store');
-    
+Route::group(array('before' => array('auth', 'projectleider')), function(){
+
+    Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
+    Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
+             
     Route::get('klantinstellingen/wijzig/{id}', 'CustomerSettingsController@customer_settings_edit');
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
     Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
+    
+    Route::resource('projects', 'Controllers\ProjectManagement\Leerling');
+    Route::get('handleiding', 'GuideController@index');
+
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){
+    Route::resource('projects', 'Controllers\ProjectManagement\DocentProjectManagement');
 	Route::get('usersettings',  'UserSettingsController@index');
     Route::post('usersettings/edit',  'UserSettingsController@edit');
     Route::post('usersettings/save',  'UserSettingsController@save');
@@ -92,25 +118,26 @@ Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), f
     Route::get('usersettings/delete',  'UserSettingsController@delete');
     Route::post('usersettings/delete',  'UserSettingsController@hard_delete');
 	Route::post('usersettings/wachtwoord-wijzigen', 'UserSettingsController@changepassword');
+	Route::resource('projects', 'Controllers\ProjectManagement\Docent');
+    Route::resource('teacherlogbook', 'TeacherLogbookController');
 
     Route::resource('projects', 'Controllers\ProjectManagement\Docent');
-
-    Route::get('taken', function(){
-       Redirect::route('docent.projects.index');
-    });
-
+    
     Route::get('projects/{projectId}/taken', array(
         'as' => 'docent.tasks.index', 'uses' => 'Controllers\TaskManagement\Docent@index' ));
     Route::get('projects/{projectId}/taken/create', array(
         'as' => 'docent.tasks.create', 'uses' => 'Controllers\TaskManagement\Docent@create' ));
 
 
-    Route::get('projects/{projectId}/1', array(
+    Route::get('projects/{projectId}/taken', array(
         'as' => 'docent.tasks.index',
         'uses' => 'Controllers\TaskManagement\Docent@index'));
-    Route::get('projects/{projectId}/1/create', array(
+    Route::get('projects/{projectId}/taken/create', array(
         'as' => 'docent.tasks.create',
         'uses' => 'Controllers\TaskManagement\Docent@create'));
+    Route::get('projects/{projectId}/taken/edit/{$taskId}', array(
+        'as' => 'docent.tasks.edit',
+        'uses' => 'Controllers\TaskManagement\Docent@edit'));
 });
 
 

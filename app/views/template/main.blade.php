@@ -39,7 +39,7 @@
         <div id="notificationFooter"><a href="#">Bekijk alles</a></div>
     </div>
     {{--TODO:hier de link naar instellingen van leerling--}}
-    <a href="persoonlijke-instellingen">{{HTML::image('images/icons/instellingen-mob.png', 'Instellingen', array('class' => 'destop-instellingen', 'title' => 'Instellingen') )}}
+    <a href="/persoonlijke-instellingen">{{HTML::image('images/icons/instellingen-mob.png', 'Instellingen', array('class' => 'destop-instellingen', 'title' => 'Instellingen') )}}
         <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
     </a>
      @if(isset($user_avatar) && $user_avatar != '')
@@ -80,43 +80,79 @@
             <span>12 feb 2014 12:45</span>
         </div>
     </nav>
+    <script src="http://code.jquery.com/jquery-latest.min.js"
+            type="text/javascript"></script>
+    <script>
+        $(document).ready(
+                function() {
+                    $("#urend").click(function() {
+                        $("#urenreg").toggle();
+                    });
+                });
+
+        $(document).mouseup(function (e)
+        {
+            var container = $("#urenreg");
+
+            if (!container.is(e.target) // if the target of the click isn't the container...
+                    && container.has(e.target).length === 0) // ... nor a descendant of the container
+            {
+                container.hide();
+            }
+        });
+    </script>
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left menu-mob-width cbp-spmenu-open" id="cbp-spmenu-s1">
     <div class="profiel-mob">
             {{HTML::image('images/'.$user_avatar, 'avatar', array('class' => 'avatar') )}}
-        <a href="persoonlijke-instellingen">
+        <a href="/persoonlijke-instellingen">
             <p>{{{$userFullName}}}</p> {{--TODO:Hier moet de gebruikers komen--}}
         </a>
             {{HTML::image('images/icons/instellingen-mob.png', 'Instellingen', array('class' => 'mob-instellingen', 'title' => 'Instellingen') )}}
     </div>
     <div style="clear:both"></div> <!-- AUB Clearfix gebruiken! -->
     @if($user_role == 1)
-    <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
-    <a href="/logboek"><span>{{HTML::image('images/icons/logboek.png', 'Logboek')}}</span>Logboek</a>
-    <a href="/projects"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
-    <a href="/groepsinstellingen"><span>{{HTML::image('images/icons/instellingen.png', 'Instellingen')}}</span>Groeps instellingen</a>
-    <a href="#"><span>{{HTML::image('images/icons/handleiding.png', 'Handleiding')}}</span>Handleiding</a>
-    <a href="/logout"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
+        <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
+        <div id="urend"> <a href="#"><span>{{HTML::image('images/icons/urenreg.png', 'uren')}}</span>Uren registreren</a></div>
+        <a href="/logboek"><span>{{HTML::image('images/icons/logboek.png', 'Logboek')}}</span>Logboek</a>
+        <a href="/projects"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
+        <a href="#"><span>{{HTML::image('images/icons/handleiding.png', 'Handleiding')}}</span>Handleiding</a>
+        <a href="/logout"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
+    @endif
+    @if($user_role == 3)
+        <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
+        <div id="urend"> <a href="#"><span>{{HTML::image('images/icons/urenreg.png', 'uren')}}</span>Uren registreren</a></div>
+        <a href="/logboek"><span>{{HTML::image('images/icons/logboek.png', 'Logboek')}}</span>Logboek</a>
+        <a href="/projects"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
+        <a href="/groepsinstellingen"><span>{{HTML::image('images/icons/instellingen.png', 'Instellingen')}}</span>Groeps instellingen</a>
+        <a href="#"><span>{{HTML::image('images/icons/handleiding.png', 'Handleiding')}}</span>Handleiding</a>
+        <a href="/logout"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
+
     @endif
     @if($user_role == 2)
         <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
         <a href="{{route('docent.projects.index')}}"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
+        <a href="{{route('docent.teacherlogbook.index')}}"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Logbook inzien</a>
         <a href="{{route('logout')}}"><span>{{HTML::image('images/icons/uitloggen.png', 'Uitloggen')}}</span>Uitloggen</a>
 
     @endif
-    @if($user_role == 1)
-    <h2>Uren bijwerken</h2>
-          {{Form::open(array('route' => 'logboek.store', 'method' => 'POST')) }}
-              {{Form::select('log categorie' , $userProjects['Log_Categories'])}}
-              {{Form::select('project' , $userProjects['Projects'])}}
-              {{Form::select('categorie' , $userProjects['Categories'])}}
-              {{Form::select('taak' , $userProjects['Tasks'])}}
-              {{Form::text('date' , date('Y/m/d') )}}
-              {{Form::text('starttijd' , '00:00' , null , ['class' => 'uren'])}}
-              {{Form::text('stoptijd' , '00:00' , null , ['class' => 'uren'])}}
-              {{Form::textarea('omschrijving' , 'Omschrijving')}}
-            {{Form::submit('Bijwerken',['class' => 'Bijwerken'])}}
-          {{Form::close() }}
-        @endif
+
+    <div id="urenreg">
+        <div class="uren-wrapper"> @if($user_role == 1 || 3)
+                <h2>Uren bijwerken</h2>
+                {{Form::open(array('route' => 'logboek.store', 'method' => 'POST')) }}
+                {{Form::select('project' , $userProjects['Projects'])}}
+                {{Form::select('taak' , $userProjects['Tasks'])}}
+                {{Form::text('date' , date('Y/m/d'), ['class'=>'datum-pop'] )}}
+                {{Form::text('starttijd' , '00:00'  , ['class' => 'uren'])}}
+                <p class="uren-tot">tot</p>
+                {{Form::text('stoptijd' , '00:00'  , ['class' => 'uren'])}}
+                {{Form::textarea('omschrijving' , 'Omschrijving')}}
+                {{Form::submit('Bijwerken', ['class' => 'bijwerken'])}}
+                {{Form::close() }}
+            @endif</div>
+    </div>
+
+
 </nav>
     <section class="ac-container container-mob">
     <div>
@@ -155,13 +191,15 @@
 
           @yield('content')
 
-     {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
+         </section>
+
+        {{HTML::script(asset('http://code.jquery.com/jquery-latest.min.js')) }}
         {{HTML::script(asset('js/notificatie.js')) }}
-<!--                      {{HTML::script(asset('js/picker.js')) }}
-                     {{HTML::script(asset('js/picker.date.js')) }} -->
+<!--    {{HTML::script(asset('js/picker.js')) }}
+        {{HTML::script(asset('js/picker.date.js')) }} -->
         {{HTML::script(asset('js/menuleft.js')) }}
-             {{HTML::script(asset('js/legacy.js')) }}
-             {{HTML::script(asset('js/Chart.js')) }}
+        {{HTML::script(asset('js/legacy.js')) }}
+        {{HTML::script(asset('js/Chart.js')) }}
         <!--TODO: Mijn editor zeurt dat hier een </div> ontbreekt, klopt dat? -->
         </body>
         </html><!---------------------Credits---------------------
