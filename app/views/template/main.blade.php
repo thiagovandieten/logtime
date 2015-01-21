@@ -112,6 +112,7 @@
     <div style="clear:both"></div> <!-- AUB Clearfix gebruiken! -->
     @if($user_role == 1)
         <a href="{{route('dashboard')}}"><span>{{HTML::image('images/icons/dashboard.png', 'Dashboard')}}</span>Dashboard</a>
+        <div id="urend"> <a href="#"><span>{{HTML::image('images/icons/urenreg.png', 'uren')}}</span>Uren registreren</a></div>
         <a href="/logboek"><span>{{HTML::image('images/icons/logboek.png', 'Logboek')}}</span>Logboek</a>
         <a href="/projects"><span>{{HTML::image('images/icons/map.png', 'Project Aanmaken')}}</span>Project beheer</a>
         <a href="#"><span>{{HTML::image('images/icons/handleiding.png', 'Handleiding')}}</span>Handleiding</a>
@@ -136,7 +137,7 @@
     @endif
 
     <div id="urenreg">
-        <div class="uren-wrapper"> @if($user_role == 1)
+        <div class="uren-wrapper"> @if($user_role == 1 || 3)
                 <h2>Uren bijwerken</h2>
                 {{Form::open(array('route' => 'logboek.store', 'method' => 'POST')) }}
                 {{Form::select('project' , $userProjects['Projects'])}}

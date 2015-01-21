@@ -105,7 +105,7 @@ Route::group(array('before' => array('auth', 'projectleider')), function(){
     Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
     Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
     
-    Route::resource('projects', 'ProjectManagementController');
+    Route::resource('projects', 'Controllers\ProjectManagement\Leerling');
     Route::get('handleiding', 'GuideController@index');
 
     Route::resource('logboek',  'LogbookController');

@@ -1521,7 +1521,7 @@ input[type='checkbox']:checked + span {
 }
 
 
-.personal-settings input[type='text'],  .personal-settings input[type='password']{
+.personal-settings input[type='text'],  .personal-settings input[type='password'], .personal-settings textarea{
     width: 100%;
     background: #e2e2e2;
     border-radius: 3px;
