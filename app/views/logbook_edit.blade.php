@@ -11,6 +11,11 @@
       {{Form::text('stoptijd' , $userlog['stop_time'] , null , ['class' => 'uren'])}}
       {{Form::textarea('omschrijving' , $userlog['description'])}}
     {{Form::submit('Bijwerken',['class' => 'Bijwerken'])}}
+
+    
+
+    
   {{Form::close() }}
+
 </div>
 @stop

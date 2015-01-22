@@ -14,6 +14,10 @@
 					@endforeach
 
 				</select>
+                
+                
+                <input type="submit" class="klant-gegevens-aanpassen" name="pdf" value="Genereer PDF">
+
 			</form>
 		</div>
 	</div>
@@ -23,6 +27,7 @@
 			<thead>
 			<tr class="border_bottom">
 				<td style="color: #666; width: 10%">Datum</td>
+				<td style="color: #666; width: 10%">Project</td>
 				<td style="color: #666; width: 20%">Taak</td>
 				<td style="color: #666; width: 10%">Begintijd</td>
 				<td style="color: #666; width: 10%">Eindtijd</td>
@@ -36,7 +41,6 @@
 				<tr>
 					<td>{{$userlog['date']}}</td>
 					<td>{{$userlog['project']}}</td>
-					<td>{{$userlog['categorie']}}</td>
 					<td>{{$userlog['task']}}</td>
 					<td>{{$userlog['start_time']}}</td>
 					<td>{{$userlog['stop_time']}}</td>
@@ -51,7 +55,7 @@
 				</tr>
 			@endforeach
 
-</table>
+        </table>
 		<script>
 			$(document).ready(function()
 			{

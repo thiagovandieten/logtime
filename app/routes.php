@@ -92,20 +92,17 @@ Route::group(array('before' => array('auth', 'leerling', 'geen_gegevens')), func
     Route::get('handleiding', 'GuideController@index');
 
     Route::resource('logboek',  'LogbookController');
+
+    Route::post('logbook/opslaan', 'logbookController@store');
 });
 
 Route::group(array('before' => array('auth', 'projectleider')), function(){
+     
+    //Route::get('klantinstellingen/wijzig/{id}', 'CustomerSettingsController@customer_settings_edit');
+    //Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
+    //Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
 
-    Route::get('groepsinstellingen', 'GroupSettingsController@group_settings');
-    Route::post('groepsinstellingen/opslaan', 'GroupSettingsController@store');
-             
-    Route::get('klantinstellingen/wijzig/{id}', 'CustomerSettingsController@customer_settings_edit');
-    Route::get('klantinstellingen', 'CustomerSettingsController@customer_settings');
-    Route::post('klantinstellingen/opslaan/{id}', 'CustomerSettingsController@store');
-    
-    Route::resource('projects', 'Controllers\ProjectManagement\Leerling');
-    Route::get('handleiding', 'GuideController@index');
-
+    Route::resource('tasks', 'TasksController');
 });
 
 Route::group(array('before' => array('auth', 'docent'), 'prefix' => 'docent'), function(){

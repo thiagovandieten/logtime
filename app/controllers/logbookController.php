@@ -24,11 +24,13 @@ class LogbookController extends BaseLoggedInController
 		$userlogs = array();
 		Userlog::chunk(200, function($logs) use (&$userlogs , $user )
 		{
-			foreach ($logs as $log)
+			
+          
+            foreach ($logs as $log)
 			{
 				if($user->id == $log->user_id)
 				{
-					$userlogs[$log->id] = array(
+                    $userlogs[$log->id] = array(
 					 'task' => $log->task->task_name,
 					 'project' => $log->task->project->project_name,
 					 'categorie' => $log->task->categorie->categorie_name,
@@ -42,6 +44,71 @@ class LogbookController extends BaseLoggedInController
 				}
 			}
 		});
+        
+        if(Input::get('pdf')){   
+            $html =
+            '<html><body>
+                <table class="order-table table" cellspacing="0">
+                    <div class="page" style="font-size: 15px">
+                    <table style="width: 100%;" class="header">
+                        <tr>
+                            <td><h1 style="text-align: left">LOGBOEK</h1></td>
+                            <td><h1 style="text-align: right">2015</h1></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr><td colspan="6"><h2>Logs:</h2></td></tr>
+
+                    <thead>
+                    <tr class="border_bottom">
+                        <td style="color: #666; width: 10%">Datum</td>
+                        <td style="color: #666; width: 20%">Taak</td>
+                        <td style="color: #666; width: 10%">Begintijd</td>
+                        <td style="color: #666; width: 10%">Eindtijd</td>
+                        <td style="color: #666">Totale uren</td>
+                        <td style="color: #666">Omschrijving</td>
+                    </tr>
+                    </thead>';
+
+
+
+                foreach($userlogs as $userlog){
+                    $html .= '
+                    <tr>
+                    <td style="text-align: left" width: 10%">'.$userlog['date'].'</td>
+                    <td style="text-align: left" width: 20%">'.$userlog['task'].'</td>
+                    <td style="text-align: left" width: 10%">'.$userlog['start_time'].'</td>
+                    <td style="text-align: left" width: 10%">'.$userlog['stop_time'].'</td>
+                    <td style="text-align: left">'.$userlog['total_time_in_hours'].'</td>
+                    <td style="text-align: left">'.$userlog['description'].'</td>
+                    </tr>';	
+                }
+
+            $html .= '
+                </div>
+                </table>
+                 </body></html>';
+
+                
+                $today = date("Y-m-d-H-i-s");
+                $filename = $today."-logboek.pdf";
+            
+                
+            
+                $dompdf = new DOMPDF();
+                $dompdf->load_html($html);
+                $dompdf->render();
+                $dompdf->stream($filename);
+                 
+                $output = $dompdf->output();
+                $file_to_save = './pdf/'.$filename;
+                file_put_contents($file_to_save, $output);
+            
+                readfile($file_to_save);
+            }
+                         
+        
 		function sortFunction( $a, $b ) {
     		return strtotime($a["date"]) - strtotime($b["date"]);
 		}
@@ -104,6 +171,7 @@ class LogbookController extends BaseLoggedInController
            	$userLog->save();
 		}
 
+        
 
 		return Redirect::back()->with('message' , 'opgeslagen');
 	}
@@ -141,6 +209,7 @@ class LogbookController extends BaseLoggedInController
 					 'date' => $userlog->date ,
 					 'id' => $userlog->id
 					 );
+                
 		return View::make('logbook_edit')->with(array('userlog' => $userlogs));
 	}
 
