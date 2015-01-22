@@ -14,6 +14,10 @@
 					@endforeach
 
 				</select>
+                
+                
+                <input type="submit" class="klant-gegevens-aanpassen" name="pdf" value="Genereer PDF">
+
 			</form>
 		</div>
 	</div>
@@ -49,7 +53,7 @@
 				</tr>
 			@endforeach
 
-</table>
+        </table>
 		<script>
 			$(document).ready(function()
 			{

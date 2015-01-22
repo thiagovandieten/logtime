@@ -208,7 +208,7 @@ class PersonalSettingsController extends BaseLoggedInController {
 
                     // redirect ----------------------------------------
                     // redirect our user back to the form so they can do it all over again
-                    return Redirect::to('persoonlijke-instellingen');            
+                    return Redirect::to('persoonlijke-instellingen')->with(array("message" => "Het wachtwoord is succesvol gewijzigd!"));            
                 
                 }
                 else {
