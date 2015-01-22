@@ -48,7 +48,7 @@ Route::get('logout', array( 'as' => 'logout', function(){
     return Redirect::to('login');
 }));
 
-Route::get('dashboard', array('as' => 'dashboard', 'before' => array('auth', 'geen_gegevens'), 'uses' => 'dashboardController@showWelcome'));
+Route::get('dashboard', array('as' => 'dashboard', 'before' => array('auth', 'geen_gegevens'), 'uses' => 'dashboardController@index'));
 
 Route::get('handleiding', 'GuideController@index');
 
