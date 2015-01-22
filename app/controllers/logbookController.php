@@ -92,6 +92,8 @@ class LogbookController extends BaseLoggedInController
                 $today = date("Y-m-d-H-i-s");
                 $filename = $today."-logboek.pdf";
             
+                
+            
                 $dompdf = new DOMPDF();
                 $dompdf->load_html($html);
                 $dompdf->render();
@@ -100,6 +102,8 @@ class LogbookController extends BaseLoggedInController
                 $output = $dompdf->output();
                 $file_to_save = './pdf/'.$filename;
                 file_put_contents($file_to_save, $output);
+            
+                readfile($file_to_save);
             }
                          
         
