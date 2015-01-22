@@ -137,7 +137,7 @@
     @endif
 
     <div id="urenreg">
-        <div class="uren-wrapper"> @if($user_role == 1 || 3)
+        <div class="uren-wrapper"> @if($user_role == 1 || $user_role == 3)
                 <h2>Uren bijwerken</h2>
                 {{Form::open(array('route' => 'logboek.store', 'method' => 'POST')) }}
                 {{Form::select('project' , $userProjects['Projects'])}}
